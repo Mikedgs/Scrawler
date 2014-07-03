@@ -1,4 +1,5 @@
 ﻿using System;
+using Scrawler.Models.Interfaces;
 
 namespace Scrawler.Models
 {

@@ -11,7 +11,6 @@ namespace Scrawler.Models.Services
                 Body = msgJson.Content,
                 CreatedAt = msgJson.Time,
                 Username = msgJson.Username,
-                Votes = msgJson.Votes,
                 ChatroomId = msgJson.RoomId
             };
         }
