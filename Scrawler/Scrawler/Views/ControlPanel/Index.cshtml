@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@model IList<Scrawler.Plumbing.Chatroom>
+
+<h2>Index</h2>
+
+<ul>
+@foreach (var room in @Model)
+{
+    <li>@room.Id</li>
+}
+</ul>
