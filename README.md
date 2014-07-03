@@ -1,5 +1,9 @@
 # Scrawler
 
+Note: The front and back end are two seperate applications and repositories.
+
+* [Back-End Repository](https://github.com/Mikedgs/Scrawler)
+ * Back-End deployment: http://scrawler.azurewebsites.net/
 * [Front-End Repository](https://github.com/genevievebelle/Scrawler-UI)
 
 ### Team members
