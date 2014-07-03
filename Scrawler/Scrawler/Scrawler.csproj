@@ -161,14 +161,17 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChatroomJSON.cs" />
+    <Compile Include="Models\HiddenStringFactory.cs" />
+    <Compile Include="Models\MessageJSON.cs" />
+    <Compile Include="Models\MessageJsonToMessage.cs" />
+    <Compile Include="Models\MessageMapperToJson.cs" />
     <Compile Include="Plumbing\Repository.cs" />
     <Compile Include="Plumbing\Scrawler.cs">
       <AutoGen>True</AutoGen>
@@ -218,7 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Chat\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<model dslVersion="1.1.0.0" name="Scrawler" targetNamespace="Scrawler.Plumbing" xmlns="http://namespaces.mindscape.co.nz/lightspeed" />
- 
+<model xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.1.0.0" name="Scrawler" targetNamespace="Scrawler.Plumbing" databaseProvider="SqlServer2008" connectionString="Data Source=serval\sqlexpress;Initial Catalog=Scrawler;Integrated Security=True;Pooling=False" pluralizedInDatabase="false" mediumTrustCompatibility="false" xmlns="http://namespaces.mindscape.co.nz/lightspeed">
+  <entities>
+    <entity name="Chatroom" identityType="Int32" cacheExpiry="0" identityMethod="IdentityColumn">
+      <entityProperties>
+        <entityProperty name="HiddenUrl" columnName="hidden_url" privateSetter="false">
+          <validations>
+            <presenceValidation />
+            <lengthValidation minimumLength="0" maximumLength="10" />
+          </validations>
+        </entityProperty>
+        <entityProperty name="FirebaseId" columnName="firebase_id" privateSetter="false" />
+        <entityProperty name="CreatedAt" dataType="DateTime" columnName="created_at" privateSetter="false" />
+      </entityProperties>
+      <oneToManyAssociations>
+        <oneToManyAssociation Id="25a2d369-03ba-4b6e-917d-9fcae51641df" collectionName="Messages" backreferenceName="Chatroom" isNullable="false" columnName="chatroom_id">
+          <entityMoniker name="/Scrawler/Message" />
+        </oneToManyAssociation>
+      </oneToManyAssociations>
+    </entity>
+    <entity name="Message" identityType="Int32" cacheExpiry="0" identityMethod="IdentityColumn">
+      <entityProperties>
+        <entityProperty name="CreatedAt" dataType="DateTime" columnName="created_at" privateSetter="false" />
+        <entityProperty name="Body" privateSetter="false">
+          <validations>
+            <presenceValidation />
+            <lengthValidation minimumLength="0" maximumLength="140" />
+          </validations>
+        </entityProperty>
+        <entityProperty name="Username" isNullable="true" privateSetter="false">
+          <validations>
+            <lengthValidation minimumLength="0" maximumLength="50" />
+          </validations>
+        </entityProperty>
+        <entityProperty name="Votes" dataType="Int32" isNullable="true" privateSetter="false" />
+      </entityProperties>
+    </entity>
+  </entities>
+</model>
