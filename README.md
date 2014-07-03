@@ -1,19 +1,14 @@
-QRChat
-======
+# Scrawler
 
-Project Name and team members
-QRChat
-Regan Young
-Michael Douglas
-Genevieve 
-Hannah Salmon
-Ben Te Hira
+### Team members
 
-Description of Project
-Location based chat service
+- Regan Young
+- Michael Douglas
+- Genevieve 
+- Hannah Salmon
+- Ben Te Hira
 
-How to use the code (rake, database, etc.)
-
-Link to Heroku
+### Description
+Temporary location-based chat service accessed by QR Code
 
 Link to (or embedded) project workflow document
