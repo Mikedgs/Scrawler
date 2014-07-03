@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Scrawler.Models;
-using Scrawler.Models.Services;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
