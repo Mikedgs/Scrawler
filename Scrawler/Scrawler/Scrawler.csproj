@@ -40,11 +40,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Mindscape.LightSpeed">
-      <HintPath>..\..\..\..\Program Files (x86)\Mindscape\LightSpeed\Bin\Mindscape.LightSpeed.dll</HintPath>
+    <Reference Include="Mindscape.LightSpeed, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.dll</HintPath>
     </Reference>
-    <Reference Include="Mindscape.LightSpeed.Linq">
-      <HintPath>..\..\..\..\Program Files (x86)\Mindscape\LightSpeed\Bin\Mindscape.LightSpeed.Linq.dll</HintPath>
+    <Reference Include="Mindscape.LightSpeed.Linq, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.MetaData, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.MetaData.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.ServiceModel, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.ServiceModel.DomainServices, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.ServiceModel.DomainServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.Web, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.Web.DynamicData, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.Web.DynamicData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -188,6 +210,42 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="lib\Mindscape.LightSpeed.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Linq.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Linq.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.MetaData.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.MetaData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.ServiceModel.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.ServiceModel.DomainServices.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.ServiceModel.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Web.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Web.DynamicData.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Web.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Plumbing\Scrawler.lsmodel">
