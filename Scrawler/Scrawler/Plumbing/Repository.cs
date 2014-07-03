@@ -15,7 +15,7 @@ namespace Scrawler.Plumbing
         {
             var context = new LightSpeedContext<ScrawlerUnitOfWork>
             {
-                ConnectionString = @"server=.\sqlexpress;database=Scrawler;Trusted_Connection=True;",
+                ConnectionString = @"Server=tcp:bc2wsegi5e.database.windows.net,1433;Database=ScrawlerDB;User ID=devacademy@bc2wsegi5e;Password=15WalterStreet;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;",
                 IdentityMethod = IdentityMethod.IdentityColumn,
                 QuoteIdentifiers = true
             };
