@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace Scrawler.Models
 {
-    public class ChatroomJSON
+    public class ChatroomJson : IChatroomJson
     {
         public string FireBaseRoomId { get; set; }
-        public List<MessageJSON> Messages { get; set; }
+        public List<MessageJson> Messages { get; set; }
     }
 }

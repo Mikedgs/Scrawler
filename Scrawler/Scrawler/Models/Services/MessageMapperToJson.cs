@@ -1,13 +1,14 @@
 ﻿using Scrawler.Plumbing;
 
-namespace Scrawler.Models
+namespace Scrawler.Models.Services
 {
-    public class MessageMapperToJson
+    public class MessageMapperToJson : IMessageMapperToJson
     {
-        public MessageJSON MapToJson(Message msg)
+        public MessageJson MapToJson(Message msg)
         {
-            return new MessageJSON
+            return new MessageJson
             {
+                Id = msg.Id,
                 Content = msg.Body,
                 Time = msg.CreatedAt,
                 Username = msg.Username,

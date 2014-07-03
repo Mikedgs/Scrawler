@@ -186,14 +186,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ScrawlerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChatroomJSON.cs" />
-    <Compile Include="Models\HiddenStringFactory.cs" />
+    <Compile Include="Models\IResponseProxy.cs" />
+    <Compile Include="Models\ResponseProxy.cs" />
+    <Compile Include="Models\Services\HiddenStringFactory.cs" />
+    <Compile Include="Models\Interfaces\IMessageJson.cs" />
+    <Compile Include="Models\Services\Interfaces\IMessageMapperToJson.cs" />
+    <Compile Include="Models\Services\Interfaces\IHiddenStringFactory.cs" />
+    <Compile Include="Models\Interfaces\IChatroomJson.cs" />
     <Compile Include="Models\MessageJSON.cs" />
-    <Compile Include="Models\MessageJsonToMessage.cs" />
-    <Compile Include="Models\MessageMapperToJson.cs" />
+    <Compile Include="Models\Services\Interfaces\IMessageJsonToMessage.cs" />
+    <Compile Include="Models\Services\ISaveMessage.cs" />
+    <Compile Include="Models\Services\MessageJsonToMessage.cs" />
+    <Compile Include="Models\Services\MessageMapperToJson.cs" />
+    <Compile Include="Models\Services\SaveMessage.cs" />
+    <Compile Include="Plumbing\Interfaces\IRepository.cs" />
     <Compile Include="Plumbing\Repository.cs" />
     <Compile Include="Plumbing\Scrawler.cs">
       <AutoGen>True</AutoGen>
@@ -280,6 +291,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Chat\" />
+    <Folder Include="Views\Scrawler\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

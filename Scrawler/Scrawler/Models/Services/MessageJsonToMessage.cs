@@ -1,10 +1,10 @@
 ﻿using Scrawler.Plumbing;
 
-namespace Scrawler.Models
+namespace Scrawler.Models.Services
 {
-    public class MessageJsonToMessage
+    public class MessageJsonToMessage : IMessageJsonToMessage
     {
-        public Message MapToMessage(MessageJSON msgJson)
+        public Message MapToMessage(MessageJson msgJson)
         {
             return new Message
             {

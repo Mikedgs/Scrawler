@@ -2,8 +2,9 @@
 
 namespace Scrawler.Models
 {
-    public class MessageJSON
+    public class MessageJson : IMessageJson
     {
+        public int Id { get; set; }
         public int RoomId { get; set; }
         public DateTime Time { get; set; }
         public string Content { get; set; }

@@ -5,10 +5,11 @@ using System.Linq;
 using Mindscape.LightSpeed.Linq;
 using System.Linq.Expressions;
 using Mindscape.LightSpeed.Logging;
+using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Plumbing
 {
-    public class Repository<T> where T : Entity<int>
+    public class Repository<T> : IRepository<T> where T : Entity<int>
     {
         public Repository()
         {
