@@ -16,7 +16,6 @@ namespace Scrawler.Controllers
         public ActionResult Index(int id)
         {
             return Redirect("www.scrawler.heroku.com/chat?hashedurl=" + _chatRepository.FindById(id).HiddenUrl);
-
         }
 
         [HttpPost]
@@ -38,7 +37,6 @@ namespace Scrawler.Controllers
                 FireBaseRoomId = chatroom.FirebaseId,
                 Messages = listOfConvertedJsonMsgs
             };
-
             return Json(chatRoomJson, JsonRequestBehavior.AllowGet);
         }
     }
