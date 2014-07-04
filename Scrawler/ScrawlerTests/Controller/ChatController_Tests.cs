@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
 using Scrawler.Controllers;
@@ -16,8 +17,8 @@ namespace ScrawlerTests.Controller
         public void The_index_method_returns_a_redirect_result()
         {
             // Arrange
-            var chatMock = new Mock<Repository<Chatroom>>();
-            var sut = new ChatController(chatMock.Object, null, null, null);
+            var chatRepoMock = new Mock<Repository<Chatroom>>();
+            var sut = new ChatController(chatRepoMock.Object, null, null, null);
             // Act
             var result = sut.Index(It.IsAny<int>());
             // Assert
@@ -25,11 +26,16 @@ namespace ScrawlerTests.Controller
         }
 
         [Test]
-        public void The_room_information_returns_a_crossjsonResult()
+        public void The_room_information_returns_a_chatRoomJson()
         {
             // Arrange
+            var chatRepoMock = new Mock<Repository<Chatroom>>();
+            var messageRepoMock = new Mock<Repository<Message>>();
+            var cut = new ChatController(chatRepoMock.Object, messageRepoMock.Object, new MessageMapperToJson(), null);
 
             // Act
+            var response = cut.GetRoomInformation("id");
+
 
             // Assert
         }
