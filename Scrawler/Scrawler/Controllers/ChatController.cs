@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Scrawler.Models;
+using Scrawler.Models.Services;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
@@ -10,29 +11,27 @@ namespace Scrawler.Controllers
     {
         private readonly IRepository<Chatroom> _chatRepository;
         private readonly IRepository<Message> _messageRepository;
-        private readonly IMessageJsonToMessage _messageJsonToMessage;
         private readonly IMessageMapperToJson _messageMapperToJson;
+        private readonly ISaveMessage _saveMessage;
 
-        public ChatController(IRepository<Chatroom> chatRepository, IRepository<Message> messageRepository, IMessageJsonToMessage messageJsonToMessage, IMessageMapperToJson messageMapperToJson)
+        public ChatController(IRepository<Chatroom> chatRepository, IRepository<Message> messageRepository, IMessageMapperToJson messageMapperToJson, ISaveMessage saveMessage)
         {
             _chatRepository = chatRepository;
             _messageRepository = messageRepository;
-            _messageJsonToMessage = messageJsonToMessage;
             _messageMapperToJson = messageMapperToJson;
+            _saveMessage = saveMessage;
         }
 
         [HttpGet]
         public ActionResult Index(int id)
         {
-            return Redirect("http://www.scrawler.heroku.com/chat?id=" + _chatRepository.FindById(id).HiddenUrl);
+            return Redirect("http://www.hidden-falls-5768.herokuapp.com/chat?id=" + _chatRepository.FindById(id).HiddenUrl);
         }
 
         [HttpPost]
         public void SaveMessage(MessageJson msg)
         {
-            var convertedMsg = _messageJsonToMessage.MapToMessage(msg);               
-            _messageRepository.Add(convertedMsg);
-            _messageRepository.SaveChanges();
+            _saveMessage.SaveMessages(msg);
         }
 
         [HttpGet]
