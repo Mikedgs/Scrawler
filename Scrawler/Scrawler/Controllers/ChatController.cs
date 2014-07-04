@@ -29,9 +29,10 @@ namespace Scrawler.Controllers
         }
 
         [HttpPost]
-        public void SaveMessage(MessageJson msg)
+        public ActionResult SaveMessage(MessageJson msg)
         {
             _saveMessage.SaveMessages(msg);
+            return CrossSiteFriendlyJson("Sent");
         }
 
         [HttpGet]
