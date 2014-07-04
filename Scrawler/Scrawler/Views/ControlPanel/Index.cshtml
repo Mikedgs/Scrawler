@@ -3,13 +3,16 @@
     ViewBag.Title = "Index";
 }
 
+@using Microsoft.Ajax.Utilities
 @model IList<Scrawler.Plumbing.Chatroom>
 
 <h2>Index</h2>
 
+<a href="/ControlPanel/AddRoom">New Room</a>
+
 <ul>
 @foreach (var room in @Model)
 {
-    <li>@room.Id</li>
+    <li>RoomId: @room.Id, Room FireBase ID: @room.FirebaseId, Room Hidden URL Key:@room.HiddenUrl <a href="http://scrawler.azurewebsites.net/chat/index?id=@room.Id">Link</a> <a href="/ControlPanel/Delete?Id=@room.Id">Delete</a></li>
 }
 </ul>

@@ -3,5 +3,12 @@
     ViewBag.Title = "AddRoom";
 }
 
+@model Scrawler.Plumbing.Chatroom
+
 <h2>AddRoom</h2>
 
+@using (@Html.BeginForm())
+    {
+        @Html.LabelFor(x=>x.FirebaseId) @Html.TextBoxFor(x=>x.FirebaseId)
+        <input type ="submit" value ="Create"/>
+    }
