@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scrawler.Models
+namespace Scrawler.Models.Interfaces
 {
     public interface IMessageJson
     {
@@ -9,6 +9,5 @@ namespace Scrawler.Models
         DateTime Time { get; set; }
         string Content { get; set; }
         string Username { get; set; }
-        int? Votes { get; set; }
     }
 }
