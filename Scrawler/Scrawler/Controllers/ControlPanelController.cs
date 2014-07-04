@@ -10,7 +10,7 @@ namespace Scrawler.Controllers
     public class ControlPanelController : ScrawlerController
     {
         private readonly IRepository<Chatroom> _chatRepository = new Repository<Chatroom>();
-        private IHiddenStringFactory _stringFactory = new HiddenStringFactory();
+        private readonly IHiddenStringFactory _stringFactory = new HiddenStringFactory();
 
         public ControlPanelController(IResponseProxy responseProxy) : base(responseProxy)
         {

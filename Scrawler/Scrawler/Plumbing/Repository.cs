@@ -18,7 +18,7 @@ namespace Scrawler.Plumbing
             _context = new LightSpeedContext<ScrawlerUnitOfWork>
             {
                 ConnectionString =
-                                  @"server=.\sqlexpress;database=betterchangethisvalue;Trusted_Connection=True;",
+                                  @"Server=tcp:bc2wsegi5e.database.windows.net,1433;Database=ScrawlerDB;User ID=devacademy@bc2wsegi5e;Password=15WalterStreet;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;",
                 IdentityMethod = IdentityMethod.IdentityColumn,
                 QuoteIdentifiers = true,
                 Logger = new TraceLogger()
