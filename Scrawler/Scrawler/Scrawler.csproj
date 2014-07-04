@@ -208,8 +208,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChatroomJSON.cs" />
-    <Compile Include="Models\IResponseProxy.cs" />
-    <Compile Include="Models\ResponseProxy.cs" />
+    <Compile Include="Plumbing\Interfaces\IResponseProxy.cs" />
+    <Compile Include="Plumbing\ResponseProxy.cs" />
     <Compile Include="Models\Services\HiddenStringFactory.cs" />
     <Compile Include="Models\Interfaces\IMessageJson.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageMapperToJson.cs" />
@@ -221,7 +221,7 @@
     <Compile Include="Models\Services\LinkUpdater.cs" />
     <Compile Include="Models\Services\MessageJsonToMessage.cs" />
     <Compile Include="Models\Services\MessageMapperToJson.cs" />
-    <Compile Include="Models\Services\NinjectControllerFactory.cs" />
+    <Compile Include="Plumbing\NinjectControllerFactory.cs" />
     <Compile Include="Models\Services\SaveMessage.cs" />
     <Compile Include="Plumbing\Interfaces\IRepository.cs" />
     <Compile Include="Plumbing\Repository.cs" />

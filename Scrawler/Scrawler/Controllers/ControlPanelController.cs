@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
@@ -12,6 +8,10 @@ namespace Scrawler.Controllers
     {
         private readonly IRepository<Chatroom> _chatRepository;
 
+
+        public ControlPanelController(IResponseProxy responseProxy) : base(responseProxy)
+        {
+        }
 
         public ActionResult Index()
         {

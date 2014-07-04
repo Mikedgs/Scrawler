@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
 
-namespace Scrawler.Models.Services
+namespace Scrawler.Plumbing
 {
     public class NinjectControllerFactory : DefaultControllerFactory
     {

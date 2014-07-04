@@ -1,4 +1,4 @@
-﻿namespace Scrawler.Models
+﻿namespace Scrawler.Plumbing.Interfaces
 {
     public interface IResponseProxy
     {

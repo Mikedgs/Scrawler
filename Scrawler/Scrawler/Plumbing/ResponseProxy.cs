@@ -1,6 +1,7 @@
 ﻿using System.Web;
+using Scrawler.Plumbing.Interfaces;
 
-namespace Scrawler.Models
+namespace Scrawler.Plumbing
 {
     public class ResponseProxy : IResponseProxy
     {

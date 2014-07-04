@@ -14,7 +14,7 @@ namespace Scrawler.Controllers
         private readonly IMessageMapperToJson _messageMapperToJson;
         private readonly ISaveMessage _saveMessage;
 
-        public ChatController(IRepository<Chatroom> chatRepository, IRepository<Message> messageRepository, IMessageMapperToJson messageMapperToJson, ISaveMessage saveMessage)
+        public ChatController(IRepository<Chatroom> chatRepository, IRepository<Message> messageRepository, IMessageMapperToJson messageMapperToJson, ISaveMessage saveMessage, IResponseProxy responseProxy) : base(responseProxy)
         {
             _chatRepository = chatRepository;
             _messageRepository = messageRepository;
@@ -37,7 +37,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public JsonResult GetRoomInformation(string id)
         {
-            var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).Single();
+            var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).First();
             var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == chatroom.Id).ToList();
             var listOfConvertedJsonMsgs = listOfImmortalMsgs.Select(msg => _messageMapperToJson.MapToJson(msg)).ToList();
             var chatRoomJson = new ChatroomJson

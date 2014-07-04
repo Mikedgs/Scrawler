@@ -1,15 +1,11 @@
 ﻿using System.Web.Mvc;
-using Scrawler.Models;
+using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Controllers
 {
     public abstract class ScrawlerController : Controller
     {
         private readonly IResponseProxy _responseProxy;
-
-        protected ScrawlerController() : this(new ResponseProxy())
-        {
-        }
 
         protected ScrawlerController(IResponseProxy responseProxy)
         {

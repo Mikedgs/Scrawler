@@ -8,7 +8,7 @@ namespace ScrawlerTests.Models.Services
     class MessageJsonToMessageTests
     {
         [Test]
-        public void MapToJson_correctly_maps_json_to_message_correctly()
+        public void MsgJsonToMessage_correctly_maps_json_to_message_correctly()
         {
             // Arrange
             var cut = new MessageJsonToMessage();
