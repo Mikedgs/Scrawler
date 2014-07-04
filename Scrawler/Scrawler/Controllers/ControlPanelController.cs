@@ -52,5 +52,11 @@ namespace Scrawler.Controllers
 
             return Redirect("/ControlPanel/Index");
         }
+
+        public void Dispose()
+        {
+            _chatRepository.Dispose();
+            base.Dispose();
+        }
     }
 }
