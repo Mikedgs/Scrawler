@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Scrawler.Models;
 using Scrawler.Models.Services;
@@ -40,7 +41,17 @@ namespace Scrawler.Controllers
         {
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).First();
             var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == chatroom.Id).ToList();
-            var listOfConvertedJsonMsgs = listOfImmortalMsgs.Select(msg => _messageMapperToJson.MapToJson(msg)).ToList();
+            listOfImmortalMsgs.OrderBy(x=>x.Votes);
+
+            var topThree = new List<Message>();
+            if (listOfImmortalMsgs.Count > 3)
+            {
+                topThree.Add(listOfImmortalMsgs[0]);
+                topThree.Add(listOfImmortalMsgs[1]);
+                topThree.Add(listOfImmortalMsgs[2]);
+            }
+            
+            var listOfConvertedJsonMsgs = topThree.Select(msg => _messageMapperToJson.MapToJson(msg)).ToList();
             var chatRoomJson = new ChatroomJson
             {
                 FireBaseRoomId = chatroom.FirebaseId,
