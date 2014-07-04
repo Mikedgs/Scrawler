@@ -25,7 +25,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult Index(int id)
         {
-            return Redirect("http://www.hidden-falls-5768.herokuapp.com/?id=" + _chatRepository.FindById(id).HiddenUrl);
+            return Redirect("http://hidden-falls-5768.herokuapp.com?id=" + _chatRepository.FindById(id).HiddenUrl);
         }
 
         [HttpPost]
