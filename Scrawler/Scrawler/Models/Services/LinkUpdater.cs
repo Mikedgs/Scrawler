@@ -15,6 +15,7 @@ namespace Scrawler.Models.Services
 
         public void UpdateLinks()
         {
+
             var allrooms = _chatRepository.GetAll();
             foreach (var room in allrooms)
             {
