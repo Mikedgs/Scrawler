@@ -18,7 +18,7 @@ namespace Scrawler.Controllers
 
         protected JsonResult CrossSiteFriendlyJson(object data)
         {
-            _responseProxy.AddHeader("Access-Control-Allow-Origin", "*");
+            _responseProxy.AddHeader("Access-Control-Allow-Origin", "http://hidden-falls-5768.herokuapp.com/");
             _responseProxy.AddHeader("Access-Control-Request-Methods", "*");
             return Json(data, JsonRequestBehavior.AllowGet);
         }
