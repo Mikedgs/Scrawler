@@ -218,6 +218,7 @@
     <Compile Include="Models\MessageJSON.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageJsonToMessage.cs" />
     <Compile Include="Models\Services\Interfaces\ISaveMessage.cs" />
+    <Compile Include="Models\Services\LinkUpdater.cs" />
     <Compile Include="Models\Services\MessageJsonToMessage.cs" />
     <Compile Include="Models\Services\MessageMapperToJson.cs" />
     <Compile Include="Models\Services\NinjectControllerFactory.cs" />
