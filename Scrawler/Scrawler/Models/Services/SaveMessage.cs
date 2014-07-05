@@ -1,4 +1,5 @@
-﻿using Scrawler.Plumbing;
+﻿using System.Linq;
+using Scrawler.Plumbing;
 
 namespace Scrawler.Models.Services
 {
@@ -9,7 +10,11 @@ namespace Scrawler.Models.Services
 
         public void SaveMessages(MessageJson msg)
         {
-            var messagetosave = _repository.FindById(msg.Id);
+            var messagetosave = _repository.Get(x=>x.Body == msg.Content).SingleOrDefault();
+            if (messagetosave == null)
+            {
+                messagetosave = _mapper.MapToMessage(msg);
+            }
             messagetosave.Votes += 1;
             _repository.Add(messagetosave);
             _repository.SaveChanges();
