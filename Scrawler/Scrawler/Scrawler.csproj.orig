@@ -20,8 +20,6 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,9 +67,6 @@
     <Reference Include="Mindscape.LightSpeed.Web.DynamicData, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Mindscape.LightSpeed.Web.DynamicData.dll</HintPath>
-    </Reference>
-    <Reference Include="Mindscape.Raygun4Net">
-      <HintPath>..\packages\Mindscape.Raygun4Net.3.0.0\lib\net40\Mindscape.Raygun4Net.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
@@ -213,9 +208,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChatroomJSON.cs" />
-    <Compile Include="Plumbing\Interfaces\IResponseProxy.cs" />
-    <Compile Include="Plumbing\Interfaces\IRepository.cs" />
-    <Compile Include="Plumbing\ResponseProxy.cs" />
+    <Compile Include="Models\IResponseProxy.cs" />
+    <Compile Include="Models\ResponseProxy.cs" />
     <Compile Include="Models\Services\HiddenStringFactory.cs" />
     <Compile Include="Models\Interfaces\IMessageJson.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageMapperToJson.cs" />
@@ -224,11 +218,15 @@
     <Compile Include="Models\MessageJSON.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageJsonToMessage.cs" />
     <Compile Include="Models\Services\Interfaces\ISaveMessage.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\Services\LinkUpdater.cs" />
+=======
+>>>>>>> c8cf3f07fbebafe7326c7800af9773a92f153aaa
     <Compile Include="Models\Services\MessageJsonToMessage.cs" />
     <Compile Include="Models\Services\MessageMapperToJson.cs" />
-    <Compile Include="Plumbing\NinjectControllerFactory.cs" />
+    <Compile Include="Models\Services\NinjectControllerFactory.cs" />
     <Compile Include="Models\Services\SaveMessage.cs" />
+    <Compile Include="Plumbing\Interfaces\IRepository.cs" />
     <Compile Include="Plumbing\Repository.cs" />
     <Compile Include="Plumbing\Scrawler.cs">
       <AutoGen>True</AutoGen>
@@ -354,13 +352,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
