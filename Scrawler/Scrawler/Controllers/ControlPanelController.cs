@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Threading;
+using System.Timers;
 using System.Web.Mvc;
 using Scrawler.Models;
 using Scrawler.Models.Services;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
+using Timer = System.Timers.Timer;
 
 namespace Scrawler.Controllers
 {
@@ -11,11 +14,23 @@ namespace Scrawler.Controllers
     {
         private readonly IRepository<Chatroom> _chatRepository;
         private readonly IHiddenStringFactory _stringFactory;
+        private Timer _timer;
+        private LinkUpdater _DBrefresh;
 
-        public ControlPanelController(IResponseProxy responseProxy, IRepository<Chatroom> chatRepository, IHiddenStringFactory stringFactory) : base(responseProxy)
+        public ControlPanelController(IResponseProxy responseProxy, IRepository<Chatroom> chatRepository, IHiddenStringFactory stringFactory, Timer timer, LinkUpdater DBrefresh) : base(responseProxy)
         {
             _chatRepository = chatRepository;
             _stringFactory = stringFactory;
+            _timer = timer;
+            _DBrefresh = DBrefresh;
+            _timer.Interval = 1800000;
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Enabled = true;
+        }
+
+        void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            _DBrefresh.UpdateLinks();
         }
 
         public ActionResult Index()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Moq;
 using NUnit.Framework;
 using Scrawler.Controllers;
@@ -21,7 +22,8 @@ namespace ScrawlerTests.Controller
         {
             //Arrange
             var mockrepo = new Mock<IRepository<Chatroom>>();
-            var sut = new ControlPanelController(null, mockrepo.Object, null);
+            var mocktimer = new Mock<Timer>();
+            var sut = new ControlPanelController(null, mockrepo.Object, null, mocktimer.Object, null);
             var listofchats = new List<Chatroom>();
             mockrepo.Setup(x => x.GetAll()).Returns(listofchats);
 
@@ -38,7 +40,8 @@ namespace ScrawlerTests.Controller
             //Arrange
             var mockrepo = new Mock<IRepository<Chatroom>>();
             var mockFactory = new Mock<IHiddenStringFactory>();
-            var sut = new ControlPanelController(null, mockrepo.Object, mockFactory.Object);
+            var mocktimer = new Mock<Timer>();
+            var sut = new ControlPanelController(null, mockrepo.Object, mockFactory.Object, mocktimer.Object, null);
             var room = new Chatroom();
 
             //Act
@@ -55,7 +58,8 @@ namespace ScrawlerTests.Controller
         {
             //Arrange
             var mockrepo = new Mock<IRepository<Chatroom>>();
-            var sut = new ControlPanelController(null, mockrepo.Object, null);
+            var mocktimer = new Mock<Timer>();
+            var sut = new ControlPanelController(null, mockrepo.Object, null, mocktimer.Object, null);
             
             //Act
             sut.Delete(6);
