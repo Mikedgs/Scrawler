@@ -41,7 +41,7 @@ namespace Scrawler.Controllers
         {
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).First();
             var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == chatroom.Id).ToList();
-            var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderBy(x=>x.Votes).ToList();
+            var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderByDescending(x=>x.Votes).ToList();
 
             var topThree = new List<Message>();
             if (listOfImmortalMsgs.Count > 3)
