@@ -41,14 +41,14 @@ namespace Scrawler.Controllers
         {
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).First();
             var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == chatroom.Id).ToList();
-            listOfImmortalMsgs.OrderBy(x=>x.Votes);
+            var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderBy(x=>x.Votes).ToList();
 
             var topThree = new List<Message>();
             if (listOfImmortalMsgs.Count > 3)
             {
-                topThree.Add(listOfImmortalMsgs[0]);
-                topThree.Add(listOfImmortalMsgs[1]);
-                topThree.Add(listOfImmortalMsgs[2]);
+                topThree.Add(sortedlistofImortalMsgs[0]);
+                topThree.Add(sortedlistofImortalMsgs[1]);
+                topThree.Add(sortedlistofImortalMsgs[2]);
             }
             
             var listOfConvertedJsonMsgs = topThree.Select(msg => _messageMapperToJson.MapToJson(msg)).ToList();
