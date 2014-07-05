@@ -9,8 +9,9 @@ namespace Scrawler.Models.Services
 
         public void SaveMessages(MessageJson msg)
         {
-            var convertedMsg = _mapper.MapToMessage(msg);
-            _repository.Add(convertedMsg);
+            var messagetosave = _repository.FindById(msg.Id);
+            messagetosave.Votes += 1;
+            _repository.Add(messagetosave);
             _repository.SaveChanges();
         }
     }
