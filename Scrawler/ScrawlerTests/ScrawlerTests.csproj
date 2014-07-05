@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ChatController_Tests.cs" />
+    <Compile Include="Controller\ControlPanelTests.cs" />
     <Compile Include="Models\Services\HiddenStringFactoryTests.cs" />
     <Compile Include="Models\Services\MessageJsonToMessageTests.cs" />
     <Compile Include="Models\Services\MessageMapperToJsonTests.cs" />
