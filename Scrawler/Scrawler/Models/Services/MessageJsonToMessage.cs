@@ -15,7 +15,8 @@ namespace Scrawler.Models.Services
             {
                 Body = msgJson.Content,
                 CreatedAt = DateTime.Now,
-                ChatroomId = _repository.Get(x => x.HiddenUrl == msgJson.HiddenUrl).First().Id
+                ChatroomId = _repository.Get(x => x.HiddenUrl == msgJson.HiddenUrl).First().Id,
+                Votes = 1
             };
         }
     }
