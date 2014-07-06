@@ -35,5 +35,21 @@
         <entityProperty name="Votes" dataType="Int32" isNullable="true" privateSetter="false" />
       </entityProperties>
     </entity>
+    <entity name="Admin" identityType="Int32" cacheExpiry="0">
+      <entityProperties>
+        <entityProperty name="UserName" columnName="user_name" privateSetter="false">
+          <validations>
+            <presenceValidation />
+            <lengthValidation minimumLength="0" maximumLength="30" />
+          </validations>
+        </entityProperty>
+        <entityProperty name="Password" privateSetter="false">
+          <validations>
+            <presenceValidation />
+            <lengthValidation minimumLength="0" maximumLength="50" />
+          </validations>
+        </entityProperty>
+      </entityProperties>
+    </entity>
   </entities>
 </model>

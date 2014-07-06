@@ -14,7 +14,7 @@
         <elementListCompartment Id="d06b2315-722d-40a3-891b-d443bf446039" absoluteBounds="5.5150000000000006, 2.285, 1.4700000000000002, 0.76920572916666663" name="Properties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </entityShape>
-    <oneToManyAssociationConnector edgePoints="[(3.125 : 2.2309521484375); (5.5 : 2.2309521484375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <oneToManyAssociationConnector edgePoints="[(3.125 : 2.2309521484375); (5.5 : 2.2309521484375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <oneToManyAssociationMoniker Id="25a2d369-03ba-4b6e-917d-9fcae51641df" />
       <relativeChildShapes />
       <nodes>
@@ -22,5 +22,11 @@
         <entityShapeMoniker Id="3bec2a27-4a37-4e3f-9a6c-c6171a0bc53e" />
       </nodes>
     </oneToManyAssociationConnector>
+    <entityShape Id="bf42ef70-911d-421e-aa5d-5effb5b70ca8" absoluteBounds="2.25, 4.125, 1.5, 0.89460286458333349">
+      <entityMoniker name="/Scrawler/Admin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4b18c5c6-1aa4-4db4-ba97-625fb48d7ddf" absoluteBounds="2.265, 4.535, 1.4700000000000002, 0.38460286458333331" name="Properties" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </entityShape>
   </nestedChildShapes>
 </minimalLanguageDiagram>
