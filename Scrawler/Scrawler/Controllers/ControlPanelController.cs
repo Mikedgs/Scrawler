@@ -23,7 +23,7 @@ namespace Scrawler.Controllers
             _stringFactory = stringFactory;
             _timer = timer;
             _DBrefresh = DBrefresh;
-            _timer.Interval = 1800000;
+            _timer.Interval = 3600000;
             _timer.Elapsed += _timer_Elapsed;
             _timer.Enabled = true;
         }
