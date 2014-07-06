@@ -6,6 +6,5 @@ namespace Scrawler.Models
     {
         public string FireBaseRoomId { get; set; }
         public List<MessageJson> Messages { get; set; }
-        public string ChatroomName { get; set; }
     }
 }

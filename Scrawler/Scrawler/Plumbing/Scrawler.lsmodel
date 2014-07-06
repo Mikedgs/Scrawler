@@ -11,7 +11,6 @@
         </entityProperty>
         <entityProperty name="FirebaseId" columnName="firebase_id" privateSetter="false" />
         <entityProperty name="CreatedAt" dataType="DateTime" columnName="created_at" privateSetter="false" />
-        <entityProperty name="ChatroomName" privateSetter="false" />
       </entityProperties>
       <oneToManyAssociations>
         <oneToManyAssociation Id="25a2d369-03ba-4b6e-917d-9fcae51641df" collectionName="Messages" backreferenceName="Chatroom" isNullable="false" columnName="chatroom_id">
