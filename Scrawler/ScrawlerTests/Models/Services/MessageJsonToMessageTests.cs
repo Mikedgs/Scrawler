@@ -19,9 +19,10 @@ namespace ScrawlerTests.Models.Services
             // Arrange
             var cut = new MessageJsonToMessage();
             var mock = new Mock<IRepository<Chatroom>>();
-            mock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom { HiddenUrl = "2"} });
-            // Hidden url constantly changes, unsure how to testt without querying the azure db
-            var jsonMessage = new MessageJson() { Content = "content", RoomId = 1, Username = "username", ChatroomName = "name", HiddenUrl = "01WYI"};
+            var repo = new Repository<Chatroom>();
+            mock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom() });
+            // Hidden url constantly changes, so unsure how to test without querying the azure db
+            var jsonMessage = new MessageJson() { Content = "content", RoomId = 1, Username = "username", ChatroomName = "name", HiddenUrl = "AJRYJ" };
 
             // Act
             var message = cut.MapToMessage(jsonMessage);
