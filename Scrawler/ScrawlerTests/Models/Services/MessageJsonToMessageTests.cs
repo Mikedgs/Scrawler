@@ -1,6 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using Moq;
+using NUnit.Framework;
 using Scrawler.Models;
 using Scrawler.Models.Services;
+using Scrawler.Plumbing;
+using Scrawler.Plumbing.Interfaces;
 
 namespace ScrawlerTests.Models.Services
 {
@@ -12,7 +18,10 @@ namespace ScrawlerTests.Models.Services
         {
             // Arrange
             var cut = new MessageJsonToMessage();
-            var jsonMessage = new MessageJson() {Content = "content", RoomId = 1, Username = "username"};
+            var mock = new Mock<IRepository<Chatroom>>();
+            mock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom { HiddenUrl = "2"} });
+            // Hidden url constantly changes, unsure how to testt without querying the azure db
+            var jsonMessage = new MessageJson() { Content = "content", RoomId = 1, Username = "username", ChatroomName = "name", HiddenUrl = "01WYI"};
 
             // Act
             var message = cut.MapToMessage(jsonMessage);
@@ -20,7 +29,6 @@ namespace ScrawlerTests.Models.Services
             // Assert
             Assert.That(message.Body, Is.EqualTo("content"));
             Assert.That(message.ChatroomId, Is.EqualTo(1));
-            Assert.That(message.Username, Is.EqualTo("username"));
         }
     }
 }

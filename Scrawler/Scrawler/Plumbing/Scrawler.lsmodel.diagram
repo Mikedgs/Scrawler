@@ -2,10 +2,10 @@
 <minimalLanguageDiagram dslVersion="1.1.0.0" absoluteBounds="0, 0, 11, 8.5" name="Scrawler">
   <modelMoniker name="/Scrawler" />
   <nestedChildShapes>
-    <entityShape Id="8dcd82b7-7a41-475d-b88f-cb274f3b1aa9" absoluteBounds="1.625, 1.5, 1.5, 1.2792057291666668">
+    <entityShape Id="8dcd82b7-7a41-475d-b88f-cb274f3b1aa9" absoluteBounds="1.375, 1.875, 1.5, 1.2792057291666668">
       <entityMoniker name="/Scrawler/Chatroom" />
       <nestedChildShapes>
-        <elementListCompartment Id="02dfac6c-2e68-475a-ba6b-4fe5895f8d1c" absoluteBounds="1.6400000000000006, 1.9100000000000001, 1.4700000000000002, 0.76920572916666663" name="Properties" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="02dfac6c-2e68-475a-ba6b-4fe5895f8d1c" absoluteBounds="1.3900000000000006, 2.285, 1.4700000000000002, 0.76920572916666663" name="Properties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </entityShape>
     <entityShape Id="3bec2a27-4a37-4e3f-9a6c-c6171a0bc53e" absoluteBounds="5.5, 1.875, 1.5, 1.2792057291666668">
@@ -14,7 +14,7 @@
         <elementListCompartment Id="d06b2315-722d-40a3-891b-d443bf446039" absoluteBounds="5.5150000000000006, 2.285, 1.4700000000000002, 0.76920572916666663" name="Properties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </entityShape>
-    <oneToManyAssociationConnector edgePoints="[(3.125 : 2.32710286458333); (5.5 : 2.32710286458333)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <oneToManyAssociationConnector edgePoints="[(2.875 : 2.51460286458333); (5.5 : 2.51460286458333)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <oneToManyAssociationMoniker Id="25a2d369-03ba-4b6e-917d-9fcae51641df" />
       <relativeChildShapes />
       <nodes>
