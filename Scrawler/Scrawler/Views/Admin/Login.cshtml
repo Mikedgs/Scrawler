@@ -1,0 +1,16 @@
+﻿@model Scrawler.Plumbing.Admin
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Admin"))
+{
+    <label>Username: </label> @Html.TextBoxFor(x => x.UserName) <br />
+    <label>Password: </label> @Html.PasswordFor(x => x.Password) <br />
+    <input type="submit" value="Login" />
+}
+
+

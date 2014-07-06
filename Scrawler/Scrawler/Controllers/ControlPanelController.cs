@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Threading;
 using System.Timers;
 using System.Web.Mvc;
 using Scrawler.Models;
 using Scrawler.Models.Services;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
-using Timer = System.Timers.Timer;
 
 namespace Scrawler.Controllers
 {
@@ -14,36 +12,38 @@ namespace Scrawler.Controllers
     {
         private readonly IRepository<Chatroom> _chatRepository;
         private readonly IHiddenStringFactory _stringFactory;
-        private Timer _timer;
-        private readonly LinkUpdater _DBrefresh;
-
+        private readonly LinkUpdater _dBrefresh;
+        private readonly Timer _timer1 = new Timer();
+          
         public ControlPanelController(IResponseProxy responseProxy, IRepository<Chatroom> chatRepository, IHiddenStringFactory stringFactory, Timer timer, LinkUpdater DBrefresh) : base(responseProxy)
         {
             _chatRepository = chatRepository;
             _stringFactory = stringFactory;
-            _timer = timer;
-            _DBrefresh = DBrefresh;
-            _timer.Interval = 3600000;
-            _timer.Elapsed += _timer_Elapsed;
-            _timer.Enabled = true;
-        }
-
-        void _timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            _DBrefresh.UpdateLinks();
+            _dBrefresh = DBrefresh;
+            _timer1.Interval = 1800000;
+            _timer1.Elapsed += _timer_Elapsed;
+            _timer1.Enabled = true;
         }
 
         public ActionResult Index()
         {
+            if (Session["loggedIn"] == "true")
+            {
+                var listofChatrooms = _chatRepository.GetAll();
+                return View(listofChatrooms);
+            }
+            return RedirectToAction("Login", "Admin");
+        }
 
-            var listofChatrooms = _chatRepository.GetAll();
-
-            return View(listofChatrooms);
+        void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            _dBrefresh.UpdateLinks();
         }
 
         [HttpGet]
         public ActionResult AddRoom()
         {
+            if (Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
             var room = new Chatroom();
             return View(room);
         }
@@ -51,6 +51,7 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult AddRoom(Chatroom room)
         {
+            if (Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
             room.HiddenUrl = _stringFactory.GenerateHiddenString();
             room.CreatedAt = DateTime.Now;
 
@@ -63,6 +64,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
+            if (Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
             var room = _chatRepository.FindById(id);
             _chatRepository.Delete(room);
             _chatRepository.SaveChanges();
@@ -70,7 +72,7 @@ namespace Scrawler.Controllers
             return Redirect("/ControlPanel/Index");
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             _chatRepository.Dispose();
             base.Dispose();

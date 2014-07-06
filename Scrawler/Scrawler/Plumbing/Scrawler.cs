@@ -174,6 +174,55 @@ namespace Scrawler.Plumbing
   }
 
 
+  [Serializable]
+  [System.CodeDom.Compiler.GeneratedCode("LightSpeedModelGenerator", "1.0.0.0")]
+  [System.ComponentModel.DataObject]
+  public partial class Admin : Entity<int>
+  {
+    #region Fields
+  
+    [Column("user_name")]
+    [ValidatePresence]
+    [ValidateLength(0, 30)]
+    private string _userName;
+    [ValidatePresence]
+    [ValidateLength(0, 50)]
+    private string _password;
+
+    #endregion
+    
+    #region Field attribute and view names
+    
+    /// <summary>Identifies the UserName entity attribute.</summary>
+    public const string UserNameField = "UserName";
+    /// <summary>Identifies the Password entity attribute.</summary>
+    public const string PasswordField = "Password";
+
+
+    #endregion
+    
+    #region Properties
+
+
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public string UserName
+    {
+      get { return Get(ref _userName, "UserName"); }
+      set { Set(ref _userName, value, "UserName"); }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public string Password
+    {
+      get { return Get(ref _password, "Password"); }
+      set { Set(ref _password, value, "Password"); }
+    }
+
+    #endregion
+  }
+
+
 
 
   /// <summary>
@@ -191,6 +240,11 @@ namespace Scrawler.Plumbing
     public System.Linq.IQueryable<Message> Messages
     {
       get { return this.Query<Message>(); }
+    }
+    
+    public System.Linq.IQueryable<Admin> Admins
+    {
+      get { return this.Query<Admin>(); }
     }
     
   }
