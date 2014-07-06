@@ -56,6 +56,7 @@ namespace Scrawler.Controllers
             {
                 FireBaseRoomId = chatroom.FirebaseId,
                 Messages = listOfConvertedJsonMsgs,
+                ChatroomName = chatroom.ChatroomName
             };
             return CrossSiteFriendlyJson(chatRoomJson);
         }
