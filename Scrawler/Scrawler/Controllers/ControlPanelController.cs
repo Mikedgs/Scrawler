@@ -15,7 +15,7 @@ namespace Scrawler.Controllers
         private readonly IRepository<Chatroom> _chatRepository;
         private readonly IHiddenStringFactory _stringFactory;
         private Timer _timer;
-        private LinkUpdater _DBrefresh;
+        private readonly LinkUpdater _DBrefresh;
 
         public ControlPanelController(IResponseProxy responseProxy, IRepository<Chatroom> chatRepository, IHiddenStringFactory stringFactory, Timer timer, LinkUpdater DBrefresh) : base(responseProxy)
         {
