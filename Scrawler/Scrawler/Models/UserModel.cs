@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using Microsoft.VisualBasic.ApplicationServices;
 using Scrawler.Plumbing;
-using Scrawler.Models;
 
 namespace Scrawler.Models
 {

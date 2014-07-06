@@ -8,9 +8,9 @@ namespace Scrawler.Models
         public string GetMd5Hash(string plaintext)
         {
             var md5Provider = new MD5CryptoServiceProvider(); // Hashing algorith
-            byte[] hasedvalue = md5Provider.ComputeHash(Encoding.Default.GetBytes(plaintext)); // takes a byte array, so convert string to byte array
+            var hasedvalue = md5Provider.ComputeHash(Encoding.Default.GetBytes(plaintext)); // takes a byte array, so convert string to byte array
             var str = new StringBuilder(); // used to turn the resultant byte array back to a string
-            foreach (byte t in hasedvalue)
+            foreach (var t in hasedvalue)
             {
                 str.Append(t.ToString("x2"));
             }
