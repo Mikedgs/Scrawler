@@ -5,6 +5,7 @@ namespace Scrawler.Models
 {
     public class MessageJson : IMessageJson
     {
+        // TODO ctor and private setters?
         public int Id { get; set; }
         public int RoomId { get; set; }
         public DateTime Time { get; set; }

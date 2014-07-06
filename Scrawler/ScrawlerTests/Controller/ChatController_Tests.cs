@@ -7,7 +7,7 @@ using Moq;
 using NUnit.Framework;
 using Scrawler.Controllers;
 using Scrawler.Models;
-using Scrawler.Models.Interfaces;
+using Scrawler.Models.Interfaces; // TODO R# green
 using Scrawler.Models.Services;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
@@ -17,6 +17,7 @@ namespace ScrawlerTests.Controller
     [TestFixture]
     public class ChatController_Tests
     {
+        // TODO change CHatController.Index so that it returns a RedirectResult not an actionResult, and then delete this test.
         [Test]
         public void The_index_method_returns_a_redirect_result()
         {

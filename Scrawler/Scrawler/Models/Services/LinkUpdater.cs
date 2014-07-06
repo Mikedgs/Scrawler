@@ -8,7 +8,7 @@ using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Models.Services
 {
-    public class LinkUpdater
+    public class LinkUpdater // TODO interface over this and inject it where needed
     {
         private readonly IRepository<Chatroom> _chatRepository = new Repository<Chatroom>();
         private readonly IHiddenStringFactory _stringFactory = new HiddenStringFactory();
