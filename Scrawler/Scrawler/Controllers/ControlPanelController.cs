@@ -21,13 +21,14 @@ namespace Scrawler.Controllers
             _chatRepository = chatRepository;
             _stringFactory = stringFactory;
             _dBrefresh = dBrefresh;
-            _timer1.Interval = 1800000;
+            _timer1.Interval = 1800000; // TODO rip this timer out and move it into a service
             _timer1.Elapsed += _timer_Elapsed;
             _timer1.Enabled = true;
         }
 
         public ActionResult Index()
         {
+            // TODO create an ISessionProxy sessionProxy.RedirectIfNotLoggedIn();
             if ((string) Session["loggedIn"] != "true") return RedirectToAction("Login", "Admin");
             var listofChatrooms = _chatRepository.GetAll();
             return View(listofChatrooms);
@@ -63,6 +64,7 @@ namespace Scrawler.Controllers
         public ActionResult Delete(int id)
         {
             if ((string) Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
+            
             var room = _chatRepository.FindById(id);
             _chatRepository.Delete(room);
             _chatRepository.SaveChanges();

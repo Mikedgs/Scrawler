@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Scrawler.Models
+namespace Scrawler.Models // TODO namespace, TODO addall properties from implementor
 {
     public interface IChatroomJson
     {

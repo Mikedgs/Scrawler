@@ -18,6 +18,7 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult Login(Admin admin)
         {
+            // TODO this is offensive. Pull it all out. ISessionProxy's default implementation should handle much of this
             if (admin.UserName == null || admin.Password == null)
             {
                 return RedirectToAction("Login", "Admin", new RouteValueDictionary { { "validUser", false } });

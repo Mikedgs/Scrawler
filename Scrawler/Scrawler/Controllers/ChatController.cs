@@ -28,7 +28,8 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult Index(int id)
         {
-            return Redirect("http://hidden-falls-5768.herokuapp.com?id=" + _chatRepository.FindById(id).HiddenUrl);
+            return Redirect("http://hidden-falls-5768.herokuapp.com?id=" + _chatRepository.FindById(id).HiddenUrl); // TODO don't use + for string concatenation
+            // TODO pull this URL out into config - don't just reference COnfigurationManager - wrap in a class and inject an IConfiguration
         }
 
         [HttpPost]
@@ -41,16 +42,15 @@ namespace Scrawler.Controllers
         [HttpGet]
         public JsonResult GetRoomInformation(string id)
         {
-            var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).First();
+            var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).First(); // TODO .FirstOrDefault - if not found, Json("Not found URL") - add that URL to config
             var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == chatroom.Id).ToList();
             var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderByDescending(x => x.Votes).ToList();
 
             var topThree = new List<Message>();
+
             if (listOfImmortalMsgs.Count > 2)
             {
-                topThree.Add(sortedlistofImortalMsgs[0]);
-                topThree.Add(sortedlistofImortalMsgs[1]);
-                topThree.Add(sortedlistofImortalMsgs[2]);
+                topThree.AddRange(sortedlistofImortalMsgs.Take(3)); // TODO takewhile to simplify all that >2 business?
             }
 
             var listOfConvertedJsonMsgs = topThree.Select(msg => _messageMapperToJson.MapToJson(msg)).ToList();

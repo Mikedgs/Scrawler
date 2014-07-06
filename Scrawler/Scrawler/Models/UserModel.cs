@@ -3,7 +3,7 @@ using Scrawler.Plumbing;
 
 namespace Scrawler.Models
 {
-    public class UserModel
+    public class UserModel // TODO this is a straight duplicate of AdminViewModel. And it's not a viewmodel. Please to consider its functionzzzzz.
     {
         private readonly Repository<Admin> _repo;
 

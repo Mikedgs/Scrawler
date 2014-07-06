@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Security.Permissions;
+using System.Web;
 using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Plumbing

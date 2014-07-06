@@ -19,14 +19,14 @@ namespace ScrawlerTests.Controller
             var mockrepo = new Mock<IRepository<Chatroom>>();
             var mocktimer = new Mock<Timer>();
             var sut = new ControlPanelController(null, mockrepo.Object, null, mocktimer.Object, null);
-            var listofchats = new List<Chatroom>();
+            var listofchats = new List<Chatroom>(); // TODO camelCasePleaseOrICutOffYourEars
             mockrepo.Setup(x => x.GetAll()).Returns(listofchats);
 
             //Act
             var list = sut.Index();
 
             //Assert
-            Assert.NotNull(list);
+            Assert.NotNull(list); // TODO areequal - listofchats?
         }
 
         [Test]
