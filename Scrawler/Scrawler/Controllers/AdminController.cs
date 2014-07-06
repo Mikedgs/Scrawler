@@ -10,30 +10,31 @@ namespace Scrawler.Controllers
         private readonly Repository<Admin> _adminRepository = new Repository<Admin>();
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Login(bool validUser = true)
         {
-            return View(new Admin());
+            return View(new LoginViewModel(new Admin(), validUser));
         }
 
         [HttpPost]
         public ActionResult Login(Admin admin)
         {
-            Admin validUser = new UserModel().Validate(admin);
-            if (validUser != null)
+            if (admin.UserName == null || admin.Password == null)
             {
-                Session["loggedIn"] = "true";
-                Session["UserId"] = validUser.Id;
-                Session["UserName"] = validUser.UserName;
-                return Redirect("/ControlPanel/index");
+                return RedirectToAction("Login", "Admin", new RouteValueDictionary { { "validUser", false } });
             }
-            var rvDic = new RouteValueDictionary { { "validUser", false } };
-            return RedirectToAction("Login", "Admin", rvDic);
+            var validUser = new UserModel().Validate(admin);
+            if (validUser == null)
+                return RedirectToAction("Login", "Admin", new RouteValueDictionary {{"validUser", false}});
+            Session["loggedIn"] = "true";
+            Session["UserId"] = validUser.Id;
+            Session["UserName"] = validUser.UserName;
+            return Redirect("/ControlPanel/index");
         }
 
         [HttpGet]
         public ActionResult CreateUser()
         {
-            if (Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
+            if ((string) Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
             var user = new Admin();
             return View(user);
         }
@@ -41,7 +42,7 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult CreateUser(Admin addNewUser)
         {
-            if (Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
+            if ((string) Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
             addNewUser.Password = new HashProvider().GetMd5Hash(addNewUser.Password);
             _adminRepository.Add(addNewUser);
             _adminRepository.SaveChanges();

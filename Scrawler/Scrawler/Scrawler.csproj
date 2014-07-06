@@ -217,6 +217,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\ChatroomJSON.cs" />
     <Compile Include="Models\Hashprovidor.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Plumbing\Interfaces\IResponseProxy.cs" />
     <Compile Include="Plumbing\Interfaces\IRepository.cs" />

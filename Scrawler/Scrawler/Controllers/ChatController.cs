@@ -15,7 +15,9 @@ namespace Scrawler.Controllers
         private readonly IMessageMapperToJson _messageMapperToJson;
         private readonly ISaveMessage _saveMessage;
 
-        public ChatController(IRepository<Chatroom> chatRepository, IRepository<Message> messageRepository, IMessageMapperToJson messageMapperToJson, ISaveMessage saveMessage, IResponseProxy responseProxy) : base(responseProxy)
+        public ChatController(IRepository<Chatroom> chatRepository, IRepository<Message> messageRepository,
+            IMessageMapperToJson messageMapperToJson, ISaveMessage saveMessage, IResponseProxy responseProxy)
+            : base(responseProxy)
         {
             _chatRepository = chatRepository;
             _messageRepository = messageRepository;
@@ -41,16 +43,16 @@ namespace Scrawler.Controllers
         {
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).First();
             var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == chatroom.Id).ToList();
-            var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderByDescending(x=>x.Votes).ToList();
+            var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderByDescending(x => x.Votes).ToList();
 
             var topThree = new List<Message>();
-            if (listOfImmortalMsgs.Count > 3)
+            if (listOfImmortalMsgs.Count > 2)
             {
                 topThree.Add(sortedlistofImortalMsgs[0]);
                 topThree.Add(sortedlistofImortalMsgs[1]);
                 topThree.Add(sortedlistofImortalMsgs[2]);
             }
-            
+
             var listOfConvertedJsonMsgs = topThree.Select(msg => _messageMapperToJson.MapToJson(msg)).ToList();
             var chatRoomJson = new ChatroomJson
             {
