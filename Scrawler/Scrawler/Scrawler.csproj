@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,11 +42,49 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Mindscape.LightSpeed">
-      <HintPath>..\..\..\..\Program Files (x86)\Mindscape\LightSpeed\Bin\Mindscape.LightSpeed.dll</HintPath>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Mindscape.LightSpeed, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.dll</HintPath>
     </Reference>
-    <Reference Include="Mindscape.LightSpeed.Linq">
-      <HintPath>..\..\..\..\Program Files (x86)\Mindscape\LightSpeed\Bin\Mindscape.LightSpeed.Linq.dll</HintPath>
+    <Reference Include="Mindscape.LightSpeed.Linq, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.MetaData, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.MetaData.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.ServiceModel, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.ServiceModel.DomainServices, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.ServiceModel.DomainServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.Web, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.LightSpeed.Web.DynamicData, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Mindscape.LightSpeed.Web.DynamicData.dll</HintPath>
+    </Reference>
+    <Reference Include="Mindscape.Raygun4Net">
+      <HintPath>..\packages\Mindscape.Raygun4Net.3.0.0\lib\net40\Mindscape.Raygun4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -98,6 +138,9 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -161,14 +204,36 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\ControlPanelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ScrawlerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\ChatroomJSON.cs" />
+    <Compile Include="Models\Hashprovidor.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Plumbing\Interfaces\IResponseProxy.cs" />
+    <Compile Include="Plumbing\Interfaces\IRepository.cs" />
+    <Compile Include="Plumbing\ResponseProxy.cs" />
+    <Compile Include="Models\Services\HiddenStringFactory.cs" />
+    <Compile Include="Models\Interfaces\IMessageJson.cs" />
+    <Compile Include="Models\Services\Interfaces\IMessageMapperToJson.cs" />
+    <Compile Include="Models\Services\Interfaces\IHiddenStringFactory.cs" />
+    <Compile Include="Models\Interfaces\IChatroomJson.cs" />
+    <Compile Include="Models\MessageJSON.cs" />
+    <Compile Include="Models\Services\Interfaces\IMessageJsonToMessage.cs" />
+    <Compile Include="Models\Services\Interfaces\ISaveMessage.cs" />
+    <Compile Include="Models\Services\LinkUpdater.cs" />
+    <Compile Include="Models\Services\MessageJsonToMessage.cs" />
+    <Compile Include="Models\Services\MessageMapperToJson.cs" />
+    <Compile Include="Plumbing\NinjectControllerFactory.cs" />
+    <Compile Include="Models\Services\SaveMessage.cs" />
     <Compile Include="Plumbing\Repository.cs" />
     <Compile Include="Plumbing\Scrawler.cs">
       <AutoGen>True</AutoGen>
@@ -185,6 +250,42 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="lib\Mindscape.LightSpeed.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Linq.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Linq.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.MetaData.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.MetaData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.ServiceModel.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.ServiceModel.DomainServices.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.ServiceModel.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Web.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Web.DynamicData.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.Web.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Mindscape.LightSpeed.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Plumbing\Scrawler.lsmodel">
@@ -215,11 +316,15 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\ControlPanel\Index.cshtml" />
+    <Content Include="Views\ControlPanel\AddRoom.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Chat\" />
+    <Folder Include="Views\Scrawler\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -256,6 +361,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
