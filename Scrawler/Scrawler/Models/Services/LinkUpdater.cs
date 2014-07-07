@@ -22,8 +22,8 @@ namespace Scrawler.Models.Services
             {
                 room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString();
                 _chatRepository.Add(room);
-                _chatRepository.SaveChanges();
             }
+            _chatRepository.SaveChanges();
         }
     }
 }
