@@ -17,8 +17,13 @@ namespace Scrawler.Controllers
         private readonly IChatRoomJsonMapper _chatRoomJsonMapper;
         private readonly ILinkUpdater _linkUpdater;
 
-        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver, IResponseProxy responseProxy, ISessionProxy sessionProxy, IConfiguration configuration, IMessageRepository messageDb, IChatRoomJsonMapper chatRoomJsonMapper, ILinkUpdater linkUpdater)
+<<<<<<< HEAD
+        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver, IResponseProxy responseProxy, ISessionProxy sessionProxy, IConfiguration configuration, IMessageRepository messageDb, IChatRoomJsonMapper chatRoomJsonMapper)
             : base(responseProxy, sessionProxy)
+=======
+        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver, IResponseProxy responseProxy, IConfiguration configuration, IMessageDb messageDb, IChatRoomJsonMapper chatRoomJsonMapper, LinkUpdater linkUpdater)
+            : base(responseProxy)
+>>>>>>> 91be35f03074ddb0d4dea516cdccbb1d4945856b
         {
             _chatRepository = chatRepository;
             _messageSaver = messageSaver;

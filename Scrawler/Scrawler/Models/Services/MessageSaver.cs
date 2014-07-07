@@ -18,7 +18,7 @@ namespace Scrawler.Models.Services
 
         public void SaveMessages(MessageJson msg)
         {
-            var messageToSave = _repository.Get(x=>x.Body == msg.Content).SingleOrDefault() ?? _mapper.MapToMessage(msg);
+            var messageToSave = _repository.Get(x=>x.MessageId == msg.MessageId).SingleOrDefault() ?? _mapper.MapToMessage(msg);
             messageToSave.Votes += 1;
             _repository.Add(messageToSave);
             _repository.SaveChanges();

@@ -22,7 +22,7 @@ namespace ScrawlerTests.Models.Services
             var cut = new MessageJsonToMessageMapper(mockRepo.Object);
 
             // Act
-            var result = cut.MapToMessage(new MessageJson(It.IsAny<int>(),"content", new DateTime(),It.IsAny<string>(), 1 ));
+            var result = cut.MapToMessage(new MessageJson(It.IsAny<int>(),"content", new DateTime(),It.IsAny<string>(), 1 , It.IsAny<string>()));
 
             // Assert
             Assert.That(result, Is.InstanceOf<Message>());
@@ -35,7 +35,7 @@ namespace ScrawlerTests.Models.Services
             var mockRepo = new Mock<IRepository<Chatroom>>();
             mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>()))).Returns(new List<Chatroom>() { new Chatroom() { Id = 1 } });
             var cut = new MessageJsonToMessageMapper(mockRepo.Object);
-            var jsonMessage = new MessageJson(19,"content", new DateTime(),"userName", 1 );
+            var jsonMessage = new MessageJson(19, "content", new DateTime(), "userName", 1, It.IsAny<string>());
 
             // Act
             var result = cut.MapToMessage(jsonMessage);
@@ -52,7 +52,7 @@ namespace ScrawlerTests.Models.Services
             var mockRepo = new Mock<IRepository<Chatroom>>();
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom() { Id = 1 } });
             var cut = new MessageJsonToMessageMapper(mockRepo.Object);
-            var jsonMessage = new MessageJson(It.IsAny<int>(), "content", new DateTime(), It.IsAny<string>(), 1);
+            var jsonMessage = new MessageJson(It.IsAny<int>(), "content", new DateTime(), It.IsAny<string>(), 1, It.IsAny<string>());
 
             // Act
             var message = cut.MapToMessage(jsonMessage);

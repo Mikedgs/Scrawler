@@ -6,7 +6,7 @@ using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Models.Mappers
 {
-    public class MessageJsonToMessageMapper : IMessageJsonToMessageMapper
+    public class MessageJsonToMessageMapper : IMessageJsonToMessageMapper // TODO is this a mapper, or is it a factory (genuine question)
     {
         private readonly IRepository<Chatroom> _chatRoomRepository;
         private const int InitialNumberOfVotes = 0;
@@ -20,12 +20,17 @@ namespace Scrawler.Models.Mappers
         {            
             return new Message
             {
-                Username = msgJson.Username,
+                Username = msgJson.Name,
                 Body = msgJson.Content,
                 CreatedAt = DateTime.Now,
+<<<<<<< HEAD
+                ChatroomId = _chatRoomRepository.Get(x => x.HiddenUrl == msgJson.HiddenUrl).Single().Id, 
+                Votes = InitialNumberOfVotes
+=======
                 ChatroomId = _chatRoomRepository.Get(x => x.FirebaseId == msgJson.FirebaseId).Single().Id,
                 Votes = InitialNumberOfVotes,
                 MessageId = msgJson.MessageId
+>>>>>>> 91be35f03074ddb0d4dea516cdccbb1d4945856b
             };
         }
     }

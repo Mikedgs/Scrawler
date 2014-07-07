@@ -18,11 +18,19 @@ namespace Scrawler.Models.Services
 
         public void UpdateLinks(string id)
         {
+<<<<<<< HEAD
+            var allrooms = _chatRepository.GetAll();
+            foreach (var room in allrooms)
+            {
+                room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString();
+                _chatRepository.Add(room);
+            }
+=======
             var room = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
             room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString();
             _chatRepository.Add(room);
+>>>>>>> 91be35f03074ddb0d4dea516cdccbb1d4945856b
             _chatRepository.SaveChanges();
         }
-           
     }
 }

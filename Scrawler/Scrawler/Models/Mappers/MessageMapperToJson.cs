@@ -7,7 +7,7 @@ namespace Scrawler.Models.Mappers
     {
         public MessageJson MapToJson(Message msg)
         {
-            return new MessageJson(msg.Id, msg.Body, msg.CreatedAt, msg.Username, msg.Votes);
+            return new MessageJson(msg.Id, msg.Body, msg.CreatedAt, msg.Username, msg.Votes, msg.MessageId);
         }
     }
 }
