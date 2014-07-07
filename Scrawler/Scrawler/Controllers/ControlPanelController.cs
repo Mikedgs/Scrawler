@@ -3,6 +3,7 @@ using System.Timers;
 using System.Web.Mvc;
 using Scrawler.Models;
 using Scrawler.Models.Services;
+using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
@@ -14,10 +15,12 @@ namespace Scrawler.Controllers
         private readonly IHiddenStringFactory _stringFactory;
         private readonly LinkUpdater _dBrefresh;
         private readonly Timer _timer1 = new Timer();
+        private readonly ISessionProxy _sessionProxy;
 
-        public ControlPanelController(IResponseProxy responseProxy, IRepository<Chatroom> chatRepository,
-            IHiddenStringFactory stringFactory, Timer timer, LinkUpdater dBrefresh) : base(responseProxy)
+        public ControlPanelController(IResponseProxy responseProxy, ISessionProxy sessionProxy, IRepository<Chatroom> chatRepository,
+            IHiddenStringFactory stringFactory, LinkUpdater dBrefresh) : base(responseProxy)
         {
+            _sessionProxy = sessionProxy;
             _chatRepository = chatRepository;
             _stringFactory = stringFactory;
             _dBrefresh = dBrefresh;
@@ -28,8 +31,10 @@ namespace Scrawler.Controllers
 
         public ActionResult Index()
         {
-            // TODO create an ISessionProxy sessionProxy.RedirectIfNotLoggedIn();
-            if ((string) Session["loggedIn"] != "true") return RedirectToAction("Login", "Admin");
+            if (!_sessionProxy.CheckIfLoggedIn())
+            {
+                RedirectToAction("Login", "Admin");
+            }
             var listofChatrooms = _chatRepository.GetAll();
             return View(listofChatrooms);
         }
@@ -42,7 +47,10 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult AddRoom()
         {
-            if ((string) Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
+            if (!_sessionProxy.CheckIfLoggedIn())
+            {
+                RedirectToAction("Login", "Admin");
+            }
             var room = new Chatroom();
             return View(room);
         }
@@ -50,7 +58,10 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult AddRoom(Chatroom room)
         {
-            if ((string) Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
+            if (!_sessionProxy.CheckIfLoggedIn())
+            {
+                RedirectToAction("Login", "Admin");
+            }
             room.HiddenUrl = _stringFactory.GenerateHiddenString();
             room.CreatedAt = DateTime.Now;
 
@@ -63,8 +74,10 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            if ((string) Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
-            
+            if (!_sessionProxy.CheckIfLoggedIn())
+            {
+                RedirectToAction("Login", "Admin");
+            }      
             var room = _chatRepository.FindById(id);
             _chatRepository.Delete(room);
             _chatRepository.SaveChanges();

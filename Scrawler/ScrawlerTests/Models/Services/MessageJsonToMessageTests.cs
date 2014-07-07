@@ -17,11 +17,12 @@ namespace ScrawlerTests.Models.Services
         public void MsgJsonToMessage_correctly_maps_json_to_message_correctly()
         {
             // Arrange
-            var cut = new MessageJsonToMessage();
+            var cut = new MessageJsonToMessageMapper();
             var mock = new Mock<IRepository<Chatroom>>();
-            mock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom { HiddenUrl = "2"} });
-            // Hidden url constantly changes, unsure how to testt without querying the azure db
-            var jsonMessage = new MessageJson() { Content = "content", RoomId = 1, Username = "username", ChatroomName = "name", HiddenUrl = "01WYI"};
+            var repo = new Repository<Chatroom>();
+            mock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom() });
+            // Hidden url constantly changes, so unsure how to test without querying the azure db
+            var jsonMessage = new MessageJson() { Content = "content", RoomId = 1, Username = "username", ChatroomName = "name", HiddenUrl = "AJRYJ" };
 
             // Act
             var message = cut.MapToMessage(jsonMessage);

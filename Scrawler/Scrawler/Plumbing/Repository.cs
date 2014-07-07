@@ -11,20 +11,19 @@ namespace Scrawler.Plumbing
 {
     public class Repository<T> : IRepository<T> where T : Entity<int>
     {
-        private readonly LightSpeedContext<ScrawlerUnitOfWork> _context;
         private readonly ScrawlerUnitOfWork _unitOfWork;
+        private readonly IConfiguration _configuration = new Configuration();
 
         public Repository()
         {
-            _context = new LightSpeedContext<ScrawlerUnitOfWork>
+            var context = new LightSpeedContext<ScrawlerUnitOfWork>
             {
-                ConnectionString =
-                    @"Server=tcp:bc2wsegi5e.database.windows.net,1433;Database=ScrawlerDB;User ID=devacademy@bc2wsegi5e;Password=15WalterStreet;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;",
+                ConnectionString = _configuration.GetConnectionString(),
                 IdentityMethod = IdentityMethod.IdentityColumn,
                 QuoteIdentifiers = true,
                 Logger = new TraceLogger()
             };
-            _unitOfWork = _context.CreateUnitOfWork();
+            _unitOfWork = context.CreateUnitOfWork();
         }
 
         public IList<T> Get(Expression<Func<T, bool>> predicate)

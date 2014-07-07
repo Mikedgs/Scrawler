@@ -1,7 +1,8 @@
-﻿namespace Scrawler.Models
+﻿namespace Scrawler.Models.Services.Interfaces
 {
     public interface IHiddenStringFactory
     {
         string GenerateHiddenString();
+        int GetRandomSeed();
     }
 }
