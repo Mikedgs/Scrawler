@@ -17,9 +17,9 @@ namespace Scrawler.Models
         public string FirebaseId { get; set; }
         public string MessageId { get; set; }
         public int Id { get; private set; }      
-        public DateTime Time { get; private set; }
-        public string Content { get; private set; }
-        public string Username { get;private set; }
-        public int? Votes { get; private set; }
+        public DateTime Time { get;  set; }
+        public string Content { get; set; }
+        public string Username { get; set; }
+        public int? Votes { get; set; }
     }
 }
