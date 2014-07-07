@@ -51,7 +51,7 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult CreateUser(Admin newUser)
         {
-            if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
+            //if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
             _adminDb.SaveUser(newUser);
             _sessionProxy.AddAdminToSession(newUser);
             return RedirectToAction("Index", "ControlPanel");
