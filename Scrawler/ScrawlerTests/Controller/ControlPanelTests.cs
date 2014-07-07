@@ -39,12 +39,11 @@ namespace ScrawlerTests.Controller
             var mockRepo = GetMock<IRepository<Chatroom>>();
             var mockFactory = GetMock<IHiddenStringFactory>();
             var sessionMock = GetMock<ISessionProxy>();
-            var room = new Chatroom();
 
             sessionMock.Setup(x => x.AddToSession("loggedIn", "true"));
 
             //Act
-            ClassUnderTest.AddRoom(room);
+            ClassUnderTest.AddRoom(new Chatroom());
 
             //Assert
             mockFactory.Verify(x => x.GenerateHiddenString(), Times.Exactly(1));
