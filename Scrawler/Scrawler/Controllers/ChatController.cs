@@ -52,7 +52,7 @@ namespace Scrawler.Controllers
             }
 
             var listOfConvertedJsonMsgs = _messageDb.GetTopThreeMessages(chatroom.Id);
-            _linkUpdater.UpdateLinks(id);
+            // _linkUpdater.UpdateLinks(id);
             return CrossSiteFriendlyJson(_chatRoomJsonMapper.MapRoomToJson(chatroom.FirebaseId, listOfConvertedJsonMsgs, chatroom.chatroom_name));
         }
     }
