@@ -5,7 +5,6 @@ using Moq;
 using NUnit.Framework;
 using Scrawler.Models;
 using Scrawler.Models.Mappers;
-using Scrawler.Models.Services;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
@@ -23,7 +22,7 @@ namespace ScrawlerTests.Models.Services
             var cut = new MessageJsonToMessageMapper(mockRepo.Object);
 
             // Act
-            var result = cut.MapToMessage(new MessageJson() {ChatroomName = "chatRoomName"});
+            var result = cut.MapToMessage(new MessageJson(It.IsAny<int>(),"content", new DateTime(),It.IsAny<string>(), 1 ));
 
             // Assert
             Assert.That(result, Is.InstanceOf<Message>());
@@ -36,7 +35,7 @@ namespace ScrawlerTests.Models.Services
             var mockRepo = new Mock<IRepository<Chatroom>>();
             mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>()))).Returns(new List<Chatroom>() { new Chatroom() { Id = 1 } });
             var cut = new MessageJsonToMessageMapper(mockRepo.Object);
-            var jsonMessage = new MessageJson() { Content = "content", RoomId = 1, Username = "username", ChatroomName = "name", HiddenUrl = "AJRYJ" };
+            var jsonMessage = new MessageJson(19,"content", new DateTime(),"userName", 1 );
 
             // Act
             var result = cut.MapToMessage(jsonMessage);
@@ -53,14 +52,14 @@ namespace ScrawlerTests.Models.Services
             var mockRepo = new Mock<IRepository<Chatroom>>();
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom() { Id = 1 } });
             var cut = new MessageJsonToMessageMapper(mockRepo.Object);
-            var jsonMessage = new MessageJson() { Content = "content", RoomId = 1, Username = "username", ChatroomName = "name", HiddenUrl = "AJRYJ" };
+            var jsonMessage = new MessageJson(It.IsAny<int>(), "content", new DateTime(), It.IsAny<string>(), 1);
 
             // Act
             var message = cut.MapToMessage(jsonMessage);
 
             // Assert
             Assert.That(message.Body, Is.EqualTo("content"));
-            Assert.That(message.ChatroomId, Is.EqualTo(1));
+            Assert.That(message.Votes, Is.EqualTo(It.IsAny<int>()));
         }
     }
 }

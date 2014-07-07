@@ -4,6 +4,7 @@ namespace Scrawler.Models
 {
     public class ChatroomJson
     {
+        //TODO can this be imutable??
         private readonly string _fireBaseRoomId;
         private readonly List<MessageJson> _messages;
         private readonly string _chatroomName;
