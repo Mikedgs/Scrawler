@@ -44,7 +44,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult CreateUser()
         {
-            if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
+            //if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
             return View(new Admin());
         }
 
