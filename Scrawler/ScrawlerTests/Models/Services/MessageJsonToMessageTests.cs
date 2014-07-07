@@ -17,7 +17,7 @@ namespace ScrawlerTests.Models.Services
         public void MsgJsonToMessage_correctly_maps_json_to_message_correctly()
         {
             // Arrange
-            var cut = new MessageJsonToMessage();
+            var cut = new MessageJsonToMessageMapper();
             var mock = new Mock<IRepository<Chatroom>>();
             var repo = new Repository<Chatroom>();
             mock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom() });
