@@ -13,7 +13,8 @@ namespace Scrawler.Models.Mappers
                 Content = msg.Body,
                 Time = msg.CreatedAt,
                 Username = msg.Username,
-                Votes = msg.Votes
+                Votes = msg.Votes,
+                MessageId = msg.MessageId
             };
         }
     }

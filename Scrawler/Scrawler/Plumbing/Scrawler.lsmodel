@@ -14,12 +14,28 @@
         <entityProperty name="chatroom_name" isNullable="true" privateSetter="false" />
       </entityProperties>
       <oneToManyAssociations>
-        <oneToManyAssociation Id="25a2d369-03ba-4b6e-917d-9fcae51641df" collectionName="Messages" backreferenceName="Chatroom" isNullable="false" columnName="chatroom_id">
+        <oneToManyAssociation Id="791e031a-0507-4b37-81e8-28cca22c472e" collectionName="Messages" backreferenceName="Chatroom" isNullable="false" columnName="chatroom_id">
           <entityMoniker name="/Scrawler/Message" />
         </oneToManyAssociation>
       </oneToManyAssociations>
     </entity>
-    <entity name="Message" identityType="Int32" cacheExpiry="0" identityMethod="IdentityColumn">
+    <entity name="Admin" identityType="Int32" cacheExpiry="0">
+      <entityProperties>
+        <entityProperty name="UserName" columnName="user_name" privateSetter="false">
+          <validations>
+            <presenceValidation />
+            <lengthValidation minimumLength="0" maximumLength="30" />
+          </validations>
+        </entityProperty>
+        <entityProperty name="Password" privateSetter="false">
+          <validations>
+            <presenceValidation />
+            <lengthValidation minimumLength="0" maximumLength="100" />
+          </validations>
+        </entityProperty>
+      </entityProperties>
+    </entity>
+    <entity name="Message" identityType="Int32" cacheExpiry="0">
       <entityProperties>
         <entityProperty name="CreatedAt" dataType="DateTime" columnName="created_at" privateSetter="false" />
         <entityProperty name="Body" privateSetter="false">
@@ -34,20 +50,9 @@
           </validations>
         </entityProperty>
         <entityProperty name="Votes" dataType="Int32" isNullable="true" privateSetter="false" />
-      </entityProperties>
-    </entity>
-    <entity name="Admin" identityType="Int32" cacheExpiry="0">
-      <entityProperties>
-        <entityProperty name="UserName" columnName="user_name" privateSetter="false">
+        <entityProperty name="MessageId" isNullable="true" columnName="message_id" privateSetter="false">
           <validations>
-            <presenceValidation />
-            <lengthValidation minimumLength="0" maximumLength="30" />
-          </validations>
-        </entityProperty>
-        <entityProperty name="Password" privateSetter="false">
-          <validations>
-            <presenceValidation />
-            <lengthValidation minimumLength="0" maximumLength="100" />
+            <lengthValidation minimumLength="0" maximumLength="50" />
           </validations>
         </entityProperty>
       </entityProperties>

@@ -9,5 +9,6 @@ namespace Scrawler.Models.Interfaces
         DateTime Time { get; set; }
         string Content { get; set; }
         string Username { get; set; }
+        string MessageId { get; set; }
     }
 }

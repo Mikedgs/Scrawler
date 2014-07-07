@@ -23,7 +23,8 @@ namespace Scrawler.Models.Mappers
                 Body = msgJson.Content,
                 CreatedAt = DateTime.Now,
                 ChatroomId = _chatRoomRepository.Get(x => x.HiddenUrl == msgJson.HiddenUrl).Single().Id,
-                Votes = InitialNumberOfVotes
+                Votes = InitialNumberOfVotes,
+                MessageId = msgJson.MessageId
             };
         }
     }
