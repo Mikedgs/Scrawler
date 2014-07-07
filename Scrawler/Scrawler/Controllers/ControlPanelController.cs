@@ -23,7 +23,7 @@ namespace Scrawler.Controllers
             _dBrefresh = dBrefresh;
             _timer1.Interval = 1800000; // TODO rip this timer out and move it into a service
             _timer1.Elapsed += _timer_Elapsed;
-            _timer1.Enabled = true;
+            _timer1.Enabled = false;
         }
 
         public ActionResult Index()
