@@ -44,14 +44,14 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult CreateUser()
         {
-            //if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
+            if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
             return View(new Admin());
         }
 
         [HttpPost]
         public ActionResult CreateUser(Admin newUser)
         {
-            //if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
+            if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
             _adminDb.SaveUser(newUser);
             _sessionProxy.AddAdminToSession(newUser);
             return RedirectToAction("Index", "ControlPanel");
