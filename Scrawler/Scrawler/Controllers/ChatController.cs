@@ -16,8 +16,9 @@ namespace Scrawler.Controllers
         private readonly IConfiguration _configuration;
         private readonly IMessageDb _messageDb;
         private readonly IChatRoomJsonMapper _chatRoomJsonMapper;
+        private readonly ILinkUpdater _linkUpdater;
 
-        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver, IResponseProxy responseProxy, IConfiguration configuration, IMessageDb messageDb, IChatRoomJsonMapper chatRoomJsonMapper)
+        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver, IResponseProxy responseProxy, IConfiguration configuration, IMessageDb messageDb, IChatRoomJsonMapper chatRoomJsonMapper, LinkUpdater linkUpdater)
             : base(responseProxy)
         {
             _chatRepository = chatRepository;
@@ -25,11 +26,13 @@ namespace Scrawler.Controllers
             _configuration = configuration;
             _messageDb = messageDb;
             _chatRoomJsonMapper = chatRoomJsonMapper;
+            _linkUpdater = linkUpdater;
         }
 
         [HttpGet]
         public RedirectResult Index(int id)
         {
+            _linkUpdater.UpdateLinks();
             return Redirect(_configuration.GetBaseUrl(_chatRepository.FindById(id).HiddenUrl));
         }
 
