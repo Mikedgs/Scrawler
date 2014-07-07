@@ -32,7 +32,6 @@ namespace Scrawler.Controllers
         [HttpGet]
         public RedirectResult Index(int id)
         {
-            _linkUpdater.UpdateLinks();
             return Redirect(_configuration.GetBaseUrl(_chatRepository.FindById(id).HiddenUrl));
         }
 
@@ -53,7 +52,7 @@ namespace Scrawler.Controllers
             }
 
             var listOfConvertedJsonMsgs = _messageDb.GetTopThreeMessages(chatroom.Id);
-
+            _linkUpdater.UpdateLinks(id);
             return CrossSiteFriendlyJson(_chatRoomJsonMapper.MapRoomToJson(chatroom.FirebaseId, listOfConvertedJsonMsgs, chatroom.chatroom_name));
         }
     }

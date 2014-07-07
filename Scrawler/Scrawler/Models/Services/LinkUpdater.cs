@@ -1,4 +1,5 @@
-﻿using Scrawler.Models.Services.Interfaces;
+﻿using System.Linq;
+using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
@@ -15,14 +16,11 @@ namespace Scrawler.Models.Services
             _hiddenStringFactory = hiddenStringFactory;
         }
 
-        public void UpdateLinks()
+        public void UpdateLinks(string id)
         {
-            var allrooms = _chatRepository.GetAll();
-            foreach (var room in allrooms)
-            {
-                room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString();
-                _chatRepository.Add(room);
-            }
+            var room = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
+            room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString();
+            _chatRepository.Add(room);
             _chatRepository.SaveChanges();
         }
     }
