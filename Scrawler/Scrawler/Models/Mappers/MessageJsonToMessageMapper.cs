@@ -20,6 +20,7 @@ namespace Scrawler.Models.Mappers
         {            
             return new Message
             {
+                Username = msgJson.Username,
                 Body = msgJson.Content,
                 CreatedAt = DateTime.Now,
                 ChatroomId = _chatRoomRepository.Get(x => x.HiddenUrl == msgJson.HiddenUrl).Single().Id,
