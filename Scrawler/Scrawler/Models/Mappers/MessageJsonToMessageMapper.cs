@@ -9,7 +9,7 @@ namespace Scrawler.Models.Mappers
     public class MessageJsonToMessageMapper : IMessageJsonToMessageMapper
     {
         private readonly IRepository<Chatroom> _chatRoomRepository;
-        private const int InitialNumberOfVotes = 1;
+        private const int InitialNumberOfVotes = 0;
 
         public MessageJsonToMessageMapper(IRepository<Chatroom> chatRoomRepository)
         {
