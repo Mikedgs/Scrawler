@@ -1,18 +1,25 @@
 ﻿using System;
-using Scrawler.Models.Interfaces;
 
 namespace Scrawler.Models
 {
-    public class MessageJson : IMessageJson
+    public class MessageJson
     {
-        public int Id { get; set; }
-        public int RoomId { get; set; }
-        public DateTime Time { get; set; }
-        public string Content { get; set; }
-        public string Name { get; set; }
-        public int? Votes { get; set; }
+        public MessageJson(int id, string content, DateTime time, string username, int? votes, string messageId)
+        {            
+            Id = id;
+            Content = content;
+            Time = time;
+            Username = username;
+            MessageId = messageId;
+            Votes = votes;
+        }
+
         public string FirebaseId { get; set; }
-        public string ChatroomName { get; set; }
         public string MessageId { get; set; }
+        public int Id { get; private set; }      
+        public DateTime Time { get; private set; }
+        public string Content { get; private set; }
+        public string Username { get;private set; }
+        public int? Votes { get; private set; }
     }
 }

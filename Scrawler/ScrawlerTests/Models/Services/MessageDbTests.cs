@@ -21,7 +21,7 @@ namespace ScrawlerTests.Models.Services
             var messageList = new List<Message>();
             var mockRepo = new Mock<IRepository<Message>>();
             mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
-            var cut = new MessageDb(mockRepo.Object, new MessageMapperToJson());
+            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
 
             // Act
             var result = cut.GetTopThreeMessages(1);
@@ -37,7 +37,7 @@ namespace ScrawlerTests.Models.Services
             var messageList = new List<Message>() {new Message(){Body = "body"}};
             var mockRepo = new Mock<IRepository<Message>>();
             mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
-            var cut = new MessageDb(mockRepo.Object, new MessageMapperToJson());
+            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
 
             // Act
             var result = cut.GetTopThreeMessages(1);
@@ -53,7 +53,7 @@ namespace ScrawlerTests.Models.Services
             var messageList = new List<Message>() { new Message() { Body = "body" }, new Message() { Body = "next" }, new Message() { Body = "last" } };
             var mockRepo = new Mock<IRepository<Message>>();
             mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
-            var cut = new MessageDb(mockRepo.Object, new MessageMapperToJson());
+            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
 
             // Act
             var result = cut.GetTopThreeMessages(1);
@@ -69,7 +69,7 @@ namespace ScrawlerTests.Models.Services
             var messageList = new List<Message>() { new Message() { Body = "body" }, new Message() { Body = "next" }, new Message() { Body = "middle" }, new Message() { Body = "last" } };
             var mockRepo = new Mock<IRepository<Message>>();
             mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
-            var cut = new MessageDb(mockRepo.Object, new MessageMapperToJson());
+            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
 
             // Act
             var result = cut.GetTopThreeMessages(1);

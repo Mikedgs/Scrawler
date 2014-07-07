@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Plumbing
 {

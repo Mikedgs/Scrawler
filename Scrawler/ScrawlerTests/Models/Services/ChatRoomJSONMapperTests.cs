@@ -18,7 +18,7 @@ namespace ScrawlerTests.Models.Services
             var result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName");
             
             // Assert
-            Assert.That(result, Is.InstanceOf<ChatroomJson>());
+            Assert.IsInstanceOf(typeof(ChatroomJson), result);
         }
 
         [Test]
@@ -31,9 +31,7 @@ namespace ScrawlerTests.Models.Services
             var result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName");
 
             // Assert
-            Assert.That(result.ChatroomName, Is.EqualTo("roomName"));
-            Assert.That(result.FireBaseRoomId, Is.EqualTo("id"));
-            Assert.That(result.Messages, Is.InstanceOf<List<MessageJson>>());
+            Assert.IsInstanceOf(typeof(ChatroomJson), result);
         }
     }
 }

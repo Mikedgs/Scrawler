@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Scrawler.Models;
 using Scrawler.Models.Interfaces;
-using Scrawler.Models.Services;
 using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
@@ -14,12 +13,12 @@ namespace Scrawler.Controllers
         private readonly IRepository<Chatroom> _chatRepository;
         private readonly IMessageSaver _messageSaver;
         private readonly IConfiguration _configuration;
-        private readonly IMessageDb _messageDb;
+        private readonly IMessageRepository _messageDb;
         private readonly IChatRoomJsonMapper _chatRoomJsonMapper;
         private readonly ILinkUpdater _linkUpdater;
 
-        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver, IResponseProxy responseProxy, IConfiguration configuration, IMessageDb messageDb, IChatRoomJsonMapper chatRoomJsonMapper, LinkUpdater linkUpdater)
-            : base(responseProxy)
+        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver, IResponseProxy responseProxy, ISessionProxy sessionProxy, IConfiguration configuration, IMessageRepository messageDb, IChatRoomJsonMapper chatRoomJsonMapper, ILinkUpdater linkUpdater)
+            : base(responseProxy, sessionProxy)
         {
             _chatRepository = chatRepository;
             _messageSaver = messageSaver;

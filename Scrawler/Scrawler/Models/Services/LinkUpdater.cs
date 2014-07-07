@@ -23,5 +23,6 @@ namespace Scrawler.Models.Services
             _chatRepository.Add(room);
             _chatRepository.SaveChanges();
         }
+           
     }
 }

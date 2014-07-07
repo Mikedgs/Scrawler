@@ -94,7 +94,7 @@
   <ItemGroup>
     <Compile Include="Controller\AdminControllerTests.cs" />
     <Compile Include="Controller\ChatController_Tests.cs" />
-    <Compile Include="Controller\ControlPanelTests.cs" />
+    <Compile Include="Controller\ControlPanelControllerTests.cs" />
     <Compile Include="Models\Services\ChatRoomJSONMapperTests.cs" />
     <Compile Include="Models\Services\HashProvidorTests.cs" />
     <Compile Include="Models\Services\HiddenStringFactoryTests.cs" />

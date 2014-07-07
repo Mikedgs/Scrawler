@@ -1,17 +1,18 @@
 ﻿using System.Web.Mvc;
-using System.Web.Routing;
 using Scrawler.Models;
+using Scrawler.Models.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : ScrawlerController
     {
         private readonly ISessionProxy _sessionProxy;
-        private readonly IAdminDb _adminDb;
+        private readonly IAdminRepository _adminDb;
 
-        public AdminController(ISessionProxy sessionProxy, IAdminDb adminDb)
+        public AdminController(ISessionProxy sessionProxy, IAdminRepository adminDb, IResponseProxy responseProxy)
+            : base(responseProxy,sessionProxy)
         {
             _sessionProxy = sessionProxy;
             _adminDb = adminDb;
@@ -26,42 +27,40 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult Login(Admin admin)
         {
-            if (!_sessionProxy.ValidateInput(admin))
-            {
-                return RedirectToAction("Login", "Admin", new RouteValueDictionary { { "validUser", false } });
-            }
+            ValidateInput(admin);
 
-            var validUser = _adminDb.Validate(admin);
+            var validUser = _adminDb.GetAdmin(admin);
             if (validUser == null)
             {
-                return RedirectToAction("Login", "Admin", new RouteValueDictionary {{"validUser", false}});
+                RedirectToLogin();
             }
 
             _sessionProxy.AddAdminToSession(validUser);
-            return Redirect("/ControlPanel/index");
+            return RedirectToControlPanel();
         }
 
         [HttpGet]
         public ActionResult CreateUser()
         {
-            if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
+            CheckIfLoggedIn();
             return View(new Admin());
         }
 
         [HttpPost]
         public ActionResult CreateUser(Admin newUser)
         {
-            if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
+            CheckIfLoggedIn();
             _adminDb.SaveUser(newUser);
             _sessionProxy.AddAdminToSession(newUser);
-            return RedirectToAction("Index", "ControlPanel");
+            return RedirectToControlPanel();
         }
 
         [HttpGet]
         public ActionResult Logout()
         {
             Session.Clear();
-            return Redirect("/ControlPanel/Index");
+            return RedirectToControlPanel();
+
         }
     }
 }

@@ -213,16 +213,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Services\AdminDb.cs" />
+    <Compile Include="Models\Services\AdminRepository.cs" />
     <Compile Include="Models\ChatroomJSON.cs" />
     <Compile Include="Models\Services\HashProvidor.cs" />
-    <Compile Include="Models\Interfaces\IAdminDb.cs" />
+    <Compile Include="Models\Interfaces\IAdminRepository.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\Interfaces\IMessageDb.cs" />
+    <Compile Include="Models\Interfaces\IMessageRepository.cs" />
     <Compile Include="Models\Mappers\ChatRoomJSONMapper.cs" />
+    <Compile Include="Models\Services\IHashProvider.cs" />
     <Compile Include="Models\Services\Interfaces\ILinkUpdater.cs" />
     <Compile Include="Models\Services\Interfaces\IChatRoomJsonMapper.cs" />
-    <Compile Include="Models\Services\MessageDb.cs" />
+    <Compile Include="Models\Services\MessageRepository.cs" />
     <Compile Include="Plumbing\Configuration.cs" />
     <Compile Include="Plumbing\Interfaces\IConfiguration.cs" />
     <Compile Include="Plumbing\Interfaces\IResponseProxy.cs" />
@@ -230,10 +231,8 @@
     <Compile Include="Plumbing\Interfaces\ISessionProxy.cs" />
     <Compile Include="Plumbing\ResponseProxy.cs" />
     <Compile Include="Models\Services\HiddenStringFactory.cs" />
-    <Compile Include="Models\Interfaces\IMessageJson.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageMapperToJson.cs" />
     <Compile Include="Models\Services\Interfaces\IHiddenStringFactory.cs" />
-    <Compile Include="Models\Interfaces\IChatroomJson.cs" />
     <Compile Include="Models\MessageJSON.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageJsonToMessage.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageSaver.cs" />

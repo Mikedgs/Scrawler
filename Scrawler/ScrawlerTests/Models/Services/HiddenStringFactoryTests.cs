@@ -18,7 +18,7 @@ namespace ScrawlerTests.Models.Services
             var hiddenString = cut.GenerateHiddenString();
 
             // Assert
-            Assert.That(hiddenString.Length, Is.EqualTo(10));
+            Assert.That(hiddenString.Length, Is.EqualTo(10)); // TODO 5 is not equal to 10
         }
 
         [Test]

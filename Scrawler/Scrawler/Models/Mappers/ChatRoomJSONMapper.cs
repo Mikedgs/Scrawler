@@ -7,12 +7,7 @@ namespace Scrawler.Models.Mappers
     {
         public ChatroomJson MapRoomToJson(string firebaseId, List<MessageJson> listOfConvertedJsonMsgs, string roomName)
         {
-            return new ChatroomJson
-            {
-                FireBaseRoomId = firebaseId,
-                Messages = listOfConvertedJsonMsgs,
-                ChatroomName = roomName
-            };
+            return new ChatroomJson(firebaseId, listOfConvertedJsonMsgs, roomName);
         }
     }
 }

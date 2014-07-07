@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Scrawler.Models.Services
 {
-    public class HashProvider
+    public class HashProvider : IHashProvider
     {
-        public string GetMd5Hash(string plaintext)
+        public string GetSHA(string plaintext)
         {
             var shaProvider = new SHA256CryptoServiceProvider(); // Hashing algorith
             var hashedValue = shaProvider.ComputeHash(Encoding.Default.GetBytes(plaintext)); // takes a byte array, so convert string to byte array

@@ -1,4 +1,4 @@
-﻿namespace Scrawler.Plumbing
+﻿namespace Scrawler.Plumbing.Interfaces
 {
     public interface IConfiguration
     {

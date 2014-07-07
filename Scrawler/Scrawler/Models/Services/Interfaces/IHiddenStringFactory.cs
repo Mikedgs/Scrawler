@@ -3,6 +3,5 @@
     public interface IHiddenStringFactory
     {
         string GenerateHiddenString();
-        int GetRandomSeed();
     }
 }

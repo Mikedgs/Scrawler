@@ -14,7 +14,7 @@ namespace Scrawler.Models.Services
             Random = new Random(GetRandomSeed());
         }
 
-        public int GetRandomSeed()
+        protected int GetRandomSeed()
         {
             using (var randomGenerator = new RNGCryptoServiceProvider())
             {
