@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<model xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.1.0.0" name="Scrawler" targetNamespace="Scrawler.Plumbing" databaseProvider="SqlServer2008" connectionString="Data Source=serval\sqlexpress;Initial Catalog=Scrawler;Integrated Security=True;Pooling=False" pluralizedInDatabase="false" mediumTrustCompatibility="false" xmlns="http://namespaces.mindscape.co.nz/lightspeed">
+<model xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.1.0.0" name="Scrawler" targetNamespace="Scrawler.Plumbing" databaseProvider="SqlServer2008" connectionString="Data Source=serval\sqlexpress;Initial Catalog=Scrawler;Integrated Security=True;Pooling=False" pluralizedInDatabase="false" mediumTrustCompatibility="false" checkForMissingKeyTable="false" xmlns="http://namespaces.mindscape.co.nz/lightspeed">
   <entities>
     <entity name="Chatroom" identityType="Int32" cacheExpiry="0" identityMethod="IdentityColumn">
       <entityProperties>
@@ -47,7 +47,7 @@
         <entityProperty name="Password" privateSetter="false">
           <validations>
             <presenceValidation />
-            <lengthValidation minimumLength="0" maximumLength="50" />
+            <lengthValidation minimumLength="0" maximumLength="100" />
           </validations>
         </entityProperty>
       </entityProperties>

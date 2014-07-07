@@ -14,7 +14,7 @@
         <elementListCompartment Id="d06b2315-722d-40a3-891b-d443bf446039" absoluteBounds="5.5150000000000006, 2.285, 1.4700000000000002, 0.76920572916666663" name="Properties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </entityShape>
-    <oneToManyAssociationConnector edgePoints="[(2.875 : 2.51460286458333); (5.5 : 2.51460286458333)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <oneToManyAssociationConnector edgePoints="[(2.875 : 2.51460286458333); (5.5 : 2.51460286458333)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <oneToManyAssociationMoniker Id="25a2d369-03ba-4b6e-917d-9fcae51641df" />
       <relativeChildShapes />
       <nodes>

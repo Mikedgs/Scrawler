@@ -196,7 +196,7 @@ namespace Scrawler.Plumbing
     [ValidateLength(0, 30)]
     private string _userName;
     [ValidatePresence]
-    [ValidateLength(0, 50)]
+    [ValidateLength(0, 100)]
     private string _password;
 
     #endregion
