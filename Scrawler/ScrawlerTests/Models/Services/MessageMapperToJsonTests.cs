@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
-using Scrawler.Models;
-using Scrawler.Models.Services;
+using Scrawler.Models.Mappers;
 using Scrawler.Plumbing;
 
 namespace ScrawlerTests.Models.Services
