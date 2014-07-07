@@ -12,7 +12,7 @@ namespace Scrawler.Models.Mappers
                 Id = msg.Id,
                 Content = msg.Body,
                 Time = msg.CreatedAt,
-                Username = msg.Username,
+                Name = msg.Username,
                 Votes = msg.Votes,
                 MessageId = msg.MessageId
             };

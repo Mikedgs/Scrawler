@@ -8,7 +8,7 @@ namespace Scrawler.Models.Interfaces
         int RoomId { get; set; }
         DateTime Time { get; set; }
         string Content { get; set; }
-        string Username { get; set; }
+        string Name { get; set; }
         string MessageId { get; set; }
     }
 }
