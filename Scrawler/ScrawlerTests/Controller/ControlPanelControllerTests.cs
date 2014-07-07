@@ -11,7 +11,7 @@ using ScrawlerTests.Plumbing;
 namespace ScrawlerTests.Controller
 {
     [TestFixture]
-    internal class ControlPanelControllerTests : UnitTestBase<ControlPanelController>
+    internal class ControlPanelControllerTests_addRoom_scenario : UnitTestBase<ControlPanelController>
     {
         [Test]
         public void Add_room_post_method_calls_each_method_inside_once()
@@ -31,7 +31,11 @@ namespace ScrawlerTests.Controller
             mockRepo.Verify(x => x.Add(It.IsAny<Chatroom>()), Times.Exactly(1));
             mockRepo.Verify(x => x.SaveChanges(), Times.Exactly(1));
         }
+    }
 
+    [TestFixture]
+    internal class ControlPanelControllerTests_deleteRoom_scenario : UnitTestBase<ControlPanelController>
+    {
         [Test]
         public void Delete_room_method_calls_each_method_inside_once()
         {

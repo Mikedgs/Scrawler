@@ -1,6 +1,4 @@
-﻿using System.Web.Mvc;
-
-namespace Scrawler.Plumbing.Interfaces
+﻿namespace Scrawler.Plumbing.Interfaces
 {
     public interface ISessionProxy
     {

@@ -17,17 +17,17 @@ namespace ScrawlerTests.Controller
         public void Login_action_hits_every_method_within_it_only_once()
         {
             //Arrange
-            var adminDbMock = GetMock<IAdminDb>();
+            var adminDbMock = GetMock<IAdminRepository>();
             var sessionMock = GetMock<ISessionProxy>();
 
             sessionMock.Setup(x => x.ValidateInput(It.IsAny<Admin>())).Returns(true);
-            adminDbMock.Setup(x => x.Validate(It.IsAny<Admin>())).Returns(new Admin());
+            adminDbMock.Setup(x => x.GetAdmin(It.IsAny<Admin>())).Returns(new Admin());
             sessionMock.Setup(x => x.AddAdminToSession(It.IsAny<Admin>()));
             //Act
             ClassUnderTest.Login(new Admin());
 
             //Assert
-            adminDbMock.Verify(x => x.Validate(It.IsAny<Admin>()), Times.Exactly(1));
+            adminDbMock.Verify(x => x.GetAdmin(It.IsAny<Admin>()), Times.Exactly(1));
             sessionMock.Verify(x => x.ValidateInput(It.IsAny<Admin>()), Times.Exactly(1));
             sessionMock.Verify(x => x.AddAdminToSession(It.IsAny<Admin>()), Times.Exactly(1));
         }
@@ -41,7 +41,7 @@ namespace ScrawlerTests.Controller
         {
             //Arrange
             var sessionMock = GetMock<ISessionProxy>();
-            var adminDbMock = GetMock<IAdminDb>();
+            var adminDbMock = GetMock<IAdminRepository>();
             sessionMock.Setup(x => x.IsLoggedIn).Returns(true);
             adminDbMock.Setup(x => x.SaveUser(It.IsAny<Admin>()));
             sessionMock.Setup(x => x.AddAdminToSession(It.IsAny<Admin>()));

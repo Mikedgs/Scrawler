@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Timers;
 using System.Web.Mvc;
-using Scrawler.Models;
 using Scrawler.Models.Services;
 using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
@@ -15,12 +14,10 @@ namespace Scrawler.Controllers
         private readonly IHiddenStringFactory _stringFactory;
         private readonly LinkUpdater _dBrefresh;
         private readonly Timer _timer1 = new Timer();
-        private readonly ISessionProxy _sessionProxy;
 
         public ControlPanelController(IResponseProxy responseProxy, ISessionProxy sessionProxy, IRepository<Chatroom> chatRepository,
-            IHiddenStringFactory stringFactory, LinkUpdater dBrefresh) : base(responseProxy)
+            IHiddenStringFactory stringFactory, LinkUpdater dBrefresh) : base(responseProxy,sessionProxy)
         {
-            _sessionProxy = sessionProxy;
             _chatRepository = chatRepository;
             _stringFactory = stringFactory;
             _dBrefresh = dBrefresh;
@@ -31,10 +28,7 @@ namespace Scrawler.Controllers
 
         public ActionResult Index()
         {
-            if (!_sessionProxy.IsLoggedIn)
-            {
-                RedirectToAction("Login", "Admin"); // TODO see AdminController - can this be a common method on the base controller used by both?
-            }
+            CheckIfLoggedIn();
             var listofChatrooms = _chatRepository.GetAll();
             return View(listofChatrooms);
         }
@@ -47,10 +41,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult AddRoom()
         {
-            if (!_sessionProxy.IsLoggedIn)
-            {
-                RedirectToAction("Login", "Admin");
-            }
+            CheckIfLoggedIn();
             var room = new Chatroom();
             return View(room);
         }
@@ -58,31 +49,25 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult AddRoom(Chatroom room)
         {
-            if (!_sessionProxy.IsLoggedIn)
-            {
-                RedirectToAction("Login", "Admin");
-            }
+            CheckIfLoggedIn();
             room.HiddenUrl = _stringFactory.GenerateHiddenString();
             room.CreatedAt = DateTime.Now;
 
             _chatRepository.Add(room);
             _chatRepository.SaveChanges();
 
-            return Redirect("/ControlPanel/Index");
+            return RedirectToControlPanel();
         }
 
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            if (!_sessionProxy.IsLoggedIn)
-            {
-                RedirectToAction("Login", "Admin");
-            }      
+            CheckIfLoggedIn();    
             var room = _chatRepository.FindById(id);
             _chatRepository.Delete(room);
             _chatRepository.SaveChanges();
 
-            return Redirect("/ControlPanel/Index");
+            return RedirectToControlPanel();
         }
 
         public new void Dispose()

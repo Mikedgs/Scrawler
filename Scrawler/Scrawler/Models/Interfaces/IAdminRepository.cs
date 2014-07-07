@@ -2,9 +2,9 @@
 
 namespace Scrawler.Models.Interfaces
 {
-    public interface IAdminDb
+    public interface IAdminRepository
     {
         void SaveUser(Admin admin);
-        Admin Validate(Admin user);
+        Admin GetAdmin(Admin user);
     }
 }

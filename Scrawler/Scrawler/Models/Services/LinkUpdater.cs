@@ -22,8 +22,8 @@ namespace Scrawler.Models.Services
             {
                 room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString();
                 _chatRepository.Add(room);
-                _chatRepository.SaveChanges(); // TODO why call update on the database 4 billion times? move this outside the loop
             }
+            _chatRepository.SaveChanges();
         }
     }
 }

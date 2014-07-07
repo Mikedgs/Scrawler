@@ -15,7 +15,7 @@ namespace ScrawlerTests.Models.Services
             var cut = new HashProvider();
 
             // Act
-            var result = cut.GetMd5Hash("password");
+            var result = cut.GetSHA("password");
 
             // Assert
             Assert.That(result.Length, Is.EqualTo(64)); 
