@@ -1,4 +1,4 @@
-﻿@model Scrawler.Plumbing.Admin
+﻿@model Scrawler.Models.LoginViewModel
 
 @{
     ViewBag.Title = "Login";
@@ -6,10 +6,15 @@
 
 <h2>Login</h2>
 
+@if (!@Model.IsValidUser)
+{
+    <p>Invalid password</p>
+}
+
 @using (Html.BeginForm("Login", "Admin"))
 {
-    <label>Username: </label> @Html.TextBoxFor(x => x.UserName) <br />
-    <label>Password: </label> @Html.PasswordFor(x => x.Password) <br />
+    <label>Username: </label> @Html.TextBoxFor(x => x.Admin.UserName) <br />
+    <label>Password: </label> @Html.PasswordFor(x => x.Admin.Password) <br />
     <input type="submit" value="Login" />
 }
 

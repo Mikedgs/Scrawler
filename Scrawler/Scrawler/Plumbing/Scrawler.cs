@@ -22,6 +22,7 @@ namespace Scrawler.Plumbing
     private string _firebaseId;
     [Column("created_at")]
     private System.DateTime _createdAt;
+    private string _chatroom_name;
 
     #endregion
     
@@ -33,6 +34,8 @@ namespace Scrawler.Plumbing
     public const string FirebaseIdField = "FirebaseId";
     /// <summary>Identifies the CreatedAt entity attribute.</summary>
     public const string CreatedAtField = "CreatedAt";
+    /// <summary>Identifies the chatroom_name entity attribute.</summary>
+    public const string chatroom_nameField = "chatroom_name";
 
 
     #endregion
@@ -73,6 +76,13 @@ namespace Scrawler.Plumbing
     {
       get { return Get(ref _createdAt, "CreatedAt"); }
       set { Set(ref _createdAt, value, "CreatedAt"); }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public string chatroom_name
+    {
+      get { return Get(ref _chatroom_name, "chatroom_name"); }
+      set { Set(ref _chatroom_name, value, "chatroom_name"); }
     }
 
     #endregion

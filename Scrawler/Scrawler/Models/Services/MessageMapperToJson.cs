@@ -1,4 +1,5 @@
-﻿using Scrawler.Plumbing;
+﻿using Scrawler.Models.Services.Interfaces;
+using Scrawler.Plumbing;
 
 namespace Scrawler.Models.Services
 {

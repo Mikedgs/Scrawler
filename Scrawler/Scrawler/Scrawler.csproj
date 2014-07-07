@@ -209,17 +209,25 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ControlPanelController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScrawlerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\AdminDb.cs" />
     <Compile Include="Models\ChatroomJSON.cs" />
-    <Compile Include="Models\Hashprovidor.cs" />
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\HashProvidor.cs" />
+    <Compile Include="Models\Interfaces\IAdminDb.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\Interfaces\IMessageDb.cs" />
+    <Compile Include="Models\Services\ChatRoomJSONMapper.cs" />
+    <Compile Include="Models\Services\Interfaces\ILinkUpdater.cs" />
+    <Compile Include="Models\Services\Interfaces\IChatRoomJsonMapper.cs" />
+    <Compile Include="Models\Services\MessageDb.cs" />
+    <Compile Include="Plumbing\Configuration.cs" />
+    <Compile Include="Plumbing\Interfaces\IConfiguration.cs" />
     <Compile Include="Plumbing\Interfaces\IResponseProxy.cs" />
     <Compile Include="Plumbing\Interfaces\IRepository.cs" />
+    <Compile Include="Plumbing\Interfaces\ISessionProxy.cs" />
     <Compile Include="Plumbing\ResponseProxy.cs" />
     <Compile Include="Models\Services\HiddenStringFactory.cs" />
     <Compile Include="Models\Interfaces\IMessageJson.cs" />
@@ -228,18 +236,19 @@
     <Compile Include="Models\Interfaces\IChatroomJson.cs" />
     <Compile Include="Models\MessageJSON.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageJsonToMessage.cs" />
-    <Compile Include="Models\Services\Interfaces\ISaveMessage.cs" />
+    <Compile Include="Models\Services\Interfaces\IMessageSaver.cs" />
     <Compile Include="Models\Services\LinkUpdater.cs" />
-    <Compile Include="Models\Services\MessageJsonToMessage.cs" />
+    <Compile Include="Models\Services\MessageJsonToMessageMapper.cs" />
     <Compile Include="Models\Services\MessageMapperToJson.cs" />
     <Compile Include="Plumbing\NinjectControllerFactory.cs" />
-    <Compile Include="Models\Services\SaveMessage.cs" />
+    <Compile Include="Models\Services\MessageSaver.cs" />
     <Compile Include="Plumbing\Repository.cs" />
     <Compile Include="Plumbing\Scrawler.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Scrawler.lsmodel</DependentUpon>
     </Compile>
+    <Compile Include="Plumbing\SessionProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -314,7 +323,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\ControlPanel\Index.cshtml" />
     <Content Include="Views\ControlPanel\AddRoom.cshtml" />
@@ -323,8 +331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Chat\" />
-    <Folder Include="Views\Scrawler\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -9,45 +9,39 @@ using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Plumbing
 {
-
     public class Repository<T> : IRepository<T> where T : Entity<int>
     {
-        private readonly LightSpeedContext<ScrawlerUnitOfWork> _context;
         private readonly ScrawlerUnitOfWork _unitOfWork;
+        private readonly IConfiguration _configuration = new Configuration();
+
         public Repository()
         {
-            _context = new LightSpeedContext<ScrawlerUnitOfWork>
+            var context = new LightSpeedContext<ScrawlerUnitOfWork>
             {
-                ConnectionString =
-                                  @"Server=tcp:bc2wsegi5e.database.windows.net,1433;Database=ScrawlerDB;User ID=devacademy@bc2wsegi5e;Password=15WalterStreet;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;",
+                ConnectionString = _configuration.GetConnectionString(),
                 IdentityMethod = IdentityMethod.IdentityColumn,
                 QuoteIdentifiers = true,
                 Logger = new TraceLogger()
             };
-            _unitOfWork = _context.CreateUnitOfWork();
+            _unitOfWork = context.CreateUnitOfWork();
         }
 
         public IList<T> Get(Expression<Func<T, bool>> predicate)
         {
-                return _unitOfWork.Query<T>().Where(predicate).ToList();
-            
+            return _unitOfWork.Query<T>().Where(predicate).ToList();
         }
 
         public IList<T> GetAll()
         {
-           
-                return _unitOfWork.Find<T>();
-           
+            return _unitOfWork.Find<T>();
         }
 
         public void Add(T entity)
         {
-           
-                if (entity.Id > 0)
-                    _unitOfWork.Attach(entity);
-                else
-                    _unitOfWork.Add(entity);
-            
+            if (entity.Id > 0)
+                _unitOfWork.Attach(entity);
+            else
+                _unitOfWork.Add(entity);
         }
 
         public void DeleteAll()
@@ -60,26 +54,21 @@ namespace Scrawler.Plumbing
 
         public void Delete(T entity)
         {
-          _unitOfWork.Remove(entity);
-          
+            _unitOfWork.Remove(entity);
         }
 
         public T FindById(int id)
         {
-         
-                return _unitOfWork.FindById<T>(id);
-         
+            return _unitOfWork.FindById<T>(id);
         }
 
         public void SaveChanges()
         {
-           
-                _unitOfWork.SaveChanges();
-         
+            _unitOfWork.SaveChanges();
         }
 
         public void Dispose()
-        { 
+        {
             _unitOfWork.Dispose();
         }
     }

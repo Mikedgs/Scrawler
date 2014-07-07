@@ -12,5 +12,6 @@ namespace Scrawler.Models
         public string Username { get; set; }
         public int? Votes { get; set; }
         public string HiddenUrl { get; set; }
+        public string ChatroomName { get; set; }
     }
 }
