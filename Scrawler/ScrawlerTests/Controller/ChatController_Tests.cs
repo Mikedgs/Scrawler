@@ -26,16 +26,16 @@ namespace ScrawlerTests.Controller
             var configMock = new Mock<IConfiguration>();
             var messageDbMock = new Mock<IMessageDb>();
             var chatroomMapperMock = new Mock<IChatRoomJsonMapper>();
-            
-            chatRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> {new Chatroom{HiddenUrl = "2"}});
 
-            messageRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Message, bool>>>())).Returns(new List<Message>() { new Message()});
+            chatRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom { HiddenUrl = "2" } });
+
+            messageRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Message, bool>>>())).Returns(new List<Message>() { new Message() });
             mapperMock.Setup(x => x.MapToJson(new Message()));
             var cut = new ChatController(chatRepoMock.Object, null, Mock.Of<IResponseProxy>(), configMock.Object, messageDbMock.Object, chatroomMapperMock.Object);
 
             // Act
             var result = cut.GetRoomInformation(It.IsAny<string>());
-            
+
             // Assert
             Assert.IsInstanceOf(typeof(ChatroomJson), result.Data);
         }

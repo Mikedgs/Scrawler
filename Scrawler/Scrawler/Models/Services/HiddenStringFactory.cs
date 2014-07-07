@@ -18,7 +18,7 @@ namespace Scrawler.Models.Services
         {
             using (var randomGenerator = new RNGCryptoServiceProvider())
             {
-                var data = new byte[8];
+                var data = new byte[16];
                 randomGenerator.GetBytes(data);
                 return BitConverter.ToInt32(data, 0);
             }
@@ -27,7 +27,7 @@ namespace Scrawler.Models.Services
         public string GenerateHiddenString()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var result = new string(Enumerable.Repeat(chars, 5).Select(s => s[Random.Next(s.Length)]).ToArray());
+            var result = new string(Enumerable.Repeat(chars, 10).Select(s => s[Random.Next(s.Length)]).ToArray());
             return result;
         }
     }

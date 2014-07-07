@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Scrawler.Models.Services;
 
@@ -11,25 +12,31 @@ namespace ScrawlerTests.Models.Services
         public void that_GenerateHiddenString_returns_a_5_character_string()
         {
             // Arrange
-            var cut = new HiddenStringFactory(); // TODO decide on a convention - cut is fine, sut is fine, but have a consistent opinion as a team.
+            var cut = new HiddenStringFactory();
 
             // Act
             var hiddenString = cut.GenerateHiddenString();
 
             // Assert
-            Assert.That(hiddenString.Length, Is.EqualTo(5));
+            Assert.That(hiddenString.Length, Is.EqualTo(10));
         }
 
         [Test]
         public void No_two_strings_are_the_same()
         {
             // Arrange
-            throw new NotImplementedException("I hope you're not copying and pasting, Regan.");
+            var cut = new HiddenStringFactory();
 
             // Act
-
+            var listOfHiddenStrings = new List<string>();
+            for (var i = 0; i < 1000000; i ++)
+            {
+                listOfHiddenStrings.Add(cut.GenerateHiddenString());
+            }
+            var listOfDistinctStrings = listOfHiddenStrings.Distinct();
+            
             // Assert
-
+            Assert.That(listOfHiddenStrings.Count(), Is.EqualTo(listOfDistinctStrings.Count()));
         }
     }
 }
