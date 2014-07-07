@@ -31,9 +31,9 @@ namespace Scrawler.Controllers
 
         public ActionResult Index()
         {
-            if (!_sessionProxy.CheckIfLoggedIn())
+            if (!_sessionProxy.IsLoggedIn)
             {
-                RedirectToAction("Login", "Admin");
+                RedirectToAction("Login", "Admin"); // TODO see AdminController - can this be a common method on the base controller used by both?
             }
             var listofChatrooms = _chatRepository.GetAll();
             return View(listofChatrooms);
@@ -47,7 +47,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult AddRoom()
         {
-            if (!_sessionProxy.CheckIfLoggedIn())
+            if (!_sessionProxy.IsLoggedIn)
             {
                 RedirectToAction("Login", "Admin");
             }
@@ -58,7 +58,7 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult AddRoom(Chatroom room)
         {
-            if (!_sessionProxy.CheckIfLoggedIn())
+            if (!_sessionProxy.IsLoggedIn)
             {
                 RedirectToAction("Login", "Admin");
             }
@@ -74,7 +74,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            if (!_sessionProxy.CheckIfLoggedIn())
+            if (!_sessionProxy.IsLoggedIn)
             {
                 RedirectToAction("Login", "Admin");
             }      

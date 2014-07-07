@@ -7,7 +7,7 @@ using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Models.Services
 {
-    public class MessageDb : IMessageDb
+    public class MessageDb : IMessageDb // TODO MessageRepository?
     {
         private readonly IRepository<Message> _messageRepository;
         private readonly IMessageMapperToJson _messageMapperToJson;
@@ -18,7 +18,7 @@ namespace Scrawler.Models.Services
             _messageMapperToJson = messageMapperToJson;
         }
 
-        public List<MessageJson> GetTopThreeMessages(int id)
+        public List<MessageJson> GetTopThreeMessages(int id) // TODO what sort of id is this? The one that your superego keeps in check? or some other sort of id?
         {
             var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == id).ToList();
             var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderByDescending(x => x.Votes).ToList();

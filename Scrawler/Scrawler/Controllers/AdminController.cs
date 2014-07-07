@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Scrawler.Models;
+using Scrawler.Models.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
@@ -26,15 +27,16 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult Login(Admin admin)
         {
+            // TODO pull this validation orchestration out of the controller into a service class???
             if (!_sessionProxy.ValidateInput(admin))
             {
-                return RedirectToAction("Login", "Admin", new RouteValueDictionary { { "validUser", false } });
+                return RedirectToAction("Login", "Admin", new RouteValueDictionary { { "validUser", false } }); // TODO
             }
 
             var validUser = _adminDb.Validate(admin);
             if (validUser == null)
             {
-                return RedirectToAction("Login", "Admin", new RouteValueDictionary {{"validUser", false}});
+                RedirectToLogin();
             }
 
             _sessionProxy.AddAdminToSession(validUser);
@@ -44,14 +46,14 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult CreateUser()
         {
-            if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
+            if (!_sessionProxy.IsLoggedIn) return RedirectToAction("Index", "ControlPanel"); // TODO private method for this?
             return View(new Admin());
         }
 
         [HttpPost]
         public ActionResult CreateUser(Admin newUser)
         {
-            if (!_sessionProxy.CheckIfLoggedIn()) return RedirectToAction("Index", "ControlPanel");
+            if (!_sessionProxy.IsLoggedIn) return RedirectToAction("Index", "ControlPanel"); // TODO see above
             _adminDb.SaveUser(newUser);
             _sessionProxy.AddAdminToSession(newUser);
             return RedirectToAction("Index", "ControlPanel");
@@ -62,6 +64,11 @@ namespace Scrawler.Controllers
         {
             Session.Clear();
             return Redirect("/ControlPanel/Index");
+        }
+
+        private RedirectToRouteResult RedirectToLogin()
+        {
+            return RedirectToAction("Login", "Admin", new RouteValueDictionary { { "validUser", false } });
         }
     }
 }

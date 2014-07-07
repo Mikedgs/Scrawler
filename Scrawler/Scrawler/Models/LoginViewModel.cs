@@ -4,7 +4,7 @@ namespace Scrawler.Models
 {
     public class LoginViewModel
     {
-        public bool IsValidUser { get; set; }
+        public bool IsValidUser { get; set; } // TODO private setters?
         public Admin Admin { get; set; }
 
         public LoginViewModel(Admin admin, bool isValidUser)

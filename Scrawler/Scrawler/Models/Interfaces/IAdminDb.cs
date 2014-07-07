@@ -1,6 +1,6 @@
 ﻿using Scrawler.Plumbing;
 
-namespace Scrawler.Models
+namespace Scrawler.Models.Interfaces
 {
     public interface IAdminDb
     {

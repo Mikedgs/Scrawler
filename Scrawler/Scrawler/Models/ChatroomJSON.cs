@@ -2,7 +2,7 @@
 
 namespace Scrawler.Models
 {
-    public class ChatroomJson : IChatroomJson
+    public class ChatroomJson : IChatroomJson // TODO could this be immutable?
     {
         public string FireBaseRoomId { get; set; }
         public List<MessageJson> Messages { get; set; }

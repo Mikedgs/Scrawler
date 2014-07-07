@@ -18,7 +18,7 @@ namespace Scrawler.Models.Services
 
         public void SaveMessages(MessageJson msg)
         {
-            var messageToSave = _repository.Get(x=>x.Body == msg.Content).SingleOrDefault() ?? _mapper.MapToMessage(msg);
+            var messageToSave = _repository.Get(x=>x.Body == msg.Content).SingleOrDefault() ?? _mapper.MapToMessage(msg); // TODO is content the best key? Would, for example, Id be a better key?
             messageToSave.Votes += 1;
             _repository.Add(messageToSave);
             _repository.SaveChanges();

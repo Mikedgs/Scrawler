@@ -3,7 +3,7 @@ using Scrawler.Models.Interfaces;
 
 namespace Scrawler.Models
 {
-    public class MessageJson : IMessageJson
+    public class MessageJson : IMessageJson // TODO overloaded ctors and private setters?
     {
         public int Id { get; set; }
         public int RoomId { get; set; }
