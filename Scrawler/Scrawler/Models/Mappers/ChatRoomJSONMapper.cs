@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Scrawler.Models.Services.Interfaces;
 
-namespace Scrawler.Models.Services
+namespace Scrawler.Models.Mappers
 {
     public class ChatRoomJsonMapper : IChatRoomJsonMapper
     {

@@ -213,13 +213,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminDb.cs" />
+    <Compile Include="Models\Services\AdminDb.cs" />
     <Compile Include="Models\ChatroomJSON.cs" />
-    <Compile Include="Models\HashProvidor.cs" />
+    <Compile Include="Models\Services\HashProvidor.cs" />
     <Compile Include="Models\Interfaces\IAdminDb.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Interfaces\IMessageDb.cs" />
-    <Compile Include="Models\Services\ChatRoomJSONMapper.cs" />
+    <Compile Include="Models\Mappers\ChatRoomJSONMapper.cs" />
     <Compile Include="Models\Services\Interfaces\ILinkUpdater.cs" />
     <Compile Include="Models\Services\Interfaces\IChatRoomJsonMapper.cs" />
     <Compile Include="Models\Services\MessageDb.cs" />
@@ -238,8 +238,8 @@
     <Compile Include="Models\Services\Interfaces\IMessageJsonToMessage.cs" />
     <Compile Include="Models\Services\Interfaces\IMessageSaver.cs" />
     <Compile Include="Models\Services\LinkUpdater.cs" />
-    <Compile Include="Models\Services\MessageJsonToMessageMapper.cs" />
-    <Compile Include="Models\Services\MessageMapperToJson.cs" />
+    <Compile Include="Models\Mappers\MessageJsonToMessageMapper.cs" />
+    <Compile Include="Models\Mappers\MessageMapperToJson.cs" />
     <Compile Include="Plumbing\NinjectControllerFactory.cs" />
     <Compile Include="Models\Services\MessageSaver.cs" />
     <Compile Include="Plumbing\Repository.cs" />

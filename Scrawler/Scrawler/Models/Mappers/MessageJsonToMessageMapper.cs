@@ -4,19 +4,25 @@ using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
-namespace Scrawler.Models.Services
+namespace Scrawler.Models.Mappers
 {
     public class MessageJsonToMessageMapper : IMessageJsonToMessageMapper
     {
-        private readonly IRepository<Chatroom> _repository = new Repository<Chatroom>();
+        private readonly IRepository<Chatroom> _chatRoomRepository;
         private const int InitialNumberOfVotes = 1;
+
+        public MessageJsonToMessageMapper(IRepository<Chatroom> chatRoomRepository)
+        {
+            _chatRoomRepository = chatRoomRepository;
+        }
+
         public Message MapToMessage(MessageJson msgJson)
         {            
             return new Message
             {
                 Body = msgJson.Content,
                 CreatedAt = DateTime.Now,
-                ChatroomId = _repository.Get(x => x.HiddenUrl == msgJson.HiddenUrl).Single().Id,
+                ChatroomId = _chatRoomRepository.Get(x => x.HiddenUrl == msgJson.HiddenUrl).Single().Id,
                 Votes = InitialNumberOfVotes
             };
         }
