@@ -5,10 +5,10 @@ using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Models.Services
 {
-    public class AdminRepository : IAdminRepository 
+    public class AdminRepository : IAdminRepository
     {
-        private readonly IRepository<Admin> _repository;
         private readonly IHashProvider _hashProvider;
+        private readonly IRepository<Admin> _repository;
 
         public AdminRepository(IRepository<Admin> repository, IHashProvider hashProvider)
         {
@@ -18,15 +18,15 @@ namespace Scrawler.Models.Services
 
         public void SaveUser(Admin admin)
         {
-            admin.Password = _hashProvider.GetSHA(admin.Password);
+            admin.Password = _hashProvider.GetSha(admin.Password);
             _repository.Add(admin);
             _repository.SaveChanges();
         }
 
         public Admin GetAdmin(Admin admin)
         {
-            var password = _hashProvider.GetSHA(admin.Password);
+            string password = _hashProvider.GetSha(admin.Password);
             return _repository.Get(x => x.UserName == admin.UserName && x.Password == password).FirstOrDefault();
         }
-    }  
+    }
 }

@@ -2,7 +2,6 @@
 using Moq;
 using NUnit.Framework;
 using Scrawler.Controllers;
-using Scrawler.Models;
 using Scrawler.Models.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
@@ -48,16 +47,32 @@ namespace ScrawlerTests.Controller
 
             //Act
             var result = ClassUnderTest.CreateUser(new Admin());
+
+            //Assert
+            Assert.That(result, Is.TypeOf(typeof (RedirectToRouteResult)));
+        }
+
+        [Test]
+        public void Create_user_post_action_hits_all_methods_inside_once()
+        {
+            //Arrange
+            var sessionMock = GetMock<ISessionProxy>();
+            var adminDbMock = GetMock<IAdminRepository>();
+            sessionMock.Setup(x => x.IsLoggedIn).Returns(true);
+            adminDbMock.Setup(x => x.SaveUser(It.IsAny<Admin>()));
+            sessionMock.Setup(x => x.AddAdminToSession(It.IsAny<Admin>()));
+
+            //Act
+            var result = ClassUnderTest.CreateUser(new Admin());
             //Assert
             sessionMock.VerifyGet(x => x.IsLoggedIn, Times.Exactly(1));
             adminDbMock.Verify(x => x.SaveUser(It.IsAny<Admin>()), Times.Exactly(1));
             sessionMock.Verify(x => x.AddAdminToSession(It.IsAny<Admin>()), Times.Exactly(1));
-            Assert.That(result, Is.TypeOf(typeof (RedirectToRouteResult)));
-
         }
     }
+
     [TestFixture]
-    class AdminControllerTests_create_user_get_action_scenario : UnitTestBase<AdminController>
+    internal class AdminControllerTests_create_user_get_action_scenario : UnitTestBase<AdminController>
     {
         [Test]
         public void Create_user_get_action_returns_a_ViewResult()
@@ -70,8 +85,7 @@ namespace ScrawlerTests.Controller
             var result = ClassUnderTest.CreateUser();
             //Assert
             sessionMock.VerifyGet(x => x.IsLoggedIn, Times.Exactly(1));
-            Assert.IsInstanceOf(typeof(ViewResult), result);
-
+            Assert.IsInstanceOf(typeof (ViewResult), result);
         }
     }
 }

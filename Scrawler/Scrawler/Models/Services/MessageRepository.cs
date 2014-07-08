@@ -9,8 +9,8 @@ namespace Scrawler.Models.Services
 {
     public class MessageRepository : IMessageRepository
     {
-        private readonly IRepository<Message> _messageRepository;
         private readonly IMessageMapperToJson _messageMapperToJson;
+        private readonly IRepository<Message> _messageRepository;
 
         public MessageRepository(IRepository<Message> messageRepository, IMessageMapperToJson messageMapperToJson)
         {
@@ -24,6 +24,6 @@ namespace Scrawler.Models.Services
             var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderByDescending(x => x.Votes).ToList();
             var topThree = sortedlistofImortalMsgs.Take(3).ToList();
             return topThree.Select(msg => _messageMapperToJson.MapToJson(msg)).ToList();
-        } 
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mindscape.LightSpeed.Validation;
 using Moq;
 using NUnit.Framework;
 using Scrawler.Plumbing;
@@ -23,11 +22,11 @@ namespace ScrawlerTests.Plumbing
             var repos = new List<Repository<Chatroom>>();
 
             // Arrange
-            for (var i = 0; i < 181; i++)
+            for (int i = 0; i < 181; i++)
             {
                 var repo = new Repository<Chatroom>(Mock.Of<IConfiguration>(x => x.ConnectionString == connectionString));
                 repos.Add(repo);
-                var junk = repo.GetAll().First();
+                Chatroom junk = repo.GetAll().First();
                 Console.WriteLine(junk.FirebaseId);
             }
 
@@ -35,7 +34,6 @@ namespace ScrawlerTests.Plumbing
 
             // Assert
             Assert.That(repos.Count, Is.EqualTo(100));
-
         }
     }
 }

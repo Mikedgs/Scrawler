@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Runtime.InteropServices;
 using Moq;
 using NUnit.Framework;
 using Scrawler.Models;
@@ -14,7 +13,7 @@ using ScrawlerTests.Plumbing;
 namespace ScrawlerTests.Models.Services
 {
     [TestFixture]
-    class MessageSaverTests : UnitTestBase<MessageSaver>
+    internal class MessageSaverTests : UnitTestBase<MessageSaver>
     {
         private MessageJson _message;
         private Mock<IMessageJsonToMessageMapper> _mapper;
@@ -27,15 +26,8 @@ namespace ScrawlerTests.Models.Services
             _messageRepoMock = GetMock<IRepository<Message>>();
             _mapper = GetMock<IMessageJsonToMessageMapper>();
             _messageRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Message, bool>>>())).Returns(new List<Message>());
-            _mapper.Setup(x => x.MapToMessage(It.IsAny<MessageJson>())).Returns(new Message() { Votes = 1 });
+            _mapper.Setup(x => x.MapToMessage(It.IsAny<MessageJson>())).Returns(new Message {Votes = 1});
             ClassUnderTest.SaveMessages(_message);
-        }
-
-        [Test]
-        public void savemessages_still_tries_to_map_when_repo_returns_empty_list()
-        {
-            // Assert
-            _mapper.Verify(x => x.MapToMessage(_message), Times.Once);
         }
 
         [Test]
@@ -50,6 +42,13 @@ namespace ScrawlerTests.Models.Services
         {
             // Assert
             _messageRepoMock.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+        [Test]
+        public void savemessages_still_tries_to_map_when_repo_returns_empty_list()
+        {
+            // Assert
+            _mapper.Verify(x => x.MapToMessage(_message), Times.Once);
         }
     }
 }

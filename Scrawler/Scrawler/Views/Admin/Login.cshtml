@@ -13,9 +13,11 @@
 
 @using (Html.BeginForm("Login", "Admin"))
 {
-    <label>Username: </label> @Html.TextBoxFor(x => x.Admin.UserName) <br />
-    <label>Password: </label> @Html.PasswordFor(x => x.Admin.Password) <br />
+    <label>Username: </label>
+    @Html.TextBoxFor(x => x.Admin.UserName)
+    <br />
+    <label>Password: </label>
+    @Html.PasswordFor(x => x.Admin.Password)
+    <br />
     <input type="submit" value="Login" />
 }
-
-

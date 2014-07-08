@@ -2,6 +2,6 @@
 {
     public interface IHashProvider
     {
-        string GetSHA(string plaintext);
+        string GetSha(string plaintext);
     }
 }

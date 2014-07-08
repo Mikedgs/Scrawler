@@ -7,8 +7,8 @@ namespace Scrawler.Models.Services
 {
     public class LinkUpdater : ILinkUpdater
     {
-        private readonly IHiddenStringFactory _hiddenStringFactory;
         private readonly IRepository<Chatroom> _chatRepository;
+        private readonly IHiddenStringFactory _hiddenStringFactory;
 
         public LinkUpdater(IRepository<Chatroom> chatRepository, IHiddenStringFactory hiddenStringFactory)
         {
@@ -23,6 +23,5 @@ namespace Scrawler.Models.Services
             _chatRepository.Add(room);
             _chatRepository.SaveChanges();
         }
-           
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Timers;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Scrawler.Models.Services;
 using Scrawler.Models.Services.Interfaces;
@@ -13,8 +13,9 @@ namespace Scrawler.Controllers
         private readonly IRepository<Chatroom> _chatRepository;
         private readonly IHiddenStringFactory _stringFactory;
 
-        public ControlPanelController(IResponseProxy responseProxy, ISessionProxy sessionProxy, IRepository<Chatroom> chatRepository,
-            IHiddenStringFactory stringFactory, LinkUpdater dBrefresh) : base(responseProxy,sessionProxy)
+        public ControlPanelController(IResponseProxy responseProxy, ISessionProxy sessionProxy,
+            IRepository<Chatroom> chatRepository,
+            IHiddenStringFactory stringFactory, LinkUpdater dBrefresh) : base(responseProxy, sessionProxy)
         {
             _chatRepository = chatRepository;
             _stringFactory = stringFactory;
@@ -51,7 +52,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            CheckIfLoggedIn();    
+            CheckIfLoggedIn();
             var room = _chatRepository.FindById(id);
             _chatRepository.Delete(room);
             _chatRepository.SaveChanges();

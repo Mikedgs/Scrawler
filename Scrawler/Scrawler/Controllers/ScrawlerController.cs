@@ -25,7 +25,7 @@ namespace Scrawler.Controllers
 
         protected ActionResult RedirectToLogin()
         {
-            return RedirectToAction("Login", "Admin", new RouteValueDictionary { { "validUser", false } });
+            return RedirectToAction("Login", "Admin", new RouteValueDictionary {{"validUser", false}});
         }
 
         protected ActionResult RedirectToControlPanel()

@@ -6,21 +6,8 @@ using Scrawler.Models.Mappers;
 namespace ScrawlerTests.Models.Services
 {
     [TestFixture]
-    class ChatRoomJsonMapperTests
+    internal class ChatRoomJsonMapperTests
     {
-        [Test]
-        public void that_MapRoomToJson_returns_a_chatRoomJson()
-        {
-            // Arrange
-            var cut = new ChatRoomJsonMapper();
-
-            // Act
-            var result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName");
-            
-            // Assert
-            Assert.IsInstanceOf(typeof(ChatroomJson), result);
-        }
-
         [Test]
         public void that_MapRoomToJson_correctly_maps_a_room_to_Json()
         {
@@ -28,10 +15,23 @@ namespace ScrawlerTests.Models.Services
             var cut = new ChatRoomJsonMapper();
 
             // Act
-            var result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName");
+            ChatroomJson result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName");
 
             // Assert
-            Assert.IsInstanceOf(typeof(ChatroomJson), result);
+            Assert.IsInstanceOf(typeof (ChatroomJson), result);
+        }
+
+        [Test]
+        public void that_MapRoomToJson_returns_a_chatRoomJson()
+        {
+            // Arrange
+            var cut = new ChatRoomJsonMapper();
+
+            // Act
+            ChatroomJson result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName");
+
+            // Assert
+            Assert.IsInstanceOf(typeof (ChatroomJson), result);
         }
     }
 }

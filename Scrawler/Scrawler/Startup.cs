@@ -1,10 +1,12 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using Scrawler;
 
-[assembly: OwinStartupAttribute(typeof(Scrawler.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
+
 namespace Scrawler
 {
-    public partial class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {

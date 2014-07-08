@@ -16,7 +16,7 @@ namespace Scrawler.Plumbing
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            return (controllerType == null) ? null : (IController)_ninjectKernel.Get(controllerType);
+            return (controllerType == null) ? null : (IController) _ninjectKernel.Get(controllerType);
         }
     }
 }
