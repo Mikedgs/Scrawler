@@ -215,7 +215,7 @@
     </Compile>
     <Compile Include="Models\Services\AdminRepository.cs" />
     <Compile Include="Models\ChatroomJSON.cs" />
-    <Compile Include="Models\Services\HashProvidor.cs" />
+    <Compile Include="Models\Services\HashProvider.cs" />
     <Compile Include="Models\Interfaces\IAdminRepository.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Interfaces\IMessageRepository.cs" />

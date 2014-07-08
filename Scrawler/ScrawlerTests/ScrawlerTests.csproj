@@ -93,14 +93,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AdminControllerTests.cs" />
-    <Compile Include="Controller\ChatController_Tests.cs" />
+    <Compile Include="Controller\ChatControllerTests.cs" />
     <Compile Include="Controller\ControlPanelControllerTests.cs" />
     <Compile Include="Models\Services\ChatRoomJSONMapperTests.cs" />
-    <Compile Include="Models\Services\HashProvidorTests.cs" />
+    <Compile Include="Models\Services\HashProviderTests.cs" />
     <Compile Include="Models\Services\HiddenStringFactoryTests.cs" />
     <Compile Include="Models\Services\MessageDbTests.cs" />
     <Compile Include="Models\Services\MessageJsonToMessageMapperTests.cs" />
     <Compile Include="Models\Services\MessageMapperToJsonTests.cs" />
+    <Compile Include="Models\Services\MessageSaverTests.cs" />
     <Compile Include="Plumbing\CanWeBreakTheRepository.cs" />
     <Compile Include="Plumbing\UnitTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

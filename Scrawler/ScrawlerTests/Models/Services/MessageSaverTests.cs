@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Runtime.InteropServices;
+using Moq;
+using NUnit.Framework;
+using Scrawler.Models;
+using Scrawler.Models.Services;
+using Scrawler.Models.Services.Interfaces;
+using Scrawler.Plumbing;
+using Scrawler.Plumbing.Interfaces;
+using ScrawlerTests.Plumbing;
+
+namespace ScrawlerTests.Models.Services
+{
+    [TestFixture]
+    class MessageSaverTests : UnitTestBase<MessageSaver>
+    {
+        private MessageJson _message;
+        private Mock<IMessageJsonToMessageMapper> _mapper;
+        private Mock<IRepository<Message>> _messageRepoMock;
+
+        [TestFixtureSetUp]
+        public void setup_save_messages_tests()
+        {
+            _message = new MessageJson(1, "content", DateTime.Now, "username", 0, "id");
+            _messageRepoMock = GetMock<IRepository<Message>>();
+            _mapper = GetMock<IMessageJsonToMessageMapper>();
+            _messageRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Message, bool>>>())).Returns(new List<Message>());
+            _mapper.Setup(x => x.MapToMessage(It.IsAny<MessageJson>())).Returns(new Message() { Votes = 1 });
+            ClassUnderTest.SaveMessages(_message);
+        }
+
+        [Test]
+        public void savemessages_still_tries_to_map_when_repo_returns_empty_list()
+        {
+            // Assert
+            _mapper.Verify(x => x.MapToMessage(_message), Times.Once);
+        }
+
+        [Test]
+        public void savemessages_adds_message_to_repo()
+        {
+            // Assert
+            _messageRepoMock.Verify(x => x.Add(It.IsAny<Message>()), Times.Once);
+        }
+
+        [Test]
+        public void savemessages_still_saves_message_when_repo_returns_empty_list()
+        {
+            // Assert
+            _messageRepoMock.Verify(x => x.SaveChanges(), Times.Once);
+        }
+    }
+}

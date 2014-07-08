@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Scrawler.Models.Services;
@@ -73,9 +74,26 @@ namespace ScrawlerTests.Models.Services
 
             // Assert
             Assert.That(listOfResults.Distinct().Count(), Is.EqualTo(listOfResults.Count));
+
+
         }
 
+        [Test]
+        public void that_GetSHA_cant_handle_nulls()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => ClassUnderTest.GetSHA(null));
+        }
 
-        
+        [Test]
+        public void that_GetSHA_cant_handle_empty_string()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => ClassUnderTest.GetSHA(string.Empty));
+        }   
     }
 }

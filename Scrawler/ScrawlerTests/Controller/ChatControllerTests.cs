@@ -13,7 +13,7 @@ using ScrawlerTests.Plumbing;
 namespace ScrawlerTests.Controller
 {
     [TestFixture]
-    public class ChatController_Tests : UnitTestBase<ChatController>
+    public class ChatControllerTests : UnitTestBase<ChatController>
     {
         [Test]
         public void The_room_information_returns_a_JsonResult_when_the_chatroom_does_not_return_a_null()
