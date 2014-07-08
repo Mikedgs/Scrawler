@@ -23,10 +23,10 @@ namespace Scrawler.Models.Services
             _repository.SaveChanges();
         }
 
-        public Admin GetAdmin(Admin user)
+        public Admin GetAdmin(Admin admin)
         {
-            var password = _hashProvider.GetSHA(user.Password);
-            return _repository.Get(x => x.UserName == user.UserName && x.Password == password).FirstOrDefault();
+            var password = _hashProvider.GetSHA(admin.Password);
+            return _repository.Get(x => x.UserName == admin.UserName && x.Password == password).FirstOrDefault();
         }
     }  
 }

@@ -95,9 +95,11 @@
     <Compile Include="Controller\AdminControllerTests.cs" />
     <Compile Include="Controller\ChatControllerTests.cs" />
     <Compile Include="Controller\ControlPanelControllerTests.cs" />
+    <Compile Include="Models\Services\AdminRepositoryTests.cs" />
     <Compile Include="Models\Services\ChatRoomJSONMapperTests.cs" />
     <Compile Include="Models\Services\HashProviderTests.cs" />
     <Compile Include="Models\Services\HiddenStringFactoryTests.cs" />
+    <Compile Include="Models\Services\LinkUpdaterTests.cs" />
     <Compile Include="Models\Services\MessageDbTests.cs" />
     <Compile Include="Models\Services\MessageJsonToMessageMapperTests.cs" />
     <Compile Include="Models\Services\MessageMapperToJsonTests.cs" />
