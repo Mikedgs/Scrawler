@@ -12,10 +12,7 @@ namespace Scrawler.Plumbing
 
         public bool IsLoggedIn
         {
-            get
-            {
-                return (string)HttpContext.Current.Session["loggedIn"] == "true";
-            }
+            get { return (string) HttpContext.Current.Session["loggedIn"] == "true"; }
         }
 
         public bool ValidateInput(Admin admin)

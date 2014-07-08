@@ -11,8 +11,8 @@ namespace Scrawler.Plumbing
 {
     public class Repository<T> : IRepository<T> where T : Entity<int>
     {
-        private readonly ScrawlerUnitOfWork _unitOfWork;
         private readonly LightSpeedContext<ScrawlerUnitOfWork> _context;
+        private readonly ScrawlerUnitOfWork _unitOfWork;
 
         public Repository(IConfiguration configuration)
         {
@@ -51,7 +51,7 @@ namespace Scrawler.Plumbing
         }
 
         public void DeleteAll()
-        {  
+        {
             foreach (var entity in GetAll())
             {
                 Delete(entity);

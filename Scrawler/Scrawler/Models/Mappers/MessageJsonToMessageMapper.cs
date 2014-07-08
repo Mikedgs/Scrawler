@@ -8,8 +8,8 @@ namespace Scrawler.Models.Mappers
 {
     public class MessageJsonToMessageMapper : IMessageJsonToMessageMapper
     {
-        private readonly IRepository<Chatroom> _chatRoomRepository;
         private const int InitialNumberOfVotes = 0;
+        private readonly IRepository<Chatroom> _chatRoomRepository;
 
         public MessageJsonToMessageMapper(IRepository<Chatroom> chatRoomRepository)
         {
@@ -17,7 +17,7 @@ namespace Scrawler.Models.Mappers
         }
 
         public Message MapToMessage(MessageJson msgJson)
-        {            
+        {
             return new Message
             {
                 Username = msgJson.Username,

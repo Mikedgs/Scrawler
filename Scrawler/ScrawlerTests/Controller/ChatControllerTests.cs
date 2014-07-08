@@ -24,15 +24,17 @@ namespace ScrawlerTests.Controller
             var messageRepoMock = GetMock<IRepository<Message>>();
             var mapperMock = GetMock<IMessageMapperToJson>();
 
-            chatRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom> { new Chatroom { HiddenUrl = "2" } });
-            messageRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Message, bool>>>())).Returns(new List<Message>() { new Message() });
+            chatRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>()))
+                .Returns(new List<Chatroom> {new Chatroom {HiddenUrl = "2"}});
+            messageRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))
+                .Returns(new List<Message> {new Message()});
             mapperMock.Setup(x => x.MapToJson(new Message()));
 
             // Act
             var result = ClassUnderTest.GetRoomInformation(It.IsAny<string>());
 
             // Assert
-            Assert.IsInstanceOf(typeof(JsonResult), result);
+            Assert.IsInstanceOf(typeof (JsonResult), result);
         }
 
         [Test]
@@ -48,7 +50,20 @@ namespace ScrawlerTests.Controller
             var result = ClassUnderTest.GetRoomInformation(It.IsAny<string>());
 
             // Assert
-            Assert.IsInstanceOf(typeof(RedirectResult), result);
+            Assert.IsInstanceOf(typeof (RedirectResult), result);
+        }
+
+        [Test]
+        public void The_save_message_action_calls_save_method_on_message_saver()
+        {
+            // Arrange
+            var saverMock = GetMock<IMessageSaver>();
+
+            // Act
+            ClassUnderTest.SaveMessage(It.IsAny<MessageJson>());
+
+            // Assert
+            saverMock.Verify(x => x.SaveMessages(It.IsAny<MessageJson>()), Times.Once);
         }
 
         [Test]
@@ -58,7 +73,7 @@ namespace ScrawlerTests.Controller
             var result = ClassUnderTest.SaveMessage(It.IsAny<MessageJson>());
 
             // Assert
-            Assert.IsInstanceOf(typeof(JsonResult), result);
+            Assert.IsInstanceOf(typeof (JsonResult), result);
         }
     }
 }

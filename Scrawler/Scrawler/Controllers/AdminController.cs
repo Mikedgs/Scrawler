@@ -8,11 +8,11 @@ namespace Scrawler.Controllers
 {
     public class AdminController : ScrawlerController
     {
-        private readonly ISessionProxy _sessionProxy;
         private readonly IAdminRepository _adminRepository;
+        private readonly ISessionProxy _sessionProxy;
 
         public AdminController(ISessionProxy sessionProxy, IAdminRepository adminDb, IResponseProxy responseProxy)
-            : base(responseProxy,sessionProxy)
+            : base(responseProxy, sessionProxy)
         {
             _sessionProxy = sessionProxy;
             _adminRepository = adminDb;
@@ -60,7 +60,6 @@ namespace Scrawler.Controllers
         {
             Session.Clear();
             return RedirectToControlPanel();
-
         }
     }
 }

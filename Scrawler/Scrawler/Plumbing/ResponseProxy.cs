@@ -7,7 +7,7 @@ namespace Scrawler.Plumbing
     {
         public void AddHeader(string header, string value)
         {
-            HttpContext.Current.Response.Headers.Add(header,value);
+            HttpContext.Current.Response.Headers.Add(header, value);
         }
     }
 }

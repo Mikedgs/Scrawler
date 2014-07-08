@@ -12,8 +12,45 @@ using Scrawler.Plumbing.Interfaces;
 namespace ScrawlerTests.Models.Services
 {
     [TestFixture]
-    class MessageDbTests
+    internal class MessageDbTests
     {
+        [Test]
+        public void GetTopThreeMessages_correctly_maps_3_messages()
+        {
+            // Arrange
+            var messageList = new List<Message>
+            {
+                new Message {Body = "body"},
+                new Message {Body = "next"},
+                new Message {Body = "last"}
+            };
+            var mockRepo = new Mock<IRepository<Message>>();
+            mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
+            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
+
+            // Act
+            List<MessageJson> result = cut.GetTopThreeMessages(1);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void GetTopThreeMessages_handles_repo_returning_less_than_expected_number_of_messages()
+        {
+            // Arrange
+            var messageList = new List<Message> {new Message {Body = "body"}};
+            var mockRepo = new Mock<IRepository<Message>>();
+            mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
+            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
+
+            // Act
+            List<MessageJson> result = cut.GetTopThreeMessages(1);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(1));
+        }
+
         [Test]
         public void GetTopThreeMessages_handles_repo_returning_nothing()
         {
@@ -24,55 +61,29 @@ namespace ScrawlerTests.Models.Services
             var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
 
             // Act
-            var result = cut.GetTopThreeMessages(1);
+            List<MessageJson> result = cut.GetTopThreeMessages(1);
 
             // Assert
             Assert.That(result, Is.EqualTo(new List<MessageJson>()));
         }
 
         [Test]
-        public void GetTopThreeMessages_handles_repo_returning_less_than_expected_number_of_messages()
-        {
-            // Arrange
-            var messageList = new List<Message>() {new Message(){Body = "body"}};
-            var mockRepo = new Mock<IRepository<Message>>();
-            mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
-            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
-
-            // Act
-            var result = cut.GetTopThreeMessages(1);
-
-            // Assert
-            Assert.That(result.Count, Is.EqualTo(1));
-        }
-
-        [Test]
-        public void GetTopThreeMessages_correctly_maps_3_messages()
-        {
-            // Arrange
-            var messageList = new List<Message>() { new Message() { Body = "body" }, new Message() { Body = "next" }, new Message() { Body = "last" } };
-            var mockRepo = new Mock<IRepository<Message>>();
-            mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
-            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
-
-            // Act
-            var result = cut.GetTopThreeMessages(1);
-
-            // Assert
-            Assert.That(result.Count, Is.EqualTo(3));
-        }
-
-        [Test]
         public void GetTopThreeMessages_maps_more_than_3_messages_down_to_only_return_3()
         {
             // Arrange
-            var messageList = new List<Message>() { new Message() { Body = "body" }, new Message() { Body = "next" }, new Message() { Body = "middle" }, new Message() { Body = "last" } };
+            var messageList = new List<Message>
+            {
+                new Message {Body = "body"},
+                new Message {Body = "next"},
+                new Message {Body = "middle"},
+                new Message {Body = "last"}
+            };
             var mockRepo = new Mock<IRepository<Message>>();
             mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
             var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
 
             // Act
-            var result = cut.GetTopThreeMessages(1);
+            List<MessageJson> result = cut.GetTopThreeMessages(1);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(3));

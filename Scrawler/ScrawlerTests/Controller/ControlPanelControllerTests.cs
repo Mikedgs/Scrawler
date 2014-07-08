@@ -14,14 +14,13 @@ namespace ScrawlerTests.Controller
     internal class ControlPanelControllerTests_addRoom_scenario : UnitTestBase<ControlPanelController>
     {
         [Test]
-        public void Add_room_post_method_calls_each_method_inside_once()
+        public void Add_room_post_action_calls_each_method_inside_once()
         {
             //Arrange
-            Mock<IRepository<Chatroom>> mockRepo = GetMock<IRepository<Chatroom>>();
-            Mock<IHiddenStringFactory> mockFactory = GetMock<IHiddenStringFactory>();
-            Mock<ISessionProxy> sessionMock = GetMock<ISessionProxy>();
-
-            sessionMock.Setup(x => x.AddToSession("loggedIn", "true"));
+            var mockRepo = GetMock<IRepository<Chatroom>>();
+            var mockFactory = GetMock<IHiddenStringFactory>();
+            var sessionMock = GetMock<ISessionProxy>();
+            sessionMock.Setup(x => x.IsLoggedIn).Returns(true);
 
             //Act
             ClassUnderTest.AddRoom(new Chatroom());
@@ -37,14 +36,14 @@ namespace ScrawlerTests.Controller
     internal class ControlPanelControllerTests_deleteRoom_scenario : UnitTestBase<ControlPanelController>
     {
         [Test]
-        public void Delete_room_method_calls_each_method_inside_once()
+        public void Delete_room_action_calls_each_method_inside_once()
         {
             //Arrange
-            Mock<IRepository<Chatroom>> mockRepo = GetMock<IRepository<Chatroom>>();
-            Mock<ISessionProxy> sessionMock = GetMock<ISessionProxy>();
+            var mockRepo = GetMock<IRepository<Chatroom>>();
+            var sessionMock = GetMock<ISessionProxy>();
 
             mockRepo.Setup(x => x.FindById(It.IsAny<int>())).Returns(new Chatroom());
-            sessionMock.Setup(x => x.AddToSession("loggedIn", "true"));
+            sessionMock.Setup(x => x.IsLoggedIn).Returns(true);
 
             //Act
             ClassUnderTest.Delete(6);
@@ -56,16 +55,17 @@ namespace ScrawlerTests.Controller
         }
 
         [Test]
-        public void Index_page_returns_a_list_of_all_rooms()
+        public void Index_action_returns_a_list_of_all_rooms()
         {
             //Arrange
-            Mock<IRepository<Chatroom>> mockRepo = GetMock<IRepository<Chatroom>>();
-
+            var mockRepo = GetMock<IRepository<Chatroom>>();
+            var sessionMock = GetMock<ISessionProxy>();
             var listOfChatrooms = new List<Chatroom>();
             mockRepo.Setup(x => x.GetAll()).Returns(listOfChatrooms);
+            sessionMock.Setup(x => x.IsLoggedIn).Returns(true);
 
             //Act
-            ActionResult list = ClassUnderTest.Index();
+            var list = ClassUnderTest.Index();
 
             //Assert
             Assert.IsInstanceOf(typeof (ViewResult), list);

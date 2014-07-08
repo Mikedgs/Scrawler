@@ -22,7 +22,7 @@ namespace ScrawlerTests.Models.Services
             ClassUnderTest.SaveUser(admin);
 
             // Assert
-            hashMock.Verify(x => x.GetSHA("password"), Times.Once);
+            hashMock.Verify(x => x.GetSha("password"), Times.Once);
             repoMock.Verify(x => x.Add(admin), Times.Once);
         }
     }
@@ -41,7 +41,7 @@ namespace ScrawlerTests.Models.Services
             ClassUnderTest.SaveUser(admin);
 
             // Assert
-            hashMock.Verify(x => x.GetSHA(It.IsAny<string>()), Times.Once);
+            hashMock.Verify(x => x.GetSha(It.IsAny<string>()), Times.Once);
             repoMock.Verify(x => x.Add(It.IsAny<Admin>()), Times.Once);
         }
 
@@ -52,7 +52,7 @@ namespace ScrawlerTests.Models.Services
             Mock<IHashProvider> hashMock = GetMock<IHashProvider>();
             Mock<IRepository<Admin>> repoMock = GetMock<IRepository<Admin>>();
             const string hashedPassword = "newpassword";
-            hashMock.Setup(x => x.GetSHA(It.IsAny<string>())).Returns(hashedPassword);
+            hashMock.Setup(x => x.GetSha(It.IsAny<string>())).Returns(hashedPassword);
             var admin = new Admin {UserName = "admin", Password = "password"};
 
             // Act

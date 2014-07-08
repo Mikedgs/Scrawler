@@ -7,11 +7,18 @@ namespace Scrawler.Models.Services
 {
     public class HiddenStringFactory : IHiddenStringFactory
     {
-        public Random Random { get; set; }
-
         public HiddenStringFactory()
         {
             Random = new Random(GetRandomSeed());
+        }
+
+        public Random Random { get; set; }
+
+        public string GenerateHiddenString()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var result = new string(Enumerable.Repeat(chars, 10).Select(s => s[Random.Next(s.Length)]).ToArray());
+            return result;
         }
 
         protected int GetRandomSeed()
@@ -22,13 +29,6 @@ namespace Scrawler.Models.Services
                 randomGenerator.GetBytes(data);
                 return BitConverter.ToInt32(data, 0);
             }
-        }
-
-        public string GenerateHiddenString()
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var result = new string(Enumerable.Repeat(chars, 10).Select(s => s[Random.Next(s.Length)]).ToArray());
-            return result;
         }
     }
 }

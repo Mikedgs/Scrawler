@@ -2,11 +2,9 @@
 {
     public interface ISessionProxy
     {
-        void AddToSession(string key, object value);
         bool IsLoggedIn { get; }
+        void AddToSession(string key, object value);
         bool ValidateInput(Admin admin);
         void AddAdminToSession(Admin admin);
     }
-
-
 }

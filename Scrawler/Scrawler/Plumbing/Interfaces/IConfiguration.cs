@@ -2,7 +2,7 @@
 {
     public interface IConfiguration
     {
-        string GetBaseUrl(string hiddenUrl = "funroom");
         string ConnectionString { get; }
+        string GetBaseUrl(string hiddenUrl = "funroom");
     }
 }

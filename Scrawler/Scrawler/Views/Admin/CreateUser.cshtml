@@ -5,12 +5,14 @@
 }
 
 <h2>Create New User</h2>
-    @using (Html.BeginForm("Createuser", "Admin"))
-    {
-        @Html.LabelFor(x => x.UserName) @Html.TextBoxFor(x => x.UserName)
-        <br />
-        @Html.LabelFor(x => x.Password) @Html.PasswordFor(x => x.Password)
-        <br />
-        <input type="submit" value="Submit" />
-    }
+@using (Html.BeginForm("Createuser", "Admin"))
+{
+    @Html.LabelFor(x => x.UserName)
+    @Html.TextBoxFor(x => x.UserName)
+    <br />
+    @Html.LabelFor(x => x.Password)
+    @Html.PasswordFor(x => x.Password)
+    <br />
+    <input type="submit" value="Submit" />
+}
 <br />

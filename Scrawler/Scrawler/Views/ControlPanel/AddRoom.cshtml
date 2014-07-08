@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AddRoom";
 }
 
@@ -8,7 +7,8 @@
 <h2>AddRoom</h2>
 
 @using (@Html.BeginForm())
-    {
-        @Html.LabelFor(x=>x.FirebaseId) @Html.TextBoxFor(x=>x.FirebaseId)
-        <input maxlength="10" type ="submit" value ="Create"/>
-    }
+{
+    @Html.LabelFor(x => x.FirebaseId)
+    @Html.TextBoxFor(x => x.FirebaseId)
+    <input maxlength="10" type ="submit" value ="Create"/>
+}

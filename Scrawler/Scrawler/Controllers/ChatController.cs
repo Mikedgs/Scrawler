@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Scrawler.Models;
 using Scrawler.Models.Interfaces;
@@ -11,13 +12,15 @@ namespace Scrawler.Controllers
     public class ChatController : ScrawlerController
     {
         private readonly IRepository<Chatroom> _chatRepository;
-        private readonly IMessageSaver _messageSaver;
-        private readonly IConfiguration _configuration;
-        private readonly IMessageRepository _messageDb;
         private readonly IChatRoomJsonMapper _chatRoomJsonMapper;
+        private readonly IConfiguration _configuration;
         private readonly ILinkUpdater _linkUpdater;
+        private readonly IMessageRepository _messageDb;
+        private readonly IMessageSaver _messageSaver;
 
-        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver, IResponseProxy responseProxy, ISessionProxy sessionProxy, IConfiguration configuration, IMessageRepository messageDb, IChatRoomJsonMapper chatRoomJsonMapper, ILinkUpdater linkUpdater)
+        public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver,
+            IResponseProxy responseProxy, ISessionProxy sessionProxy, IConfiguration configuration,
+            IMessageRepository messageDb, IChatRoomJsonMapper chatRoomJsonMapper, ILinkUpdater linkUpdater)
             : base(responseProxy, sessionProxy)
         {
             _chatRepository = chatRepository;
@@ -52,7 +55,9 @@ namespace Scrawler.Controllers
 
             var listOfConvertedJsonMsgs = _messageDb.GetTopThreeMessages(chatroom.Id);
             // _linkUpdater.UpdateLinks(id);
-            return CrossSiteFriendlyJson(_chatRoomJsonMapper.MapRoomToJson(chatroom.FirebaseId, listOfConvertedJsonMsgs, chatroom.chatroom_name));
+            return
+                CrossSiteFriendlyJson(_chatRoomJsonMapper.MapRoomToJson(chatroom.FirebaseId, listOfConvertedJsonMsgs,
+                    chatroom.chatroom_name));
         }
     }
 }
