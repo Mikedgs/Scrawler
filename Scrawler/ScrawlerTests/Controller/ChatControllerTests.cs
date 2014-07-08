@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
 using Scrawler.Controllers;
+using Scrawler.Models;
 using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
@@ -29,6 +30,32 @@ namespace ScrawlerTests.Controller
 
             // Act
             var result = ClassUnderTest.GetRoomInformation(It.IsAny<string>());
+
+            // Assert
+            Assert.IsInstanceOf(typeof(JsonResult), result);
+        }
+
+        [Test]
+        public void The_room_information_returns_a_Redirect_when_the_chatroom_repo_returns_a_null()
+        {
+            // Arrange
+            var chatRepoMock = GetMock<IRepository<Chatroom>>();
+            var configMock = GetMock<IConfiguration>();
+            configMock.Setup(x => x.GetBaseUrl(It.IsAny<string>())).Returns("url");
+            chatRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom>());
+
+            // Act
+            var result = ClassUnderTest.GetRoomInformation(It.IsAny<string>());
+
+            // Assert
+            Assert.IsInstanceOf(typeof(RedirectResult), result);
+        }
+
+        [Test]
+        public void The_save_message_action_returns_a_json_result()
+        {
+            // Act
+            var result = ClassUnderTest.SaveMessage(It.IsAny<MessageJson>());
 
             // Assert
             Assert.IsInstanceOf(typeof(JsonResult), result);

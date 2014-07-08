@@ -35,7 +35,7 @@ namespace Scrawler.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveMessage(MessageJson msg)
+        public JsonResult SaveMessage(MessageJson msg)
         {
             _messageSaver.SaveMessages(msg);
             return CrossSiteFriendlyJson("Sent");
@@ -47,7 +47,7 @@ namespace Scrawler.Controllers
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
             if (chatroom == null)
             {
-                return Redirect(_configuration.GetBaseUrl(string.Empty));
+                return Redirect(_configuration.GetBaseUrl());
             }
 
             var listOfConvertedJsonMsgs = _messageDb.GetTopThreeMessages(chatroom.Id);

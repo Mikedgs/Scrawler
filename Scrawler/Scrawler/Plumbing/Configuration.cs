@@ -6,9 +6,9 @@ namespace Scrawler.Plumbing
 {
     public class Configuration : IConfiguration
     {
-        public string GetBaseUrl(string hiddenUrl)
+        public string GetBaseUrl(string hiddenUrl = "funroom")
         {
-            return String.Concat(ConfigurationManager.AppSettings["FrontEndBaseUrl"],hiddenUrl);
+            return String.Concat(ConfigurationManager.AppSettings["FrontEndBaseUrl"], hiddenUrl);
         }
 
         public string ConnectionString
