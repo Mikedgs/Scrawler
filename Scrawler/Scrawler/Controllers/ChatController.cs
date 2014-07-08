@@ -38,7 +38,7 @@ namespace Scrawler.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveMessage(MessageJson msg)
+        public JsonResult SaveMessage(MessageJson msg) // TODO BA this is called sometimes when you upvote and sometimes when you want to create. Should there be an Upvote endpoint?
         {
             _messageSaver.SaveMessages(msg);
             return CrossSiteFriendlyJson("Sent");

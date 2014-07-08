@@ -10,8 +10,9 @@ namespace Scrawler.Models.Services
         {
             if (plaintext == string.Empty)
             {
-                throw new ArgumentException();
+                throw new ArgumentException(); // TODO BA be kind. Provide an error message. Handle null too? .IsNullOrWhitespace?
             }
+
             var shaProvider = new SHA256CryptoServiceProvider(); // Hashing algorith
             var hashedValue = shaProvider.ComputeHash(Encoding.Default.GetBytes(plaintext));
                 // takes a byte array, so convert string to byte array

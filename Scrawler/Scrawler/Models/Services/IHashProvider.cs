@@ -2,6 +2,6 @@
 {
     public interface IHashProvider
     {
-        string GetSha(string plaintext);
+        string GetSha(string plaintext); // TODO BA move to tinterfaces
     }
 }

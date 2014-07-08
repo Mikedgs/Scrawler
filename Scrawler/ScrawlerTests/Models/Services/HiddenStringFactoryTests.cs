@@ -6,7 +6,7 @@ using Scrawler.Models.Services;
 namespace ScrawlerTests.Models.Services
 {
     [TestFixture]
-    internal class HiddenStringFactoryTests
+    internal class HiddenStringFactoryTests // TODO BA may as well use TestBase, now you have one...
     {
         [Test]
         public void No_two_strings_are_the_same()
@@ -16,7 +16,7 @@ namespace ScrawlerTests.Models.Services
 
             // Act
             var listOfHiddenStrings = new List<string>();
-            for (int i = 0; i < 1000000; i ++)
+            for (int i = 0; i < 1000000; i ++) // TODO BA 3 seconds to run this (ish)... 
             {
                 listOfHiddenStrings.Add(cut.GenerateHiddenString());
             }

@@ -18,7 +18,7 @@ namespace ScrawlerTests.Models.Services
             ChatroomJson result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName");
 
             // Assert
-            Assert.IsInstanceOf(typeof (ChatroomJson), result);
+            Assert.IsInstanceOf(typeof (ChatroomJson), result); // TODO BA the compiler is already enforcing this... could you assert that the property values have been correctly mapped instead?
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace ScrawlerTests.Models.Services
             var cut = new ChatRoomJsonMapper();
 
             // Act
-            ChatroomJson result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName");
+            ChatroomJson result = cut.MapRoomToJson("id", new List<MessageJson>(), "roomName"); // TODO BA ditto
 
             // Assert
             Assert.IsInstanceOf(typeof (ChatroomJson), result);

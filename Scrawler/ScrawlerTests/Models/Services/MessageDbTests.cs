@@ -14,6 +14,9 @@ namespace ScrawlerTests.Models.Services
     [TestFixture]
     internal class MessageDbTests
     {
+
+        // TODO BA zero messages? null messages?
+
         [Test]
         public void GetTopThreeMessages_correctly_maps_3_messages()
         {

@@ -19,7 +19,7 @@ namespace Scrawler.Models.Services
         public void UpdateLinks(string id)
         {
             var room = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
-            room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString();
+            room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString(); // TODO BA resharper is warning you of something here...
             _chatRepository.Add(room);
             _chatRepository.SaveChanges();
         }

@@ -50,7 +50,7 @@ namespace ScrawlerTests.Models.Services
         {
             // Arrange
             Mock<IHashProvider> hashMock = GetMock<IHashProvider>();
-            Mock<IRepository<Admin>> repoMock = GetMock<IRepository<Admin>>();
+            Mock<IRepository<Admin>> repoMock = GetMock<IRepository<Admin>>(); // TODO BA never used. R# green. AutoMocker will roll default inert mocks by, um, default
             const string hashedPassword = "newpassword";
             hashMock.Setup(x => x.GetSha(It.IsAny<string>())).Returns(hashedPassword);
             var admin = new Admin {UserName = "admin", Password = "password"};

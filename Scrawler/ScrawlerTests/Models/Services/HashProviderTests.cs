@@ -11,7 +11,7 @@ namespace ScrawlerTests.Models.Services
     internal class HashProviderTests : UnitTestBase<HashProvider>
     {
         [Test]
-        public void that_GetSHA_cant_handle_empty_string()
+        public void that_GetSHA_cant_handle_empty_strings()
         {
             // Arrange
             // Act
@@ -52,6 +52,17 @@ namespace ScrawlerTests.Models.Services
             // Arrange
             // Act
             string result = ClassUnderTest.GetSha("password");
+
+            // Assert
+            Assert.That(result.Length, Is.EqualTo(64));
+        }
+
+        [Test]
+        public void a_greater_than_64_character_password_is_all_good()
+        {
+            // Arrange
+            // Act
+            string result = ClassUnderTest.GetSha("password12password12password12password12password12password12andsomethingtomakeitmorethan64");
 
             // Assert
             Assert.That(result.Length, Is.EqualTo(64));

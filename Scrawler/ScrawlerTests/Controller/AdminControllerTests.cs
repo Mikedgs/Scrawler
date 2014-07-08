@@ -38,6 +38,7 @@ namespace ScrawlerTests.Controller
         [Test]
         public void Create_user_post_action_returns_a_RedirectToRouteResult()
         {
+            // TODO BA CreateUser can only ever return a RedirectToROuteResult. Change the return type of CreateUser from ActionResult to RedirectToRouteResult and you won't need this test
             //Arrange
             var sessionMock = GetMock<ISessionProxy>();
             var adminDbMock = GetMock<IAdminRepository>();
@@ -64,6 +65,7 @@ namespace ScrawlerTests.Controller
 
             //Act
             var result = ClassUnderTest.CreateUser(new Admin());
+
             //Assert
             sessionMock.VerifyGet(x => x.IsLoggedIn, Times.Exactly(1));
             adminDbMock.Verify(x => x.SaveUser(It.IsAny<Admin>()), Times.Exactly(1));
@@ -83,8 +85,9 @@ namespace ScrawlerTests.Controller
 
             //Act
             var result = ClassUnderTest.CreateUser();
+            
             //Assert
-            sessionMock.VerifyGet(x => x.IsLoggedIn, Times.Exactly(1));
+            sessionMock.VerifyGet(x => x.IsLoggedIn, Times.Exactly(1)); // TODO BA this assertion doesn't match the name of the test
             Assert.IsInstanceOf(typeof (ViewResult), result);
         }
     }

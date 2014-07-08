@@ -21,7 +21,7 @@ namespace Scrawler.Models.Services
             return result;
         }
 
-        protected int GetRandomSeed()
+        protected int GetRandomSeed() // TODO BA private, unused outside of this class. Can be a getter
         {
             using (var randomGenerator = new RNGCryptoServiceProvider())
             {

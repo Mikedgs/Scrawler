@@ -17,20 +17,20 @@ namespace ScrawlerTests.Models.Services
         public void MsgJsonToMessage_correctly_maps_json_to_message_correctly()
         {
             // Arrange
-
+            const string body = "content";
             var mockRepo = new Mock<IRepository<Chatroom>>();
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>()))
                 .Returns(new List<Chatroom> {new Chatroom {Id = 1}});
             var cut = new MessageJsonToMessageMapper(mockRepo.Object);
-            var jsonMessage = new MessageJson(It.IsAny<int>(), "content", new DateTime(), It.IsAny<string>(), 1,
+            var jsonMessage = new MessageJson(It.IsAny<int>(), body, new DateTime(), It.IsAny<string>(), 1,
                 It.IsAny<string>());
 
             // Act
             Message message = cut.MapToMessage(jsonMessage);
 
             // Assert
-            Assert.That(message.Body, Is.EqualTo("content"));
-            Assert.That(message.Votes, Is.EqualTo(It.IsAny<int>()));
+            Assert.That(message.Body, Is.EqualTo(body)); 
+            Assert.That(message.Votes, Is.EqualTo(It.IsAny<int>())); // TODO BA for this tyoe of test I would suggest using a real int
         }
 
         [Test]
@@ -47,11 +47,11 @@ namespace ScrawlerTests.Models.Services
             Message result = cut.MapToMessage(jsonMessage);
 
             // Assert
-            Assert.That(result.Body, Is.EqualTo("content"));
+            Assert.That(result.Body, Is.EqualTo("content")); // TODO BA use a constant
         }
 
         [Test]
-        public void that_MapRoomToJson_returns_a_chatRoomJson()
+        public void that_MapRoomToJson_returns_a_chatRoomJson() // TODO BA compiler already tells you this
         {
             // Arrange
             var mockRepo = new Mock<IRepository<Chatroom>>();

@@ -22,11 +22,14 @@ namespace ScrawlerTests.Models.Services
         [TestFixtureSetUp]
         public void setup_save_messages_tests()
         {
+            // Arrange
             _message = new MessageJson(1, "content", DateTime.Now, "username", 0, "id");
             _messageRepoMock = GetMock<IRepository<Message>>();
             _mapper = GetMock<IMessageJsonToMessageMapper>();
             _messageRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Message, bool>>>())).Returns(new List<Message>());
             _mapper.Setup(x => x.MapToMessage(It.IsAny<MessageJson>())).Returns(new Message {Votes = 1});
+
+            // Act
             ClassUnderTest.SaveMessages(_message);
         }
 

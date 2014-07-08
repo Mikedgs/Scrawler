@@ -41,7 +41,8 @@ namespace Scrawler.Controllers
             }
         }
 
-        protected void CheckIfLoggedIn()
+        // TODO BA rename? RedirectIfNotLoggedIn?
+        protected void CheckIfLoggedIn() // TODO BA pull this out of the base class and stick it in a LoginChecker, so you can write tests like "If_the_login_checker_says_the_user_is_not_logged_in_the_secure_thing_that_shouldnt_get_called_doesnt_get_called
         {
             if (!_sessionProxy.IsLoggedIn)
             {
