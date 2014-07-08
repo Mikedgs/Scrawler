@@ -14,7 +14,7 @@ namespace Scrawler.Plumbing
         {
             get
             {
-                return (string) HttpContext.Current.Session["loggedIn"] != "true";
+                return (string)HttpContext.Current.Session["loggedIn"] == "true";
             }
         }
 

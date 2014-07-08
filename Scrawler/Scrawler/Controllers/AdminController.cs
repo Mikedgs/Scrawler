@@ -29,10 +29,6 @@ namespace Scrawler.Controllers
         {
             ValidateInput(admin);
 
-            //if (!_adminRepository.IsAdmin(admin.UserName, admin.Password))
-            //{
-            //    RedirectToLogin();
-            //}
             var validUser = _adminRepository.GetAdmin(admin);
             if (validUser == null)
             {

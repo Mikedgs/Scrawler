@@ -45,7 +45,7 @@ namespace Scrawler.Controllers
         {
             if (!_sessionProxy.IsLoggedIn)
             {
-                RedirectToLogin();
+                RedirectToLogin().ExecuteResult(ControllerContext);
             }
         }
     }
