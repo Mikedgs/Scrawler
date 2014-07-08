@@ -5,7 +5,7 @@ using Mindscape.LightSpeed;
 
 namespace Scrawler.Plumbing.Interfaces
 {
-    public interface IRepository<T> where T : Entity<int>
+    public interface IRepository<T> : IDisposable where T : Entity<int>
     {
         IList<T> Get(Expression<Func<T, bool>> predicate);
         IList<T> GetAll();
@@ -14,6 +14,5 @@ namespace Scrawler.Plumbing.Interfaces
         void Delete(T entity);
         T FindById(int id);
         void SaveChanges();
-        void Dispose();
     }
 }

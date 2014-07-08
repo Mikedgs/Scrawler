@@ -1,60 +1,66 @@
 ﻿using System.Web.Mvc;
-using System.Web.Routing;
 using Scrawler.Models;
+using Scrawler.Models.Interfaces;
 using Scrawler.Plumbing;
+using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : ScrawlerController
     {
-        private readonly Repository<Admin> _adminRepository = new Repository<Admin>();
+        private readonly ISessionProxy _sessionProxy;
+        private readonly IAdminRepository _adminRepository;
+
+        public AdminController(ISessionProxy sessionProxy, IAdminRepository adminDb, IResponseProxy responseProxy)
+            : base(responseProxy,sessionProxy)
+        {
+            _sessionProxy = sessionProxy;
+            _adminRepository = adminDb;
+        }
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Login(bool validUser = true)
         {
-            return View(new Admin());
+            return View(new LoginViewModel(new Admin(), validUser));
         }
 
         [HttpPost]
         public ActionResult Login(Admin admin)
         {
-            Admin validUser = new UserModel().Validate(admin);
-            if (validUser != null)
+            ValidateInput(admin);
+
+            var validUser = _adminRepository.GetAdmin(admin);
+            if (validUser == null)
             {
-                Session["loggedIn"] = "true";
-                Session["UserId"] = validUser.Id;
-                Session["UserName"] = validUser.UserName;
-                return Redirect("/ControlPanel/index");
+                RedirectToLogin();
             }
-            var rvDic = new RouteValueDictionary { { "validUser", false } };
-            return RedirectToAction("Login", "Admin", rvDic);
+
+            _sessionProxy.AddAdminToSession(validUser);
+            return RedirectToControlPanel();
         }
 
         [HttpGet]
         public ActionResult CreateUser()
         {
-            if (Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
-            var user = new Admin();
-            return View(user);
+            CheckIfLoggedIn();
+            return View(new Admin());
         }
 
         [HttpPost]
-        public ActionResult CreateUser(Admin addNewUser)
+        public ActionResult CreateUser(Admin newUser)
         {
-            if (Session["loggedIn"] != "true") return RedirectToAction("Index", "ControlPanel");
-            addNewUser.Password = new HashProvider().GetMd5Hash(addNewUser.Password);
-            _adminRepository.Add(addNewUser);
-            _adminRepository.SaveChanges();
-            Session["loggedIn"] = "true";
-            Session["UserId"] = addNewUser.Id;
-            return RedirectToAction("Index", "ControlPanel"); //Redirect to user page
+            CheckIfLoggedIn();
+            _adminRepository.SaveUser(newUser);
+            _sessionProxy.AddAdminToSession(newUser);
+            return RedirectToControlPanel();
         }
 
         [HttpGet]
         public ActionResult Logout()
         {
             Session.Clear();
-            return Redirect("/ControlPanel/Index");
+            return RedirectToControlPanel();
+
         }
     }
 }

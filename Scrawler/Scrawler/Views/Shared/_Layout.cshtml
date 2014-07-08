@@ -22,13 +22,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "ControlPanel")</li>
-                    @if (Session["loggedIn"] == "true")
+                    @if ((string)Session["loggedIn"] == "true")
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Admin")</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Index", "Admin")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Admin")</li>
                     }
                 </ul>
             </div>
