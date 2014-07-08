@@ -9,13 +9,13 @@ namespace Scrawler.Controllers
     public class AdminController : ScrawlerController
     {
         private readonly ISessionProxy _sessionProxy;
-        private readonly IAdminRepository _adminDb;
+        private readonly IAdminRepository _adminRepository;
 
         public AdminController(ISessionProxy sessionProxy, IAdminRepository adminDb, IResponseProxy responseProxy)
             : base(responseProxy,sessionProxy)
         {
             _sessionProxy = sessionProxy;
-            _adminDb = adminDb;
+            _adminRepository = adminDb;
         }
 
         [HttpGet]
@@ -29,7 +29,11 @@ namespace Scrawler.Controllers
         {
             ValidateInput(admin);
 
-            var validUser = _adminDb.GetAdmin(admin);
+            //if (!_adminRepository.IsAdmin(admin.UserName, admin.Password))
+            //{
+            //    RedirectToLogin();
+            //}
+            var validUser = _adminRepository.GetAdmin(admin);
             if (validUser == null)
             {
                 RedirectToLogin();
@@ -50,7 +54,7 @@ namespace Scrawler.Controllers
         public ActionResult CreateUser(Admin newUser)
         {
             CheckIfLoggedIn();
-            _adminDb.SaveUser(newUser);
+            _adminRepository.SaveUser(newUser);
             _sessionProxy.AddAdminToSession(newUser);
             return RedirectToControlPanel();
         }
