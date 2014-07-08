@@ -99,7 +99,6 @@
     <Compile Include="Models\Services\ChatRoomJSONMapperTests.cs" />
     <Compile Include="Models\Services\HashProviderTests.cs" />
     <Compile Include="Models\Services\HiddenStringFactoryTests.cs" />
-    <Compile Include="Models\Services\LinkUpdaterTests.cs" />
     <Compile Include="Models\Services\MessageDbTests.cs" />
     <Compile Include="Models\Services\MessageJsonToMessageMapperTests.cs" />
     <Compile Include="Models\Services\MessageMapperToJsonTests.cs" />
