@@ -12,27 +12,34 @@ namespace Scrawler.Plumbing
     public class Repository<T> : IRepository<T> where T : Entity<int>
     {
         private readonly ScrawlerUnitOfWork _unitOfWork;
+        private readonly LightSpeedContext<ScrawlerUnitOfWork> _context;
 
         public Repository(IConfiguration configuration)
         {
-            var context = new LightSpeedContext<ScrawlerUnitOfWork>
+            _context = new LightSpeedContext<ScrawlerUnitOfWork>
             {
                 ConnectionString = configuration.ConnectionString,
                 IdentityMethod = IdentityMethod.IdentityColumn,
                 QuoteIdentifiers = true,
                 Logger = new TraceLogger()
             };
-            _unitOfWork = context.CreateUnitOfWork();
+            _unitOfWork = _context.CreateUnitOfWork();
         }
 
         public IList<T> Get(Expression<Func<T, bool>> predicate)
         {
-            return _unitOfWork.Query<T>().Where(predicate).ToList();
+            using (var unitOfWork = _context.CreateUnitOfWork())
+            {
+                return unitOfWork.Query<T>().Where(predicate).ToList();
+            }
         }
 
         public IList<T> GetAll()
         {
-            return _unitOfWork.Find<T>();
+            using (var unitOfWork = _context.CreateUnitOfWork())
+            {
+                return unitOfWork.Find<T>();
+            }
         }
 
         public void Add(T entity)
@@ -44,7 +51,7 @@ namespace Scrawler.Plumbing
         }
 
         public void DeleteAll()
-        {
+        {  
             foreach (var entity in GetAll())
             {
                 Delete(entity);
@@ -53,17 +60,24 @@ namespace Scrawler.Plumbing
 
         public void Delete(T entity)
         {
-            _unitOfWork.Remove(entity);
+            using (var unitOfWork = _context.CreateUnitOfWork())
+            {
+                unitOfWork.Remove(entity);
+            }
         }
 
         public T FindById(int id)
         {
-            return _unitOfWork.FindById<T>(id);
+            using (var unitOfWork = _context.CreateUnitOfWork())
+            {
+                return unitOfWork.FindById<T>(id);
+            }
         }
 
         public void SaveChanges()
         {
             _unitOfWork.SaveChanges();
+            Dispose();
         }
 
         public void Dispose()
