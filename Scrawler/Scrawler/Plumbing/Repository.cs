@@ -12,22 +12,25 @@ namespace Scrawler.Plumbing
     public class Repository<T> : IRepository<T> where T : Entity<int>
     {
         private readonly ScrawlerUnitOfWork _unitOfWork;
+        private LightSpeedContext<ScrawlerUnitOfWork> _context;
 
         public Repository(IConfiguration configuration)
         {
-            var context = new LightSpeedContext<ScrawlerUnitOfWork>
+            _context = new LightSpeedContext<ScrawlerUnitOfWork>
             {
                 ConnectionString = configuration.ConnectionString,
                 IdentityMethod = IdentityMethod.IdentityColumn,
                 QuoteIdentifiers = true,
                 Logger = new TraceLogger()
             };
-            _unitOfWork = context.CreateUnitOfWork();
         }
 
         public IList<T> Get(Expression<Func<T, bool>> predicate)
         {
-            return _unitOfWork.Query<T>().Where(predicate).ToList();
+            using (_unitOfWork = _context.CreateUnitOfWork())
+            {
+                return _unitOfWork.Query<T>().Where(predicate).ToList();
+            }
         }
 
         public IList<T> GetAll()
