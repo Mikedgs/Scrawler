@@ -101,6 +101,7 @@
     <Compile Include="Models\Services\MessageDbTests.cs" />
     <Compile Include="Models\Services\MessageJsonToMessageMapperTests.cs" />
     <Compile Include="Models\Services\MessageMapperToJsonTests.cs" />
+    <Compile Include="Plumbing\CanWeBreakTheRepository.cs" />
     <Compile Include="Plumbing\UnitTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -3,6 +3,6 @@
     public interface IConfiguration
     {
         string GetBaseUrl(string hiddenUrl);
-        string GetConnectionString();
+        string ConnectionString { get; }
     }
 }

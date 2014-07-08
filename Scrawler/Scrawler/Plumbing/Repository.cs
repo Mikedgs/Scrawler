@@ -12,13 +12,12 @@ namespace Scrawler.Plumbing
     public class Repository<T> : IRepository<T> where T : Entity<int>
     {
         private readonly ScrawlerUnitOfWork _unitOfWork;
-        private readonly IConfiguration _configuration = new Configuration();
 
-        public Repository()
+        public Repository(IConfiguration configuration)
         {
             var context = new LightSpeedContext<ScrawlerUnitOfWork>
             {
-                ConnectionString = _configuration.GetConnectionString(),
+                ConnectionString = configuration.ConnectionString,
                 IdentityMethod = IdentityMethod.IdentityColumn,
                 QuoteIdentifiers = true,
                 Logger = new TraceLogger()

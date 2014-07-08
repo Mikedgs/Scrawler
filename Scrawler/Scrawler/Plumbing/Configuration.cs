@@ -11,9 +11,9 @@ namespace Scrawler.Plumbing
             return String.Concat(ConfigurationManager.AppSettings["FrontEndBaseUrl"],hiddenUrl);
         }
 
-        public string GetConnectionString()
+        public string ConnectionString
         {
-            return ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            get { return ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
         }
     }
 }
