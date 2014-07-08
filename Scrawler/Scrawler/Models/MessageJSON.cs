@@ -14,6 +14,11 @@ namespace Scrawler.Models
             Votes = votes;
         }
 
+        public MessageJson()
+        {
+            
+        }
+
         public string FirebaseId { get; set; }
         public string MessageId { get; set; }
         public int Id { get; private set; }      
