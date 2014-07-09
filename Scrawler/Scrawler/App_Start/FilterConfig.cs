@@ -2,7 +2,7 @@
 
 namespace Scrawler
 {
-    public class FilterConfig // TODO BA is this used?
+    public class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {

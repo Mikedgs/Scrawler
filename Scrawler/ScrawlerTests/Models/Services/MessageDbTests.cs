@@ -14,9 +14,6 @@ namespace ScrawlerTests.Models.Services
     [TestFixture]
     internal class MessageDbTests
     {
-
-        // TODO BA zero messages? null messages?
-
         [Test]
         public void GetTopThreeMessages_correctly_maps_3_messages()
         {
@@ -90,6 +87,38 @@ namespace ScrawlerTests.Models.Services
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void GetTopThreeMessages_handles_when_zero_messages_are_returned_from_repo()
+        {
+            // Arrange
+            var messageList = new List<Message>();
+            var mockRepo = new Mock<IRepository<Message>>();
+            mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
+            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
+
+            // Act
+            var result = cut.GetTopThreeMessages(1);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GetTopThreeMessages_handles_when_null_messages_are_returned_from_repo()
+        {
+            // Arrange
+            var messageList = new List<Message>() { null };
+            var mockRepo = new Mock<IRepository<Message>>();
+            mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Message, bool>>>()))).Returns(messageList);
+            var cut = new MessageRepository(mockRepo.Object, new MessageMapperToJson());
+
+            // Act
+            var result = cut.GetTopThreeMessages(1);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(0));
         }
     }
 }

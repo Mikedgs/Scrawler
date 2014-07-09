@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Linq;
-using Scrawler.Models.Services.Interfaces;
+using Scrawler.Models.Mappers.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Models.Mappers
 {
-    public class MessageJsonToMessageMapper : IMessageJsonToMessageMapper
+    public class MessageFactory : IMessageFactory
     {
         private const int InitialNumberOfVotes = 0;
         private readonly IRepository<Chatroom> _chatRoomRepository;
 
-        public MessageJsonToMessageMapper(IRepository<Chatroom> chatRoomRepository) // TODO BA mappers don't typically have services doing work for them. Is this a factory?
+        public MessageFactory(IRepository<Chatroom> chatRoomRepository)
         {
             _chatRoomRepository = chatRoomRepository;
         }
 
-        public Message MapToMessage(MessageJson msgJson) // ... so this method is CreateFromJsonMessage or something?
+        public Message CreateMessageFromJsonMessage(MessageJson msgJson)
         {
             return new Message
             {

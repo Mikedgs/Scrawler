@@ -19,7 +19,6 @@ namespace ScrawlerTests.Controller
             var adminDbMock = GetMock<IAdminRepository>();
             var sessionMock = GetMock<ISessionProxy>();
 
-            sessionMock.Setup(x => x.ValidateInput(It.IsAny<Admin>())).Returns(true);
             adminDbMock.Setup(x => x.GetAdmin(It.IsAny<Admin>())).Returns(new Admin());
             sessionMock.Setup(x => x.AddAdminToSession(It.IsAny<Admin>()));
             //Act
@@ -27,7 +26,6 @@ namespace ScrawlerTests.Controller
 
             //Assert
             adminDbMock.Verify(x => x.GetAdmin(It.IsAny<Admin>()), Times.Exactly(1));
-            sessionMock.Verify(x => x.ValidateInput(It.IsAny<Admin>()), Times.Exactly(1));
             sessionMock.Verify(x => x.AddAdminToSession(It.IsAny<Admin>()), Times.Exactly(1));
         }
     }
@@ -36,59 +34,21 @@ namespace ScrawlerTests.Controller
     internal class AdminControllerTests_create_user_post_action_scenario : UnitTestBase<AdminController>
     {
         [Test]
-        public void Create_user_post_action_returns_a_RedirectToRouteResult()
-        {
-            // TODO BA CreateUser can only ever return a RedirectToROuteResult. Change the return type of CreateUser from ActionResult to RedirectToRouteResult and you won't need this test
-            //Arrange
-            var sessionMock = GetMock<ISessionProxy>();
-            var adminDbMock = GetMock<IAdminRepository>();
-            sessionMock.Setup(x => x.IsLoggedIn).Returns(true);
-            adminDbMock.Setup(x => x.SaveUser(It.IsAny<Admin>()));
-            sessionMock.Setup(x => x.AddAdminToSession(It.IsAny<Admin>()));
-
-            //Act
-            var result = ClassUnderTest.CreateUser(new Admin());
-
-            //Assert
-            Assert.That(result, Is.TypeOf(typeof (RedirectToRouteResult)));
-        }
-
-        [Test]
         public void Create_user_post_action_hits_all_methods_inside_once()
         {
             //Arrange
             var sessionMock = GetMock<ISessionProxy>();
             var adminDbMock = GetMock<IAdminRepository>();
             sessionMock.Setup(x => x.IsLoggedIn).Returns(true);
-            adminDbMock.Setup(x => x.SaveUser(It.IsAny<Admin>()));
+            adminDbMock.Setup(x => x.SaveAdmin(It.IsAny<Admin>()));
             sessionMock.Setup(x => x.AddAdminToSession(It.IsAny<Admin>()));
 
             //Act
-            var result = ClassUnderTest.CreateUser(new Admin());
+            ClassUnderTest.CreateUser(new Admin());
 
             //Assert
-            sessionMock.VerifyGet(x => x.IsLoggedIn, Times.Exactly(1));
-            adminDbMock.Verify(x => x.SaveUser(It.IsAny<Admin>()), Times.Exactly(1));
+            adminDbMock.Verify(x => x.SaveAdmin(It.IsAny<Admin>()), Times.Exactly(1));
             sessionMock.Verify(x => x.AddAdminToSession(It.IsAny<Admin>()), Times.Exactly(1));
-        }
-    }
-
-    [TestFixture]
-    internal class AdminControllerTests_create_user_get_action_scenario : UnitTestBase<AdminController>
-    {
-        [Test]
-        public void Create_user_get_action_returns_a_ViewResult()
-        {
-            //Arrange
-            var sessionMock = GetMock<ISessionProxy>();
-            sessionMock.Setup(x => x.IsLoggedIn).Returns(true);
-
-            //Act
-            var result = ClassUnderTest.CreateUser();
-            
-            //Assert
-            sessionMock.VerifyGet(x => x.IsLoggedIn, Times.Exactly(1)); // TODO BA this assertion doesn't match the name of the test
-            Assert.IsInstanceOf(typeof (ViewResult), result);
         }
     }
 }

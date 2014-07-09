@@ -1,6 +1,6 @@
 using Scrawler.Plumbing;
 
-namespace Scrawler.Models.Services.Interfaces
+namespace Scrawler.Models.Mappers.Interfaces
 {
     public interface IMessageMapperToJson
     {

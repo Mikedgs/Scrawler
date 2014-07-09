@@ -10,7 +10,11 @@ namespace Scrawler.Models.Services
         {
             if (plaintext == string.Empty)
             {
-                throw new ArgumentException(); // TODO BA be kind. Provide an error message. Handle null too? .IsNullOrWhitespace?
+                throw new ArgumentException("Cannot hash an empty string");
+            }
+            if (plaintext == null)
+            {
+                throw new ArgumentNullException();
             }
 
             var shaProvider = new SHA256CryptoServiceProvider(); // Hashing algorith

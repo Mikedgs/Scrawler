@@ -6,6 +6,7 @@ using Moq;
 using NUnit.Framework;
 using Scrawler.Controllers;
 using Scrawler.Models;
+using Scrawler.Models.Mappers.Interfaces;
 using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
@@ -58,12 +59,14 @@ namespace ScrawlerTests.Controller
         {
             // Arrange
             var saverMock = GetMock<IMessageSaver>();
+            var messageRepo = GetMock<IRepository<Message>>();
+            messageRepo.Setup(x => x.Get(It.IsAny<Expression<Func<Message, bool>>>())).Returns(new List<Message>());
 
             // Act
             ClassUnderTest.SaveMessage(It.IsAny<MessageJson>());
 
             // Assert
-            saverMock.Verify(x => x.SaveMessages(It.IsAny<MessageJson>()), Times.Once);
+            saverMock.Verify(x => x.SaveMessage(It.IsAny<MessageJson>()), Times.Once);
         }
 
         [Test]

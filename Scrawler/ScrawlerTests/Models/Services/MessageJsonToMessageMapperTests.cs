@@ -21,51 +21,34 @@ namespace ScrawlerTests.Models.Services
             var mockRepo = new Mock<IRepository<Chatroom>>();
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>()))
                 .Returns(new List<Chatroom> {new Chatroom {Id = 1}});
-            var cut = new MessageJsonToMessageMapper(mockRepo.Object);
-            var jsonMessage = new MessageJson(It.IsAny<int>(), body, new DateTime(), It.IsAny<string>(), 1,
+            var cut = new MessageFactory(mockRepo.Object);
+            var jsonMessage = new MessageJson(1, body, new DateTime(), It.IsAny<string>(), 1,
                 It.IsAny<string>());
 
             // Act
-            Message message = cut.MapToMessage(jsonMessage);
+            var message = cut.CreateMessageFromJsonMessage(jsonMessage);
 
             // Assert
             Assert.That(message.Body, Is.EqualTo(body)); 
-            Assert.That(message.Votes, Is.EqualTo(It.IsAny<int>())); // TODO BA for this tyoe of test I would suggest using a real int
+            Assert.That(message.Votes, Is.EqualTo(0));
         }
 
         [Test]
         public void that_MapRoomToJson_correctly_maps_a_room_to_Json()
         {
             // Arrange
+            const string body = "content";
             var mockRepo = new Mock<IRepository<Chatroom>>();
             mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())))
                 .Returns(new List<Chatroom> {new Chatroom {Id = 1}});
-            var cut = new MessageJsonToMessageMapper(mockRepo.Object);
-            var jsonMessage = new MessageJson(19, "content", new DateTime(), "userName", 1, It.IsAny<string>());
+            var cut = new MessageFactory(mockRepo.Object);
+            var jsonMessage = new MessageJson(19, body, new DateTime(), "userName", 1, It.IsAny<string>());
 
             // Act
-            Message result = cut.MapToMessage(jsonMessage);
+            Message result = cut.CreateMessageFromJsonMessage(jsonMessage);
 
             // Assert
-            Assert.That(result.Body, Is.EqualTo("content")); // TODO BA use a constant
-        }
-
-        [Test]
-        public void that_MapRoomToJson_returns_a_chatRoomJson() // TODO BA compiler already tells you this
-        {
-            // Arrange
-            var mockRepo = new Mock<IRepository<Chatroom>>();
-            mockRepo.Setup((x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())))
-                .Returns(new List<Chatroom> {new Chatroom {Id = 1}});
-            var cut = new MessageJsonToMessageMapper(mockRepo.Object);
-
-            // Act
-            Message result =
-                cut.MapToMessage(new MessageJson(It.IsAny<int>(), "content", new DateTime(), It.IsAny<string>(), 1,
-                    It.IsAny<string>()));
-
-            // Assert
-            Assert.That(result, Is.InstanceOf<Message>());
+            Assert.That(result.Body, Is.EqualTo(body));
         }
     }
 }

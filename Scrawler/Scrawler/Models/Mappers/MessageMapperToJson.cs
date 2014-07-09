@@ -1,13 +1,14 @@
-﻿using Scrawler.Models.Services.Interfaces;
+﻿using Scrawler.Models.Mappers.Interfaces;
+using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 
 namespace Scrawler.Models.Mappers
 {
     public class MessageMapperToJson : IMessageMapperToJson
     {
-        public MessageJson MapToJson(Message msg) // TODO BA msg is a food additive. message is a Message.
+        public MessageJson MapToJson(Message message)
         {
-            return new MessageJson(msg.Id, msg.Body, msg.CreatedAt, msg.Username, msg.Votes, msg.MessageId);
+            return new MessageJson(message.Id, message.Body, message.CreatedAt, message.Username, message.Votes, message.MessageId);
         }
     }
 }

@@ -2,23 +2,23 @@
 using System.Linq;
 using NUnit.Framework;
 using Scrawler.Models.Services;
+using ScrawlerTests.Plumbing;
 
 namespace ScrawlerTests.Models.Services
 {
     [TestFixture]
-    internal class HiddenStringFactoryTests // TODO BA may as well use TestBase, now you have one...
+    internal class HiddenStringFactoryTests : UnitTestBase<HiddenStringFactory>
     {
         [Test]
         public void No_two_strings_are_the_same()
         {
             // Arrange
-            var cut = new HiddenStringFactory();
 
             // Act
             var listOfHiddenStrings = new List<string>();
-            for (int i = 0; i < 1000000; i ++) // TODO BA 3 seconds to run this (ish)... 
+            for (var i = 0; i < 100000; i ++)
             {
-                listOfHiddenStrings.Add(cut.GenerateHiddenString());
+                listOfHiddenStrings.Add(ClassUnderTest.GenerateHiddenString());
             }
             var listOfDistinctStrings = listOfHiddenStrings.Distinct();
 
@@ -30,10 +30,9 @@ namespace ScrawlerTests.Models.Services
         public void that_GenerateHiddenString_returns_a_10_character_string()
         {
             // Arrange
-            var cut = new HiddenStringFactory();
 
             // Act
-            var hiddenString = cut.GenerateHiddenString();
+            var hiddenString = ClassUnderTest.GenerateHiddenString();
 
             // Assert
             Assert.That(hiddenString.Length, Is.EqualTo(10));

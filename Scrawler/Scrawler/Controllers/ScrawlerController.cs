@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Scrawler.Models;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
 
@@ -8,12 +9,10 @@ namespace Scrawler.Controllers
     public abstract class ScrawlerController : Controller
     {
         private readonly IResponseProxy _responseProxy;
-        private readonly ISessionProxy _sessionProxy;
-
-        protected ScrawlerController(IResponseProxy responseProxy, ISessionProxy sessionProxy)
+        
+        protected ScrawlerController(IResponseProxy responseProxy)
         {
             _responseProxy = responseProxy;
-            _sessionProxy = sessionProxy;
         }
 
         protected JsonResult CrossSiteFriendlyJson(object data)
@@ -23,7 +22,7 @@ namespace Scrawler.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        protected ActionResult RedirectToLogin()
+        public ActionResult RedirectToLogin()
         {
             return RedirectToAction("Login", "Admin", new RouteValueDictionary {{"validUser", false}});
         }
@@ -35,18 +34,9 @@ namespace Scrawler.Controllers
 
         protected void ValidateInput(Admin admin)
         {
-            if (!_sessionProxy.ValidateInput(admin))
+            if (!admin.HasAllTheLoginStuffItNeeds())
             {
                 RedirectToLogin();
-            }
-        }
-
-        // TODO BA rename? RedirectIfNotLoggedIn?
-        protected void CheckIfLoggedIn() // TODO BA pull this out of the base class and stick it in a LoginChecker, so you can write tests like "If_the_login_checker_says_the_user_is_not_logged_in_the_secure_thing_that_shouldnt_get_called_doesnt_get_called
-        {
-            if (!_sessionProxy.IsLoggedIn)
-            {
-                RedirectToLogin().ExecuteResult(ControllerContext);
             }
         }
     }
