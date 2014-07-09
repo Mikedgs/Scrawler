@@ -39,22 +39,6 @@ namespace ScrawlerTests.Controller
         }
 
         [Test]
-        public void The_room_information_returns_a_Redirect_when_the_chatroom_repo_returns_a_null()
-        {
-            // Arrange
-            var chatRepoMock = GetMock<IRepository<Chatroom>>();
-            var configMock = GetMock<IConfiguration>();
-            configMock.Setup(x => x.GetSplashUrl()).Returns("url");
-            chatRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom>());
-
-            // Act
-            var result = ClassUnderTest.GetRoomInformation(It.IsAny<string>());
-
-            // Assert
-            Assert.IsInstanceOf(typeof (RedirectResult), result);
-        }
-
-        [Test]
         public void The_save_message_action_calls_save_method_on_message_saver()
         {
             // Arrange
