@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Scrawler.Models;
 using Scrawler.Models.Interfaces;
 using Scrawler.Models.Services.Interfaces;
@@ -55,14 +57,14 @@ namespace Scrawler.Controllers
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
             if (chatroom == null)
             {
-                return CrossSiteFriendlyRedirect(_configuration.GetSplashUrl());
+                return CrossSiteFriendlyJson(new ChatroomJson(null, null, null, "Invalid", _configuration.GetSplashUrl()));
             }
 
             var listOfConvertedJsonMsgs = _messageDb.GetTopThreeMessages(chatroom.Id);
 
             return
                 CrossSiteFriendlyJson(new ChatroomJson(chatroom.FirebaseId, listOfConvertedJsonMsgs,
-                    chatroom.chatroom_name));
+                    chatroom.chatroom_name, "OK", null));
         }
     }
 }
