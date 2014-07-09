@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Scrawler.Models.Interfaces;
+using Scrawler.Models.Mappers.Interfaces;
 using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
@@ -20,7 +21,11 @@ namespace Scrawler.Models.Services
 
         public List<MessageJson> GetTopThreeMessages(int chatroomId)
         {
-            var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == chatroomId).ToList();
+            var listOfImmortalMsgs = _messageRepository.Get(x => x.ChatroomId == chatroomId).DefaultIfEmpty().ToList();
+            if (listOfImmortalMsgs[0] == null)
+            {
+                return new List<MessageJson>();
+            }
             var sortedlistofImortalMsgs = listOfImmortalMsgs.OrderByDescending(x => x.Votes).ToList();
             var topThree = sortedlistofImortalMsgs.Take(3).ToList();
             return topThree.Select(msg => _messageMapperToJson.MapToJson(msg)).ToList();

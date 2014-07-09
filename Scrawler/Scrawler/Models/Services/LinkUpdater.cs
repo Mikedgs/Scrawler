@@ -19,6 +19,10 @@ namespace Scrawler.Models.Services
         public void UpdateLinks(string id)
         {
             var room = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
+            if (room == null)
+            {
+                return;
+            }
             room.HiddenUrl = _hiddenStringFactory.GenerateHiddenString();
             _chatRepository.Add(room);
             _chatRepository.SaveChanges();

@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using Scrawler.Models;
 using Scrawler.Plumbing.Interfaces;
 
 namespace Scrawler.Plumbing
@@ -15,11 +16,6 @@ namespace Scrawler.Plumbing
             get { return (string) HttpContext.Current.Session["loggedIn"] == "true"; }
         }
 
-        public bool ValidateInput(Admin admin)
-        {
-            return admin.UserName != null && admin.Password != null;
-        }
-
         public void AddAdminToSession(Admin admin)
         {
             AddToSession("loggedIn", "true");
@@ -27,4 +23,6 @@ namespace Scrawler.Plumbing
             AddToSession("UserId", admin.Id);
         }
     }
+
+    
 }

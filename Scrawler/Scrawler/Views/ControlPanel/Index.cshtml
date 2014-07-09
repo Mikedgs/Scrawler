@@ -12,6 +12,7 @@
 <ul>
     @foreach (Chatroom room in @Model)
     {
+        // TODO BA try to avoid hardcoded URLs - site can then work locally / in test as well as in prod
         <li>RoomId: @room.Id, Room FireBase ID: @room.FirebaseId, Room Hidden URL Key:@room.HiddenUrl <a href="http://scrawler.azurewebsites.net/chat/index?id=@room.Id">Link</a> <a href="/ControlPanel/Delete?Id=@room.Id">Delete</a></li>
     }
 </ul>

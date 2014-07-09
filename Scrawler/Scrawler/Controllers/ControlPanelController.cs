@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
-using Scrawler.Models.Services;
 using Scrawler.Models.Services.Interfaces;
 using Scrawler.Plumbing;
 using Scrawler.Plumbing.Interfaces;
@@ -12,18 +10,20 @@ namespace Scrawler.Controllers
     {
         private readonly IRepository<Chatroom> _chatRepository;
         private readonly IHiddenStringFactory _stringFactory;
+        private readonly ILoginChecker _loginChecker;
 
-        public ControlPanelController(IResponseProxy responseProxy, ISessionProxy sessionProxy,
+        public ControlPanelController(IResponseProxy responseProxy, 
             IRepository<Chatroom> chatRepository,
-            IHiddenStringFactory stringFactory, LinkUpdater dBrefresh) : base(responseProxy, sessionProxy)
+            IHiddenStringFactory stringFactory, ILoginChecker loginChecker) : base(responseProxy)
         {
             _chatRepository = chatRepository;
             _stringFactory = stringFactory;
+            _loginChecker = loginChecker;
         }
 
         public ActionResult Index()
         {
-            CheckIfLoggedIn();
+            _loginChecker.RedirectIfNotLoggedIn(this);
             var listofChatrooms = _chatRepository.GetAll();
             return View(listofChatrooms);
         }
@@ -31,7 +31,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult AddRoom()
         {
-            CheckIfLoggedIn();
+            _loginChecker.RedirectIfNotLoggedIn(this);
             var room = new Chatroom();
             return View(room);
         }
@@ -39,7 +39,7 @@ namespace Scrawler.Controllers
         [HttpPost]
         public ActionResult AddRoom(Chatroom room)
         {
-            CheckIfLoggedIn();
+            _loginChecker.RedirectIfNotLoggedIn(this);
             room.HiddenUrl = _stringFactory.GenerateHiddenString();
             room.CreatedAt = DateTime.Now;
 
@@ -52,7 +52,7 @@ namespace Scrawler.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            CheckIfLoggedIn();
+            _loginChecker.RedirectIfNotLoggedIn(this);
             var room = _chatRepository.FindById(id);
             _chatRepository.Delete(room);
             _chatRepository.SaveChanges();

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Scrawler.Models;
 using Scrawler.Models.Interfaces;
 using Scrawler.Models.Services.Interfaces;
@@ -12,23 +13,21 @@ namespace Scrawler.Controllers
     public class ChatController : ScrawlerController
     {
         private readonly IRepository<Chatroom> _chatRepository;
-        private readonly IChatRoomJsonMapper _chatRoomJsonMapper;
         private readonly IConfiguration _configuration;
-        private readonly ILinkUpdater _linkUpdater;
         private readonly IMessageRepository _messageDb;
         private readonly IMessageSaver _messageSaver;
+        private readonly IRepository<Message> _messageRepository; 
 
         public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver,
-            IResponseProxy responseProxy, ISessionProxy sessionProxy, IConfiguration configuration,
-            IMessageRepository messageDb, IChatRoomJsonMapper chatRoomJsonMapper, ILinkUpdater linkUpdater)
-            : base(responseProxy, sessionProxy)
+            IResponseProxy responseProxy, IConfiguration configuration,
+            IMessageRepository messageDb, IRepository<Message> messageRepository)
+            : base(responseProxy)
         {
             _chatRepository = chatRepository;
             _messageSaver = messageSaver;
             _configuration = configuration;
             _messageDb = messageDb;
-            _chatRoomJsonMapper = chatRoomJsonMapper;
-            _linkUpdater = linkUpdater;
+            _messageRepository = messageRepository;
         }
 
         [HttpGet]
@@ -40,7 +39,15 @@ namespace Scrawler.Controllers
         [HttpPost]
         public JsonResult SaveMessage(MessageJson msg)
         {
-            _messageSaver.SaveMessages(msg);
+            var message = _messageRepository.Get(x => x.MessageId == msg.MessageId).SingleOrDefault();
+            if (message == null)
+            {
+                _messageSaver.SaveMessage(msg);
+            }
+            else
+            {
+                _messageSaver.UpvoteMessage(message);
+            }
             return CrossSiteFriendlyJson("Sent");
         }
 
@@ -50,14 +57,14 @@ namespace Scrawler.Controllers
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
             if (chatroom == null)
             {
-                return Redirect(_configuration.GetBaseUrl());
+                return CrossSiteFriendlyJson(new ChatroomJson(null, null, null, "Invalid", _configuration.GetSplashUrl()));
             }
 
             var listOfConvertedJsonMsgs = _messageDb.GetTopThreeMessages(chatroom.Id);
-            // _linkUpdater.UpdateLinks(id);
+
             return
-                CrossSiteFriendlyJson(_chatRoomJsonMapper.MapRoomToJson(chatroom.FirebaseId, listOfConvertedJsonMsgs,
-                    chatroom.chatroom_name));
+                CrossSiteFriendlyJson(new ChatroomJson(chatroom.FirebaseId, listOfConvertedJsonMsgs,
+                    chatroom.chatroom_name, "OK", null));
         }
     }
 }

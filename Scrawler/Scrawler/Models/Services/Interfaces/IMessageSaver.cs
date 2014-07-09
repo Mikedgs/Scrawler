@@ -1,7 +1,10 @@
-﻿namespace Scrawler.Models.Services.Interfaces
+﻿using Scrawler.Plumbing;
+
+namespace Scrawler.Models.Services.Interfaces
 {
     public interface IMessageSaver
     {
-        void SaveMessages(MessageJson msg);
+        void SaveMessage(MessageJson msg);
+        void UpvoteMessage(Message msg);
     }
 }

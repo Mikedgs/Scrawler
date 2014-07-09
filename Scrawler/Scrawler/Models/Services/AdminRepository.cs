@@ -16,7 +16,7 @@ namespace Scrawler.Models.Services
             _hashProvider = hashProvider;
         }
 
-        public void SaveUser(Admin admin)
+        public void SaveAdmin(Admin admin)
         {
             admin.Password = _hashProvider.GetSha(admin.Password);
             _repository.Add(admin);
