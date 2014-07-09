@@ -22,6 +22,13 @@ namespace Scrawler.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        protected RedirectResult CrossSiteFriendlyRedirect(string url)
+        {
+            _responseProxy.AddHeader("Access-Control-Allow-Origin", "*");
+            _responseProxy.AddHeader("Access-Control-Request-Methods", "*");
+            return Redirect(url);
+        }
+
         public ActionResult RedirectToLogin()
         {
             return RedirectToAction("Login", "Admin", new RouteValueDictionary {{"validUser", false}});

@@ -18,7 +18,7 @@ namespace Scrawler.Controllers
 
         public ChatController(IRepository<Chatroom> chatRepository, IMessageSaver messageSaver,
             IResponseProxy responseProxy, IConfiguration configuration,
-            IMessageRepository messageDb, ILinkUpdater linkUpdater, IRepository<Message> messageRepository)
+            IMessageRepository messageDb, IRepository<Message> messageRepository)
             : base(responseProxy)
         {
             _chatRepository = chatRepository;
@@ -55,11 +55,11 @@ namespace Scrawler.Controllers
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
             if (chatroom == null)
             {
-                return Redirect(_configuration.GetBaseUrl());
+                return CrossSiteFriendlyRedirect(_configuration.GetBaseUrl());
             }
 
             var listOfConvertedJsonMsgs = _messageDb.GetTopThreeMessages(chatroom.Id);
-            // _linkUpdater.UpdateLinks(id);
+
             return
                 CrossSiteFriendlyJson(new ChatroomJson(chatroom.FirebaseId, listOfConvertedJsonMsgs,
                     chatroom.chatroom_name));
