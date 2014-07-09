@@ -55,7 +55,7 @@ namespace Scrawler.Controllers
             var chatroom = _chatRepository.Get(x => x.HiddenUrl == id).FirstOrDefault();
             if (chatroom == null)
             {
-                return CrossSiteFriendlyRedirect(_configuration.GetBaseUrl());
+                return CrossSiteFriendlyRedirect(_configuration.GetSplashUrl());
             }
 
             var listOfConvertedJsonMsgs = _messageDb.GetTopThreeMessages(chatroom.Id);

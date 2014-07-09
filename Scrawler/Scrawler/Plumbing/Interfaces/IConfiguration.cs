@@ -4,5 +4,6 @@
     {
         string ConnectionString { get; }
         string GetBaseUrl(string hiddenUrl = "funroom");
+        string GetSplashUrl();
     }
 }

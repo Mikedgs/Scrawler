@@ -44,7 +44,7 @@ namespace ScrawlerTests.Controller
             // Arrange
             var chatRepoMock = GetMock<IRepository<Chatroom>>();
             var configMock = GetMock<IConfiguration>();
-            configMock.Setup(x => x.GetBaseUrl(It.IsAny<string>())).Returns("url");
+            configMock.Setup(x => x.GetSplashUrl()).Returns("url");
             chatRepoMock.Setup(x => x.Get(It.IsAny<Expression<Func<Chatroom, bool>>>())).Returns(new List<Chatroom>());
 
             // Act
