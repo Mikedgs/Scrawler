@@ -20,7 +20,7 @@ namespace Scrawler.Models.Mappers
         {
             return new Message
             {
-                Username = msgJson.Username,
+                Username = msgJson.Name,
                 Body = msgJson.Content,
                 CreatedAt = DateTime.Now,
                 ChatroomId = _chatRoomRepository.Get(x => x.FirebaseId == msgJson.FirebaseId).Single().Id,
